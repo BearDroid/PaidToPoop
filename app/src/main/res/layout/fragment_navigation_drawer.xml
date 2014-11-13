@@ -1,11 +1,38 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v7.widget.RecyclerView
-    android:id="@+id/drawerList"
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:clickable="true"
-    android:focusableInTouchMode="true"
-    android:scrollbars="vertical"
-    android:focusable="true"
     android:layout_height="match_parent"
-    android:background="@color/drawerBackground"/>
+    android:orientation="vertical">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        android:id="@+id/header"
+        android:background="@color/colorPrimary">
+        <ImageView
+            android:layout_width="75dp"
+            android:layout_height="75dp"
+            android:layout_marginTop="4dp"
+            android:layout_marginLeft="4dp"
+            android:src="@drawable/ptp"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Paid to Poop"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentBottom="true"
+            android:textSize="28sp"
+            android:textColor="@color/white"
+            android:paddingRight="4dp"
+             />
+        </RelativeLayout>
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/drawerList"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/drawerBackground"
+        android:clickable="true"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
+        android:scrollbars="vertical" />
+</LinearLayout>
