@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Paid To Poop</string>
+    <string name="title_section1">Section 1</string>
+    <string name="title_section2">Section 2</string>
+    <string name="title_section3">Section 3</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="action_example">Example action</string>
+    <string name="action_settings">Settings</string>
+    <string name="drawer_open">Menu opened</string>
+    <string name="drawer_close">Menu closed</string>
+    <string name="desc_list_item_icon">Item Icon</string>
+    <string name="title_activity_settings_fragment">SettingsFragment</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="cancel">Cancel</string>
+    <string name="clearButton">Clear total</string>
+    <string name="clearSum">Clear total</string>
+    <string name="dialog_ok">Ok</string>
+    <string name="dialog_cancel">Cancel</string>
+    <string name="total">Total</string>
+    <string name="totalnumber">126.02</string>
+    <string name="minutesTitle">Minutes on toilet:</string>
+    <string name="rating">Rating: </string>
+    <string name="badbutton">Bad</string>
+    <string name="okaybutton">Okay</string>
+    <string name="goodbutton">Good</string>
+    <string name="add">Add!</string>
+    <string name="money">How much do you make per hour?</string>
+    <string name="time">How long were you on the can? (in minutes)</string>
+    <string name="calculate">How much were you paid to poop?</string>
+    <string name="city">A city at night</string>
+    <string name="made">On this trip:  </string>
+    <string name="madeTotal">All time total:  </string>
+    <string name="lastTime">Last visit: </string>
+    <string name="test">test</string>
+    <string name="share">share</string>
+    <string name="madeNum">0.00</string>
+    <string name="dolladolla">$</string>
+    <string name="clear">Clear</string>
+    <string name="info">Info</string>
+    <string name="title_activity_home">Home</string>
+    <string name="title_activity_about">About</string>
+    <string name="appName">Paid To Poop v3.0</string>
+    <string name="created">Created by Max Moss</string>
+    <string name="bearDroid">in BearDroid Labs</string>
+    <string name="play"><a ref="http://twitter.com/">Play</a></string>
+    <string name="twitter"><a ref="http://twitter.com/">Twitter</a></string>
+    <string name="gplus"><a ref="http://twitter.com/">Google+</a></string>
+    <string name="thanks">Thanks to:</string>
+    <string name="systint">SystemBarTint</string>
+    <string name="icon">Application icon</string>
+    <string name="prefGen">General</string>
+    <string name="clearMsg">Are you sure you want to clear your total amount?</string>
+    <string name="my_link"><a ref="http://somesite.com/">Click me!</a></string>
+    <string name="Settings">Settings</string>
+    <string name="Home">Home</string>
+    <string name="About">About</string>
+    <!-- Nav Drawer Menu Items -->
+    <string-array name="nav_drawer_items">
+        <item>Home</item>
+        <item>Settings</item>
+        <item>About</item>
+        <item>New Home</item>
+    </string-array>
+
+    <!-- Nav Drawer List Item Icons -->
+    <!-- Keep them in order as the titles are in -->
+    <array name="nav_drawer_icons">
+        <item>@drawable/ic_home</item>
+        <item>@drawable/ic_settings</item>
+        <item>@drawable/ic_info</item>
+    </array>
+    <array name="ratingItems">
+        <item>Good</item>
+        <item>Okay</item>
+        <item>Bad</item>
+    </array>
+    <array name="ratingValues">
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+    </array>
+
+</resources>

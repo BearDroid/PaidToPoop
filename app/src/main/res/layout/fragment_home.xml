@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_marginBottom="0dp"
+    android:paddingBottom="0dp"
+    android:background="#fff">
+
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="0dp"
+        android:background="#eeeeee"
+        android:orientation="vertical"
+        android:paddingBottom="0dp"
+        android:paddingTop="0dp">
+
+        <RelativeLayout
+            android:id="@+id/header"
+            android:layout_width="match_parent"
+            android:layout_height="150dp"
+            android:layout_marginTop="0dp"
+            android:paddingTop="0dp">
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_alignBottom="@+id/number"
+                android:scaleType="centerCrop"
+                android:src="@drawable/city" />
+
+            <TextView
+                android:id="@+id/number"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentRight="true"
+                android:text="@string/totalnumber"
+                android:textColor="@color/white"
+                android:textSize="60sp" />
+
+            <TextView
+                android:id="@+id/dollarsign"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_toLeftOf="@id/number"
+                android:text="@string/dolladolla"
+                android:textColor="@color/white"
+                android:textSize="60sp" />
+
+            <TextView
+                android:id="@+id/total"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBaseline="@id/number"
+                android:layout_alignParentBottom="true"
+                android:layout_toLeftOf="@id/dollarsign"
+                android:paddingLeft="0dp"
+                android:paddingRight="4dp"
+                android:text="@string/total"
+                android:textColor="@color/white"
+                android:textSize="25sp" />
+
+
+        </RelativeLayout>
+
+        <ListView
+            android:id="@+id/pooplist"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/header"
+            android:layout_marginBottom="0dp"
+            android:divider="#eeeeee"
+            android:dividerHeight="10dp"
+            android:padding="8dp"
+            android:paddingBottom="0dp"
+            android:paddingLeft="@dimen/activity_horizontal_margin"
+            android:paddingRight="@dimen/activity_horizontal_margin"
+            android:paddingTop="0dp"
+            android:scrollbarStyle="outsideOverlay">
+
+        </ListView>
+
+        <Button
+            android:id="@+id/fab"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|right"
+            android:text="This is a fab" />
+    </LinearLayout>
+</FrameLayout>

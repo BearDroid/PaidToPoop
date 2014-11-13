@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/newstuff"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/whatsnew"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:text="What's new in V2.0"
+        android:textSize="24sp" />
+
+    <ScrollView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/whatsnew">
+
+        <TextView
+            android:id="@+id/features"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:paddingBottom="8dp"
+            android:paddingLeft="16dp"
+            android:paddingRight="16dp"
+            android:paddingTop="8dp"
+            android:text="&#8226;Implemented Navigation Drawer\n\n&#8226;Added a settings menu\n\n&#8226;Ability to save wage or salary\n\n&#8226;Refreshed color theme\n\n&#8226;New icon (that doesn't suck)\n\n&#8226;Click icon in About for What's New\n\n&#8226;Got rid of transparent system bars (Sorry! They were causing problems and it doesn't fit Google's design! They'll be back in L.)\n\n&#8226;Bugfixes"
+            android:textSize="20sp" />
+    </ScrollView>
+
+</RelativeLayout>
