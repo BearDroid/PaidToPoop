@@ -6,17 +6,19 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.database.Cursor;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ListView;
 import android.widget.NumberPicker;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.SimpleCursorAdapter;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.text.DecimalFormat;
@@ -39,10 +41,16 @@ public class HomeFragment extends Fragment {
     @Override
     public View onCreateView(final LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_home, container, false);
-        ListView myList = (ListView) view.findViewById(R.id.pooplist);
+        final ListView myList = (ListView) view.findViewById(R.id.pooplist);
         openDB();
         populateListViewFromDB(myList);
-        Button fab = (Button) view.findViewById(R.id.fab);
+
+        FloatingActionButton fab = new FloatingActionButton.Builder(getActivity())
+                .withDrawable(getResources().getDrawable(R.drawable.ic_action_money))
+                .withButtonColor(Color.parseColor("#0e8f4f"))
+                .withGravity(Gravity.BOTTOM | Gravity.RIGHT)
+                .withMargins(0, 0, 16, 16)
+                .create();
         //fab.attachToListView(listView);
         mPrefs = getActivity().getPreferences(Context.MODE_PRIVATE);
         //FloatingActionButton fab = (FloatingActionButton) getActivity().findViewById(R.id.fab);
@@ -105,6 +113,7 @@ public class HomeFragment extends Fragment {
                         handler.insertData(moneyMade, date, time, ratingString);
                         Toast.makeText(getActivity(), "Data inserted", Toast.LENGTH_LONG).show();
                         //Toast.makeText(getActivity(), jsonPoop, Toast.LENGTH_LONG).show();
+                        populateListViewFromDB(myList);
                     }
                 })
                         .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
@@ -124,10 +133,24 @@ public class HomeFragment extends Fragment {
         handler = new DataHandler(getActivity());
         handler.open();
     }
+
     private void closeDB() {
         handler.close();
     }
+    private void makeHeaderNumber(TextView header){
+        Cursor cursor = handler.getAllRows();
 
+        String[] amountsStored = new String[]{
+                DataHandler.KEY_AMOUNT
+        };
+        double totalAmount = 0;
+        for(int i=0; i<amountsStored.length; i++){
+            double add = Double.parseDouble(amountsStored[i]);
+            totalAmount = totalAmount + add;
+        }
+
+
+    }
     private void populateListViewFromDB(ListView myList) {
         Cursor cursor = handler.getAllRows();
         //gets data from db

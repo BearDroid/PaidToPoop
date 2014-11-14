@@ -19,7 +19,7 @@ import java.text.DecimalFormat;
 /**
  * Created by Max on 11/14/2014.
  */
-public class MyPreferenceFragment extends PreferenceFragment{
+public class MyPreferenceFragment extends PreferenceFragment {
     private static final boolean ALWAYS_SIMPLE_PREFS = false;
     static public EditText salYear;
     static public EditText salHour;
@@ -28,10 +28,10 @@ public class MyPreferenceFragment extends PreferenceFragment{
     public static double hourlyWage;
     static SharedPreferences mPrefs;
     static String hourlyWageString;
+    DataHandler handler;
 
     @Override
-    public void onCreate(final Bundle savedInstanceState)
-    {
+    public void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         addPreferencesFromResource(R.xml.settings);
         final Preference wage = (Preference) findPreference("hourly");
@@ -65,6 +65,8 @@ public class MyPreferenceFragment extends PreferenceFragment{
                                         editor.putString("allTime", "0.00").commit();
                                         editor.putString("hourlyWage", null).commit();
                                         editor.putString("lastTime", "0.00").commit();
+                                        openDB();
+                                        handler.deleteAll();
                                         //TextView totalNum = (TextView)getActivity(). findViewById(R.id.totalNum);
                                         //totalNum.setText("0.00");
 
@@ -178,4 +180,8 @@ public class MyPreferenceFragment extends PreferenceFragment{
             }
         });
     }
+    private void openDB() {
+        handler = new DataHandler(getActivity());
+        handler.open();
     }
+}

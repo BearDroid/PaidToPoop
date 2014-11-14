@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="colorPrimary">#0e8f4f</color>
-    <color name="colorPrimaryDark">#1B5E20</color>
+    <color name="colorPrimaryDark">#0A6437</color>
     <color name="selected_gray">#ffdbdbdb</color>
     <color name="drawerBackground">#F2F2F2</color>
     <color name="white">#fff</color>
