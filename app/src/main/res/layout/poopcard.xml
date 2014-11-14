@@ -13,10 +13,11 @@
         android:layout_height="match_parent"
         android:background="@drawable/redsquare">
 
-        <ImageView
+        <TextView
             android:id="@+id/smiley"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:text="0"/>
     </RelativeLayout>
 
     <RelativeLayout

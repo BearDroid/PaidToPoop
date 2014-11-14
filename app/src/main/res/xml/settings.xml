@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:parentActivityName="HomeFragmentNew"
+    android:textColor="@color/black">
+
+    <PreferenceCategory android:title="@string/prefGen">
+        <SwitchPreference
+            android:key="salBox"
+            android:summary="Switch on if you want salary mode"
+            android:title="Salary"
+            android:textColor="@color/black"/>
+        <Preference
+            android:key="hourly"
+            android:summary="How much do you make per hour?"
+            android:title="Hourly wage"
+            android:textColor="@color/black"/>
+        <Preference
+            android:dependency="salBox"
+            android:key="salaryMoney"
+            android:summary="How much do you make in a year?"
+            android:title="Per year"
+            android:textColor="@color/black"/>
+        <Preference
+            android:key="clearPref"
+            android:title="Clear All"
+            android:textColor="@color/black"/>
+    </PreferenceCategory>
+
+</PreferenceScreen>

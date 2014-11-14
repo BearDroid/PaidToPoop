@@ -157,7 +157,7 @@ public class NavigationDrawerFragment extends Fragment implements NavigationDraw
                 frag = new HomeFragment();
                 break;
             case 1:
-                frag = new HomeFragment();
+                frag = new MyPreferenceFragment();
                 trans.addToBackStack("back");
                 break;
             case 2:
