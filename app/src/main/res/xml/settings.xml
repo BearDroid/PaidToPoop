@@ -2,7 +2,6 @@
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="wrap_content"
     android:parentActivityName="HomeFragmentNew"
-    android:textColor="@color/black"
     >
 
     <PreferenceCategory android:title="@string/prefGen">
@@ -14,14 +13,12 @@
         <Preference
             android:key="hourly"
             android:summary="How much do you make per hour?"
-            android:title="Hourly wage"
-            android:textColor="@color/black"/>
+            android:title="Hourly wage"/>
         <Preference
             android:dependency="salBox"
             android:key="salaryMoney"
             android:summary="How much do you make in a year?"
-            android:title="Per year"
-            android:textColor="@color/black"/>
+            android:title="Salary"/>
         <Preference
             android:key="clearPref"
             android:title="Clear All"

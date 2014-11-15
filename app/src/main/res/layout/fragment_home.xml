@@ -70,7 +70,7 @@
             android:layout_below="@id/header"
             android:layout_marginBottom="0dp"
             android:divider="#eeeeee"
-            android:dividerHeight="8dp"
+            android:dividerHeight="4dp"
             android:paddingTop="0dp"
             android:paddingBottom="0dp"
             android:paddingLeft="8dp"

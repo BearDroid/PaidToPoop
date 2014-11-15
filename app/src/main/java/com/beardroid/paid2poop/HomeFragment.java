@@ -40,11 +40,11 @@ public class HomeFragment extends Fragment {
 
     @Override
     public View onCreateView(final LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_home, container, false);
+        final View view = inflater.inflate(R.layout.fragment_home, container, false);
         final ListView myList = (ListView) view.findViewById(R.id.pooplist);
         openDB();
         populateListViewFromDB(myList);
-
+        makeHeaderNumber(view);
         FloatingActionButton fab = new FloatingActionButton.Builder(getActivity())
                 .withDrawable(getResources().getDrawable(R.drawable.ic_action_money))
                 .withButtonColor(Color.parseColor("#0e8f4f"))
@@ -55,7 +55,7 @@ public class HomeFragment extends Fragment {
         mPrefs = getActivity().getPreferences(Context.MODE_PRIVATE);
         //FloatingActionButton fab = (FloatingActionButton) getActivity().findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View view) {
+            public void onClick(final View view) {
                 AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
 
                 final View alertView = inflater.inflate(R.layout.poop_dialog, (ViewGroup) getActivity().findViewById(R.id.poopdialog));
@@ -114,6 +114,7 @@ public class HomeFragment extends Fragment {
                         Toast.makeText(getActivity(), "Data inserted", Toast.LENGTH_LONG).show();
                         //Toast.makeText(getActivity(), jsonPoop, Toast.LENGTH_LONG).show();
                         populateListViewFromDB(myList);
+                        makeHeaderNumber(getView());
                     }
                 })
                         .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
@@ -137,20 +138,15 @@ public class HomeFragment extends Fragment {
     private void closeDB() {
         handler.close();
     }
-    private void makeHeaderNumber(TextView header){
-        Cursor cursor = handler.getAllRows();
-
-        String[] amountsStored = new String[]{
-                DataHandler.KEY_AMOUNT
-        };
-        double totalAmount = 0;
-        for(int i=0; i<amountsStored.length; i++){
-            double add = Double.parseDouble(amountsStored[i]);
-            totalAmount = totalAmount + add;
-        }
-
-
+    private void makeHeaderNumber(View view){
+        Cursor c = handler.totalAmount();
+        Double totalAmount = c.getDouble(c.getColumnIndex("myTotal"));
+        DecimalFormat moneyFormat = new DecimalFormat("0.00");
+        String totalAmountStr = moneyFormat.format(totalAmount);
+        TextView tv = (TextView) view.findViewById(R.id.number);
+        tv.setText(totalAmountStr);
     }
+
     private void populateListViewFromDB(ListView myList) {
         Cursor cursor = handler.getAllRows();
         //gets data from db

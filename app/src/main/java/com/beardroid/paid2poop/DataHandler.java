@@ -30,11 +30,12 @@ public class DataHandler {
     public static final int COL_RATING = 4;
 
     public static final String[] ALL_KEYS = new String[]{KEY_ROWID, KEY_AMOUNT, KEY_DATE, KEY_TIME, KEY_RATING};
+    public static final String[] AMOUNT_KEY = new String[]{KEY_AMOUNT};
 
 
     public static final String TABLE_NAME = "mainTable";
     public static final String DATABASE_NAME = "PoopDB";
-    public static final int DATABASE_VERSION = 5;
+    public static final int DATABASE_VERSION = 8;
     public static final String TABLE_CREATE =
             "create table if not exists " + TABLE_NAME + " ("
                     + KEY_ROWID + " integer primary key autoincrement,"
@@ -95,7 +96,14 @@ public class DataHandler {
         }
         return c;
     }
-
+    public Cursor totalAmount(){
+        String where = null;
+        Cursor c = db.rawQuery("SELECT Sum(amount) AS myTotal FROM " + TABLE_NAME, null);
+        if (c != null) {
+            c.moveToFirst();
+        }
+        return c;
+    }
     public boolean updateRow(long rowId, Double amount, String date, String time, String rating) {
         String where = KEY_ROWID + "=" + rowId;
         ContentValues content = new ContentValues();
