@@ -6,4 +6,8 @@
     <color name="drawerBackground">#F2F2F2</color>
     <color name="white">#fff</color>
     <color name="black">#000</color>
+    <color name="colorSecondary">#5D4037</color>
+    <color name="colorSecondaryDark">#4E342E</color>
+    <color name="colorSecondaryLight">#D7CCC8</color>
+
 </resources>
