@@ -36,6 +36,17 @@ public class NavigationDrawerFragment extends Fragment implements NavigationDraw
     private boolean mFromSavedInstanceState;
     private int mCurrentSelectedPosition;
 
+    public static void saveSharedSetting(Context ctx, String settingName, String settingValue) {
+        SharedPreferences sharedPref = ctx.getSharedPreferences(PREFERENCES_FILE, Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPref.edit();
+        editor.putString(settingName, settingValue);
+        editor.apply();
+    }
+
+    public static String readSharedSetting(Context ctx, String settingName, String defaultValue) {
+        SharedPreferences sharedPref = ctx.getSharedPreferences(PREFERENCES_FILE, Context.MODE_PRIVATE);
+        return sharedPref.getString(settingName, defaultValue);
+    }
 
     @Nullable
     @Override
@@ -206,17 +217,5 @@ public class NavigationDrawerFragment extends Fragment implements NavigationDraw
 
     public void setDrawerLayout(DrawerLayout drawerLayout) {
         mDrawerLayout = drawerLayout;
-    }
-
-    public static void saveSharedSetting(Context ctx, String settingName, String settingValue) {
-        SharedPreferences sharedPref = ctx.getSharedPreferences(PREFERENCES_FILE, Context.MODE_PRIVATE);
-        SharedPreferences.Editor editor = sharedPref.edit();
-        editor.putString(settingName, settingValue);
-        editor.apply();
-    }
-
-    public static String readSharedSetting(Context ctx, String settingName, String defaultValue) {
-        SharedPreferences sharedPref = ctx.getSharedPreferences(PREFERENCES_FILE, Context.MODE_PRIVATE);
-        return sharedPref.getString(settingName, defaultValue);
     }
 }

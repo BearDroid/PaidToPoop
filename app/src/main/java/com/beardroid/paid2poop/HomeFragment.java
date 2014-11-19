@@ -1,15 +1,16 @@
 package com.beardroid.paid2poop;
 
+import android.annotation.SuppressLint;
+import android.annotation.TargetApi;
 import android.app.AlertDialog;
 import android.app.Fragment;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.database.Cursor;
-import android.graphics.Color;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,6 +21,8 @@ import android.widget.RadioGroup;
 import android.widget.SimpleCursorAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.melnykov.fab.FloatingActionButton;
 
 import java.text.DecimalFormat;
 import java.text.Format;
@@ -45,17 +48,19 @@ public class HomeFragment extends Fragment {
         openDB();
         populateListViewFromDB(myList);
         makeHeaderNumber(view);
-        FloatingActionButton fab = new FloatingActionButton.Builder(getActivity())
-                .withDrawable(getResources().getDrawable(R.drawable.ic_action_money))
-                .withButtonColor(Color.parseColor("#0e8f4f"))
-                .withGravity(Gravity.BOTTOM | Gravity.RIGHT)
-                .withMargins(0, 0, 16, 16)
-                .create();
+        final FloatingActionButton fab = (FloatingActionButton) view.findViewById(R.id.fab);
+        fab.attachToListView(myList);
+        fab.setColorNormal(getResources().getColor(R.color.colorSecondary));
+        fab.setColorPressed(getResources().getColor(R.color.colorSecondaryDark));
+        fab.setColorRipple(getResources().getColor(R.color.ripple_material_dark));
         //fab.attachToListView(listView);
         mPrefs = getActivity().getPreferences(Context.MODE_PRIVATE);
         //FloatingActionButton fab = (FloatingActionButton) getActivity().findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
+            @SuppressLint("NewApi")
+            @TargetApi(Build.VERSION_CODES.LOLLIPOP)
             public void onClick(final View view) {
+                fab.setElevation(20);
                 AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
 
                 final View alertView = inflater.inflate(R.layout.poop_dialog, (ViewGroup) getActivity().findViewById(R.id.poopdialog));
@@ -87,8 +92,9 @@ public class HomeFragment extends Fragment {
                         minDbl = minDbl / 60;
                         double moneyMade = minDbl * wageDbl;
                         DecimalFormat moneyFormat = new DecimalFormat("0.00");
-                        String madeStr = "" + moneyFormat.format(moneyMade);
+                        String madeStr = moneyFormat.format(moneyMade);
                         moneyMade = Double.parseDouble(madeStr);
+                        madeStr = "$" + madeStr;
 
 
                         //this does time
@@ -110,11 +116,12 @@ public class HomeFragment extends Fragment {
                         }
                         String time = hour + ":" + minute + " " + ampmString;
                         //Toast.makeText(getActivity(), madeStr, Toast.LENGTH_LONG).show();
-                        handler.insertData(moneyMade, date, time, ratingString);
+                        handler.insertData(moneyMade, date, time, ratingString, madeStr);
                         Toast.makeText(getActivity(), "Data inserted", Toast.LENGTH_LONG).show();
                         //Toast.makeText(getActivity(), jsonPoop, Toast.LENGTH_LONG).show();
                         populateListViewFromDB(myList);
                         makeHeaderNumber(getView());
+
                     }
                 })
                         .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
@@ -138,20 +145,23 @@ public class HomeFragment extends Fragment {
     private void closeDB() {
         handler.close();
     }
-    private void makeHeaderNumber(View view){
+
+    private void makeHeaderNumber(View view) {
         Cursor c = handler.totalAmount();
         Double totalAmount = c.getDouble(c.getColumnIndex("myTotal"));
         DecimalFormat moneyFormat = new DecimalFormat("0.00");
         String totalAmountStr = moneyFormat.format(totalAmount);
+        totalAmountStr = "$" + totalAmountStr;
         TextView tv = (TextView) view.findViewById(R.id.number);
         tv.setText(totalAmountStr);
+        getActivity().setTitle(totalAmountStr);
     }
 
     private void populateListViewFromDB(ListView myList) {
         Cursor cursor = handler.getAllRows();
         //gets data from db
         String[] fromFieldNames = new String[]{
-                DataHandler.KEY_AMOUNT, DataHandler.KEY_DATE, DataHandler.KEY_TIME, DataHandler.KEY_RATING
+                DataHandler.KEY_AMOUNT_STR, DataHandler.KEY_DATE, DataHandler.KEY_TIME, DataHandler.KEY_RATING
         };
         //gets ids of textviews
         int[] toViewIDs = new int[]{
@@ -168,4 +178,5 @@ public class HomeFragment extends Fragment {
 
         myList.setAdapter(myCursorAdapter);
     }
+
 }

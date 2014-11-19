@@ -110,13 +110,13 @@ public class FloatingActionButton extends View {
     }
 
     static public class Builder {
-        private FrameLayout.LayoutParams params;
         private final Activity activity;
         int gravity = Gravity.BOTTOM | Gravity.RIGHT; // default bottom right
         Drawable drawable;
         int color = Color.WHITE;
         int size = 0;
         float scale = 0;
+        private FrameLayout.LayoutParams params;
 
         public Builder(Activity context) {
             scale = context.getResources().getDisplayMetrics().density;

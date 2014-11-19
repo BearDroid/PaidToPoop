@@ -30,6 +30,7 @@ public class About extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        getActivity().setTitle("About");
         View view = inflater.inflate(R.layout.fragment_about, container, false);
 
         TextView play = (TextView) view.findViewById(R.id.play);

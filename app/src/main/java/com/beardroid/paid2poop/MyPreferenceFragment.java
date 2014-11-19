@@ -34,6 +34,7 @@ public class MyPreferenceFragment extends PreferenceFragment {
     public void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         addPreferencesFromResource(R.xml.settings);
+        getActivity().setTitle("Settings");
         final Preference wage = (Preference) findPreference("hourly");
         SwitchPreference salSwitch = (SwitchPreference) findPreference("salBox");
         wage.setEnabled(!salSwitch.isChecked());
@@ -180,6 +181,7 @@ public class MyPreferenceFragment extends PreferenceFragment {
             }
         });
     }
+
     private void openDB() {
         handler = new DataHandler(getActivity());
         handler.open();

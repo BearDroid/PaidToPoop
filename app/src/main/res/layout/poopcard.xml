@@ -37,7 +37,8 @@
             android:layout_centerVertical="true"
             android:layout_marginRight="60dp"
             android:text="$9.03"
-            android:textSize="36sp"/>
+            android:textSize="36sp"
+            android:textAppearance="@style/TextAppearance.AppCompat.Headline"/>
 
         <TextView
             android:id="@+id/date"
@@ -50,7 +51,8 @@
             android:paddingRight="4dp"
             android:text="Date"
             android:textColor="#000"
-            android:textSize="14sp" />
+            android:textSize="14sp"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Body1"/>
 
         <TextView
             android:id="@+id/time"
@@ -62,7 +64,8 @@
             android:paddingRight="0dp"
             android:text="Time"
             android:textColor="#000"
-            android:textSize="14sp" />
+            android:textSize="14sp"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Body1"/>
 
 
         <ImageView
