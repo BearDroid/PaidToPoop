@@ -77,7 +77,6 @@ public class HomeFragment extends Fragment {
                         RadioButton ratingButton;
                         int selectedRating = ratingGroup.getCheckedRadioButtonId();
                         ratingButton = (RadioButton) alertView.findViewById(selectedRating);
-
                         String ratingString = (String) ratingButton.getText();
 
                         //number spinner
@@ -86,7 +85,6 @@ public class HomeFragment extends Fragment {
                         Double minDbl = Double.parseDouble(num);
 
                         //get sharedpref of hourly wage and do the magic math here
-
                         String wageStr = mPrefs.getString("hourlyWage", null); //get saved wage
                         Double wageDbl = Double.parseDouble(wageStr); //saved wage to double
                         minDbl = minDbl / 60;
@@ -96,29 +94,10 @@ public class HomeFragment extends Fragment {
                         moneyMade = Double.parseDouble(madeStr);
                         madeStr = "$" + madeStr;
 
-
-                        //this does time
-                        Calendar cal = Calendar.getInstance();
-                        int day = cal.get(Calendar.DATE);
-                        String month = cal.getDisplayName(Calendar.MONTH, Calendar.LONG, Locale.US);
-                        int year = cal.get(Calendar.YEAR);
-                        String date = month + " " + day + ", " + year;
-                        int hour = cal.get(Calendar.HOUR);
-                        Format timeFormat = new DecimalFormat("00");
-                        int min = cal.get(Calendar.MINUTE);
-                        String minute = timeFormat.format(min);
-                        int ampm = cal.get(Calendar.AM_PM);
-                        String ampmString;
-                        if (ampm == 0) { //translates ampm to a readable string because 0 or 1 doesn't fucking help
-                            ampmString = "AM";
-                        } else {
-                            ampmString = "PM";
-                        }
-                        String time = hour + ":" + minute + " " + ampmString;
-                        //Toast.makeText(getActivity(), madeStr, Toast.LENGTH_LONG).show();
+                        String date = dateGetter();
+                        String time = timeGetter();
                         handler.insertData(moneyMade, date, time, ratingString, madeStr);
                         Toast.makeText(getActivity(), "Data inserted", Toast.LENGTH_LONG).show();
-                        //Toast.makeText(getActivity(), jsonPoop, Toast.LENGTH_LONG).show();
                         populateListViewFromDB(myList);
                         makeHeaderNumber(getView());
 
@@ -134,6 +113,32 @@ public class HomeFragment extends Fragment {
             }
         });
         return view;
+    }
+
+    public String timeGetter() {
+        Calendar cal = Calendar.getInstance();
+        int hour = cal.get(Calendar.HOUR);
+        Format timeFormat = new DecimalFormat("00");
+        int min = cal.get(Calendar.MINUTE);
+        String minute = timeFormat.format(min);
+        int ampm = cal.get(Calendar.AM_PM);
+        String ampmString;
+        if (ampm == 0) { //translates ampm to a readable string because 0 or 1 doesn't help
+            ampmString = "AM";
+        } else {
+            ampmString = "PM";
+        }
+        String time = hour + ":" + minute + " " + ampmString;
+        return time;
+    }
+
+    public String dateGetter() {
+        Calendar cal = Calendar.getInstance();
+        int day = cal.get(Calendar.DATE);
+        String month = cal.getDisplayName(Calendar.MONTH, Calendar.LONG, Locale.US);
+        int year = cal.get(Calendar.YEAR);
+        String date = month + " " + day + ", " + year;
+        return date;
     }
 
     //here lie database stuff
@@ -178,5 +183,6 @@ public class HomeFragment extends Fragment {
 
         myList.setAdapter(myCursorAdapter);
     }
+
 
 }
