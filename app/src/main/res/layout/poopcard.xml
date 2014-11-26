@@ -24,9 +24,16 @@
 
             <TextView
                 android:id="@+id/smiley"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="0" />
+                android:layout_alignParentBottom="true"
+                android:layout_centerHorizontal="true"
+                android:textSize="24dp"
+                android:padding="4dp"
+                android:textColor="@color/white"
+                android:background="#40000000"
+                android:gravity="center"
+                android:text="Bad" />
         </RelativeLayout>
 
         <RelativeLayout
@@ -66,7 +73,7 @@
                     android:paddingLeft="16dp"
                     android:text="Time"
                     android:textAppearance="@style/Base.TextAppearance.AppCompat.Body1"
-                    android:textColor="#000"
+                    android:textColor="@color/abc_secondary_text_material_light"
                     android:textSize="14sp" />
 
                 <TextView
@@ -78,7 +85,7 @@
                     android:paddingLeft="16dp"
                     android:text="Date"
                     android:textAppearance="@style/Base.TextAppearance.AppCompat.Body1"
-                    android:textColor="#000"
+                    android:textColor="@color/abc_secondary_text_material_light"
                     android:textSize="14sp" />
             </RelativeLayout>
         </RelativeLayout>
