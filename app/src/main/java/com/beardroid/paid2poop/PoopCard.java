@@ -4,10 +4,13 @@ package com.beardroid.paid2poop;
  * Created by Max on 11/13/2014.
  */
 public class PoopCard {
-    private double amount;
-    private String date;
-    private String time;
-    private String rating;
+    protected String amount;
+    protected String date;
+    protected String time;
+    protected String rating; //will eventually be gone
+    private double amountDbl;
+    private long id;
+
 
     public PoopCard() {
 
@@ -17,11 +20,11 @@ public class PoopCard {
 
     }
 
-    public double getAmount() {
+    public String getAmount() {
         return amount;
     }
 
-    public void setAmount(double amount) {
+    public void setAmount(String amount) {
         this.amount = amount;
     }
 
@@ -47,6 +50,22 @@ public class PoopCard {
 
     public void setRating(String rating) {
         this.rating = rating;
+    }
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    public double getAmountDbl() {
+        return amountDbl;
+    }
+
+    public void setAmountDbl(double amountDbl) {
+        this.amountDbl = amountDbl;
     }
 
 }

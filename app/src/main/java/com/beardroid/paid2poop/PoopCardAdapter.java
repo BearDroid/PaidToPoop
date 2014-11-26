@@ -1,65 +1,54 @@
 package com.beardroid.paid2poop;
 
-import android.content.Context;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
-import java.util.ArrayList;
+import java.util.List;
 
 /**
- * Created by Max on 11/13/2014.
+ * Created by Max on 11/25/2014.
  */
-public class PoopCardAdapter extends ArrayAdapter<PoopCard> {
-    private final ArrayList<PoopCard> objects;
-
-
-    public PoopCardAdapter(Context context, int textViewResourceId, ArrayList<PoopCard> objects) {
-        super(context, textViewResourceId, objects);
-        this.objects = objects;
+public class PoopCardAdapter extends RecyclerView.Adapter<PoopCardAdapter.PoopCardHolder> {
+    private List<PoopCard> PoopCardList;
+    public PoopCardAdapter(List<PoopCard> PoopCardList){
+        this.PoopCardList = PoopCardList;
+    }
+    @Override
+    public PoopCardHolder onCreateViewHolder(ViewGroup viewGroup, int viewType) {
+        View itemView = LayoutInflater.from(viewGroup.getContext()).
+                inflate(R.layout.poopcard, viewGroup, false);
+        return new PoopCardHolder(itemView);
     }
 
     @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
-        View rowView = convertView;
-        ViewHolder view;
-
-        if (rowView == null) {
-            // Get a new instance of the row layout view
-            LayoutInflater inflater = (LayoutInflater) getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            rowView = inflater.inflate(R.layout.poopcard, null);
-
-            // Hold the view objects in an object, that way the don't need to be "re-  finded"
-            view = new ViewHolder();
-            view.amount = (TextView) rowView.findViewById(R.id.money);
-            view.date = (TextView) rowView.findViewById(R.id.date);
-            view.time = (TextView) rowView.findViewById(R.id.time);
-
-            rowView.setTag(view);
-        } else {
-            view = (ViewHolder) rowView.getTag();
-        }
-        PoopCard item = objects.get(position);
-        if (item != null) {
-            double moneyDbl = item.getAmount();
-            String moneyStr = String.valueOf(moneyDbl);
-            view.amount.setText(moneyStr);
-            view.date.setText(item.getDate());
-            view.time.setText(item.getTime());
-
-            return rowView;
-        } else {
-            return null;
-        }
-
+    public void onBindViewHolder(PoopCardHolder holder, int position) {
+        PoopCard pc = PoopCardList.get(position);
+        holder.mAmount.setText(pc.getAmount());
+        holder.mTime.setText(pc.getTime());
+        holder.mDate.setText(pc.getDate());
+        holder.mRating.setText(pc.getRating());
 
     }
 
-    protected static class ViewHolder {
-        protected TextView amount;
-        protected TextView date;
-        protected TextView time;
+    @Override
+    public int getItemCount() {
+        return PoopCardList.size();
+    }
+    public static class PoopCardHolder extends RecyclerView.ViewHolder{
+        protected TextView mAmount;
+        protected TextView mDate;
+        protected TextView mTime;
+        protected TextView mRating;
+
+        public PoopCardHolder(View v) {
+            super(v);
+            mAmount = (TextView) v.findViewById(R.id.money);
+            mDate = (TextView) v.findViewById(R.id.date);
+            mTime = (TextView) v.findViewById(R.id.time);
+            mRating = (TextView) v.findViewById(R.id.smiley); //this should eventually change to an imageview I think.
+        }
     }
 }

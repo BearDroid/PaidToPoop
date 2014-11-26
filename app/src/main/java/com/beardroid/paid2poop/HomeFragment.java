@@ -11,6 +11,7 @@ import android.database.Cursor;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,7 +20,6 @@ import android.widget.NumberPicker;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.SimpleCursorAdapter;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.melnykov.fab.FloatingActionButton;
@@ -40,20 +40,29 @@ public class HomeFragment extends Fragment {
     private RecyclerView mRecyclerView;
     private RecyclerView.Adapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
+    private Toolbar mToolbar;
 
     @Override
     public View onCreateView(final LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         final View view = inflater.inflate(R.layout.fragment_home, container, false);
         final ListView myList = (ListView) view.findViewById(R.id.pooplist);
         openDB();
+
+        ListView listView = (ListView) view.findViewById(R.id.pooplist);
+        /**
+        recyclerView.setHasFixedSize(true);
+        LinearLayoutManager llm = new LinearLayoutManager(getActivity());
+        llm.setOrientation(LinearLayoutManager.VERTICAL);
+        recyclerView.setLayoutManager(llm);
+        **/
         populateListViewFromDB(myList);
         makeHeaderNumber(view);
+        mToolbar = (Toolbar) getActivity().findViewById(R.id.toolbar);
         final FloatingActionButton fab = (FloatingActionButton) view.findViewById(R.id.fab);
         fab.attachToListView(myList);
         fab.setColorNormal(getResources().getColor(R.color.colorSecondary));
         fab.setColorPressed(getResources().getColor(R.color.colorSecondaryDark));
         fab.setColorRipple(getResources().getColor(R.color.ripple_material_dark));
-        //fab.attachToListView(listView);
         mPrefs = getActivity().getPreferences(Context.MODE_PRIVATE);
         //FloatingActionButton fab = (FloatingActionButton) getActivity().findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -156,32 +165,31 @@ public class HomeFragment extends Fragment {
         Double totalAmount = c.getDouble(c.getColumnIndex("myTotal"));
         DecimalFormat moneyFormat = new DecimalFormat("0.00");
         String totalAmountStr = moneyFormat.format(totalAmount);
-        totalAmountStr = "$" + totalAmountStr;
-        TextView tv = (TextView) view.findViewById(R.id.number);
-        tv.setText(totalAmountStr);
+        totalAmountStr = "Total: $" + totalAmountStr;
         getActivity().setTitle(totalAmountStr);
     }
 
     private void populateListViewFromDB(ListView myList) {
-        Cursor cursor = handler.getAllRows();
-        //gets data from db
-        String[] fromFieldNames = new String[]{
-                DataHandler.KEY_AMOUNT_STR, DataHandler.KEY_DATE, DataHandler.KEY_TIME, DataHandler.KEY_RATING
-        };
-        //gets ids of textviews
-        int[] toViewIDs = new int[]{
-                R.id.money, R.id.date, R.id.time, R.id.smiley
-        };
-        SimpleCursorAdapter myCursorAdapter =
-                new SimpleCursorAdapter(
-                        getActivity(),        // Context
-                        R.layout.poopcard,    // Row layout template
-                        cursor,                    // cursor (set of DB records to map)
-                        fromFieldNames,            // DB Column names
-                        toViewIDs                // View IDs to put information in
-                );
+            Cursor cursor = handler.getAllRows();
+            //gets data from db
+            String[] fromFieldNames = new String[]{
+                    DataHandler.KEY_AMOUNT_STR, DataHandler.KEY_DATE, DataHandler.KEY_TIME, DataHandler.KEY_RATING
+            };
+            //gets ids of textviews
+            int[] toViewIDs = new int[]{
+                    R.id.money, R.id.date, R.id.time, R.id.smiley
+            };
+            SimpleCursorAdapter myCursorAdapter =
+                    new SimpleCursorAdapter(
+                            getActivity(),        // Context
+                            R.layout.poopcard,    // Row layout template
+                            cursor,                    // cursor (set of DB records to map)
+                            fromFieldNames,            // DB Column names
+                            toViewIDs                // View IDs to put information in
+                    );
 
         myList.setAdapter(myCursorAdapter);
+
     }
 
 

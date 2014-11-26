@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.app.Fragment;
 import android.content.DialogInterface;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.text.Html;
 import android.text.method.LinkMovementMethod;
 import android.view.LayoutInflater;
@@ -16,20 +17,21 @@ import android.widget.TextView;
  * Created by Max on 11/13/2014.
  */
 public class About extends Fragment {
+    private Toolbar mToolbar;
+
     public About() {
     }
 
     @Override
     public void onResume() {
         super.onResume();
-        // Set title
-        //getActivity().getActionBar()
-        // .setTitle(R.string.About);
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        mToolbar = (Toolbar) getActivity().findViewById(R.id.toolbar);
+        mToolbar.setMinimumHeight(52);
         getActivity().setTitle("About");
         View view = inflater.inflate(R.layout.fragment_about, container, false);
 

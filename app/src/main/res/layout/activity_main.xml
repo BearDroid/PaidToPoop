@@ -14,20 +14,19 @@
             android:id="@+id/toolbar"
             layout="@layout/toolbar"
             android:layout_width="match_parent"
-            android:layout_height="52dp"
-            />
+            android:layout_height="52dp" />
 
         <FrameLayout
             android:id="@+id/container"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
     </LinearLayout>
+
     <fragment
         android:id="@+id/fragment_drawer"
         android:name="com.beardroid.paid2poop.NavigationDrawerFragment"
         android:layout_width="@dimen/navigation_drawer_width"
         android:layout_height="match_parent"
         android:layout_gravity="start|left"
-        app:layout="@layout/fragment_navigation_drawer"
-        />
+        app:layout="@layout/fragment_navigation_drawer" />
 </android.support.v4.widget.DrawerLayout>

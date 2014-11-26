@@ -1,11 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:fab="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_marginBottom="0dp"
-    android:background="#fff"
-    android:paddingBottom="0dp">
+    android:background="#fff">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -14,69 +11,32 @@
         android:background="#eeeeee"
         android:orientation="vertical"
         android:paddingBottom="0dp"
-        android:paddingTop="0dp"
->
-
-        <RelativeLayout
-            android:id="@+id/header"
-            android:layout_width="match_parent"
-            android:layout_height="70dp"
-            android:layout_marginTop="0dp"
-            android:background="@color/colorPrimary"
-            android:paddingTop="0dp"
-            android:elevation="6dp">
-
-
-            <TextView
-                android:id="@+id/number"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentBottom="true"
-                android:layout_alignParentRight="true"
-                android:text="@string/totalnumber"
-                android:textColor="@color/white"
-                android:textSize="60sp"
-                />
-
-            <TextView
-                android:id="@+id/total"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignBaseline="@id/number"
-                android:layout_alignParentBottom="true"
-                android:layout_toLeftOf="@id/number"
-                android:paddingLeft="0dp"
-                android:paddingRight="4dp"
-                android:text="@string/total"
-                android:textColor="@color/white"
-                android:textSize="25sp" />
-
-
-        </RelativeLayout>
+        android:paddingTop="0dp">
 
         <ListView
             android:id="@+id/pooplist"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/header"
             android:layout_marginBottom="0dp"
+            android:clipToPadding="false"
             android:divider="#eeeeee"
-            android:dividerHeight="4dp"
+            android:dividerHeight="8dp"
+            android:fitsSystemWindows="true"
             android:paddingBottom="0dp"
             android:paddingLeft="8dp"
             android:paddingRight="8dp"
-            android:scrollbarStyle="outsideOverlay"
-
-            >
+            android:paddingTop="8dp"
+            android:scrollbarStyle="outsideOverlay">
 
         </ListView>
     </LinearLayout>
+
     <com.melnykov.fab.FloatingActionButton
         android:id="@+id/fab"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|right"
         android:layout_margin="16dp"
-        android:src="@drawable/ic_action_money"
-        android:elevation="16dp"/>
+        android:elevation="16dp"
+        android:src="@drawable/ic_action_money" />
 </FrameLayout>
