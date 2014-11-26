@@ -127,6 +127,7 @@ public class HomeFragment extends Fragment {
     public String timeGetter() {
         Calendar cal = Calendar.getInstance();
         int hour = cal.get(Calendar.HOUR);
+        if(hour == 0){hour = 12;}
         Format timeFormat = new DecimalFormat("00");
         int min = cal.get(Calendar.MINUTE);
         String minute = timeFormat.format(min);
