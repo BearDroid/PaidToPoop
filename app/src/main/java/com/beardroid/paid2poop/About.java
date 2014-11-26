@@ -31,7 +31,6 @@ public class About extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         mToolbar = (Toolbar) getActivity().findViewById(R.id.toolbar);
-        mToolbar.setMinimumHeight(52);
         getActivity().setTitle("About");
         View view = inflater.inflate(R.layout.fragment_about, container, false);
 
