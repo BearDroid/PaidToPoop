@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:fab="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#fff">
@@ -28,30 +29,34 @@
         </android.support.v7.widget.RecyclerView>
     </LinearLayout>
 
+<com.getbase.floatingactionbutton.FloatingActionsMenu
+    android:id="@+id/mainFab"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_gravity="bottom|right"
+    fab:fab_addButtonColorNormal="@color/colorSecondary"
+    fab:fab_addButtonColorPressed="@color/colorSecondaryDark"
+    fab:fab_addButtonPlusIconColor="@color/white"
+    android:layout_marginBottom="16dp"
+    android:layout_marginRight="16dp"
+    android:layout_marginEnd="16dp"
+    fab:fab_type="normal">
 
-    <com.melnykov.fab.FloatingActionButton
-        android:id="@+id/editFab"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom|right"
-        android:layout_margin="16dp"
-        android:elevation="8dp"
-        android:visibility="gone"/>
-    <com.melnykov.fab.FloatingActionButton
+    <com.getbase.floatingactionbutton.FloatingActionButton
         android:id="@+id/timerFab"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="bottom|right"
-        android:layout_margin="16dp"
-        android:elevation="8dp"
-        android:visibility="gone"/>
-    <com.melnykov.fab.FloatingActionButton
-        android:id="@+id/mainFab"
+        fab:fab_colorNormal="@color/colorSecondary"
+        fab:fab_colorPressed="@color/colorSecondaryDark"
+        fab:fab_type="mini"/>
+
+    <com.getbase.floatingactionbutton.FloatingActionButton
+        android:id="@+id/editFab"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="bottom|right"
-        android:layout_margin="16dp"
-        android:elevation="8dp"
-        android:src="@drawable/ic_action_money" />
+        fab:fab_colorNormal="@color/colorSecondary"
+        fab:fab_colorPressed="@color/colorSecondaryDark"
+        fab:fab_type="mini"/>
+    </com.getbase.floatingactionbutton.FloatingActionsMenu>
 
 </FrameLayout>

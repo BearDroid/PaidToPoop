@@ -20,7 +20,8 @@ import android.widget.NumberPicker;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 
-import com.melnykov.fab.FloatingActionButton;
+import com.getbase.floatingactionbutton.FloatingActionButton;
+import com.getbase.floatingactionbutton.FloatingActionsMenu;
 
 import java.text.DecimalFormat;
 import java.text.Format;
@@ -57,6 +58,7 @@ public class HomeFragment extends Fragment {
         populateListViewFromDB(recyclerView);
         makeHeaderNumber(view);
         mToolbar = (Toolbar) getActivity().findViewById(R.id.toolbar);
+        /**
         final FloatingActionButton mainFab = (FloatingActionButton) view.findViewById(R.id.mainFab);
         mainFab.attachToRecyclerView(myList);
         mainFab.setColorNormal(getResources().getColor(R.color.colorSecondary));
@@ -74,13 +76,16 @@ public class HomeFragment extends Fragment {
         editFab.setColorPressed(getResources().getColor(R.color.colorSecondaryDark));
         editFab.setColorRipple(getResources().getColor(R.color.ripple_material_dark));
         editFab.setType(0);
+         **/
+        final FloatingActionsMenu mainFab = (FloatingActionsMenu) view.findViewById(R.id.mainFab);
+        FloatingActionButton editFab = (FloatingActionButton) view.findViewById(R.id.editFab);
+
         mPrefs = getActivity().getPreferences(Context.MODE_PRIVATE);
         //FloatingActionButton fab = (FloatingActionButton) getActivity().findViewById(R.id.fab);
-        mainFab.setOnClickListener(new View.OnClickListener() {
+        editFab.setOnClickListener(new View.OnClickListener() {
             @SuppressLint("NewApi")
             @TargetApi(Build.VERSION_CODES.LOLLIPOP)
             public void onClick(final View view) {
-                mainFab.setElevation(20);
                 AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
 
                 final View alertView = inflater.inflate(R.layout.poop_dialog, (ViewGroup) getActivity().findViewById(R.id.poopdialog));
