@@ -19,7 +19,6 @@ import android.view.ViewGroup;
 import android.widget.NumberPicker;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
-import android.widget.Toast;
 
 import com.melnykov.fab.FloatingActionButton;
 
@@ -58,18 +57,30 @@ public class HomeFragment extends Fragment {
         populateListViewFromDB(recyclerView);
         makeHeaderNumber(view);
         mToolbar = (Toolbar) getActivity().findViewById(R.id.toolbar);
-        final FloatingActionButton fab = (FloatingActionButton) view.findViewById(R.id.fab);
-        fab.attachToRecyclerView(myList);
-        fab.setColorNormal(getResources().getColor(R.color.colorSecondary));
-        fab.setColorPressed(getResources().getColor(R.color.colorSecondaryDark));
-        fab.setColorRipple(getResources().getColor(R.color.ripple_material_dark));
+        final FloatingActionButton mainFab = (FloatingActionButton) view.findViewById(R.id.mainFab);
+        mainFab.attachToRecyclerView(myList);
+        mainFab.setColorNormal(getResources().getColor(R.color.colorSecondary));
+        mainFab.setColorPressed(getResources().getColor(R.color.colorSecondaryDark));
+        mainFab.setColorRipple(getResources().getColor(R.color.ripple_material_dark));
+        final FloatingActionButton timerFab = (FloatingActionButton) view.findViewById(R.id.timerFab);
+        timerFab.attachToRecyclerView(myList);
+        timerFab.setColorNormal(getResources().getColor(R.color.colorSecondary));
+        timerFab.setColorPressed(getResources().getColor(R.color.colorSecondaryDark));
+        timerFab.setColorRipple(getResources().getColor(R.color.ripple_material_dark));
+        timerFab.setType(0);
+        final FloatingActionButton editFab = (FloatingActionButton) view.findViewById(R.id.editFab);
+        editFab.attachToRecyclerView(myList);
+        editFab.setColorNormal(getResources().getColor(R.color.colorSecondary));
+        editFab.setColorPressed(getResources().getColor(R.color.colorSecondaryDark));
+        editFab.setColorRipple(getResources().getColor(R.color.ripple_material_dark));
+        editFab.setType(0);
         mPrefs = getActivity().getPreferences(Context.MODE_PRIVATE);
         //FloatingActionButton fab = (FloatingActionButton) getActivity().findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
+        mainFab.setOnClickListener(new View.OnClickListener() {
             @SuppressLint("NewApi")
             @TargetApi(Build.VERSION_CODES.LOLLIPOP)
             public void onClick(final View view) {
-                fab.setElevation(20);
+                mainFab.setElevation(20);
                 AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
 
                 final View alertView = inflater.inflate(R.layout.poop_dialog, (ViewGroup) getActivity().findViewById(R.id.poopdialog));
@@ -106,7 +117,6 @@ public class HomeFragment extends Fragment {
                         String date = dateGetter();
                         String time = timeGetter();
                         handler.insertData(moneyMade, date, time, ratingString, madeStr);
-                        Toast.makeText(getActivity(), "Data inserted", Toast.LENGTH_LONG).show();
                         populateListViewFromDB(recyclerView);
                         makeHeaderNumber(getView());
 

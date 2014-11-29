@@ -17,10 +17,7 @@
             android:id="@+id/pooplist"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="0dp"
             android:clipToPadding="false"
-            android:divider="#eeeeee"
-            android:dividerHeight="8dp"
             android:fitsSystemWindows="true"
             android:paddingBottom="0dp"
             android:paddingLeft="8dp"
@@ -31,12 +28,30 @@
         </android.support.v7.widget.RecyclerView>
     </LinearLayout>
 
+
     <com.melnykov.fab.FloatingActionButton
-        android:id="@+id/fab"
+        android:id="@+id/editFab"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|right"
         android:layout_margin="16dp"
-        android:elevation="16dp"
+        android:elevation="8dp"
+        android:visibility="gone"/>
+    <com.melnykov.fab.FloatingActionButton
+        android:id="@+id/timerFab"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|right"
+        android:layout_margin="16dp"
+        android:elevation="8dp"
+        android:visibility="gone"/>
+    <com.melnykov.fab.FloatingActionButton
+        android:id="@+id/mainFab"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|right"
+        android:layout_margin="16dp"
+        android:elevation="8dp"
         android:src="@drawable/ic_action_money" />
+
 </FrameLayout>

@@ -22,7 +22,7 @@
     <string name="total">Total</string>
     <string name="totalnumber">126.02</string>
     <string name="minutesTitle">Minutes on toilet:</string>
-    <string name="rating">Rating: </string>
+    <string name="rating">How\'d it go?</string>
     <string name="badbutton">Bad</string>
     <string name="okaybutton">Okay</string>
     <string name="goodbutton">Good</string>

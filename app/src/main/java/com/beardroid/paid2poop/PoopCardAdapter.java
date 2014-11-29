@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import java.text.DecimalFormat;
 import java.util.List;
 
 /**
@@ -30,7 +31,12 @@ public class PoopCardAdapter extends RecyclerView.Adapter<PoopCardAdapter.PoopCa
     @Override
     public void onBindViewHolder(PoopCardHolder holder, int position) {
         PoopCard pc = PoopCardList.get(position);
-        holder.mAmount.setText(pc.getAmount());
+        String amt = pc.getAmount();
+        Double amtDbl = Double.parseDouble(amt);
+        DecimalFormat moneyFormat = new DecimalFormat("0.00");
+        amt = moneyFormat.format(amtDbl);
+        amt = "$" + amt;
+        holder.mAmount.setText(amt);
         holder.mTime.setText(pc.getTime());
         holder.mDate.setText(pc.getDate());
         holder.mRating.setText(pc.getRating());
