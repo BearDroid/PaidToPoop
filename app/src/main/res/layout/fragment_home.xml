@@ -13,7 +13,7 @@
         android:paddingBottom="0dp"
         android:paddingTop="0dp">
 
-        <ListView
+        <android.support.v7.widget.RecyclerView
             android:id="@+id/pooplist"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -28,7 +28,7 @@
             android:paddingTop="8dp"
             android:scrollbarStyle="outsideOverlay">
 
-        </ListView>
+        </android.support.v7.widget.RecyclerView>
     </LinearLayout>
 
     <com.melnykov.fab.FloatingActionButton

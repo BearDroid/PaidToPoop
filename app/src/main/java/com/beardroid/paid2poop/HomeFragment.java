@@ -10,16 +10,15 @@ import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.os.Build;
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ListView;
 import android.widget.NumberPicker;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
-import android.widget.SimpleCursorAdapter;
 import android.widget.Toast;
 
 import com.melnykov.fab.FloatingActionButton;
@@ -28,6 +27,7 @@ import java.text.DecimalFormat;
 import java.text.Format;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
 import java.util.Locale;
 
 /**
@@ -45,21 +45,21 @@ public class HomeFragment extends Fragment {
     @Override
     public View onCreateView(final LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         final View view = inflater.inflate(R.layout.fragment_home, container, false);
-        final ListView myList = (ListView) view.findViewById(R.id.pooplist);
+        final RecyclerView myList = (RecyclerView) view.findViewById(R.id.pooplist);
         openDB();
 
-        ListView listView = (ListView) view.findViewById(R.id.pooplist);
-        /**
+        final RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.pooplist);
+
         recyclerView.setHasFixedSize(true);
         LinearLayoutManager llm = new LinearLayoutManager(getActivity());
         llm.setOrientation(LinearLayoutManager.VERTICAL);
         recyclerView.setLayoutManager(llm);
-        **/
-        populateListViewFromDB(myList);
+
+        populateListViewFromDB(recyclerView);
         makeHeaderNumber(view);
         mToolbar = (Toolbar) getActivity().findViewById(R.id.toolbar);
         final FloatingActionButton fab = (FloatingActionButton) view.findViewById(R.id.fab);
-        fab.attachToListView(myList);
+        fab.attachToRecyclerView(myList);
         fab.setColorNormal(getResources().getColor(R.color.colorSecondary));
         fab.setColorPressed(getResources().getColor(R.color.colorSecondaryDark));
         fab.setColorRipple(getResources().getColor(R.color.ripple_material_dark));
@@ -107,7 +107,7 @@ public class HomeFragment extends Fragment {
                         String time = timeGetter();
                         handler.insertData(moneyMade, date, time, ratingString, madeStr);
                         Toast.makeText(getActivity(), "Data inserted", Toast.LENGTH_LONG).show();
-                        populateListViewFromDB(myList);
+                        populateListViewFromDB(recyclerView);
                         makeHeaderNumber(getView());
 
                     }
@@ -127,7 +127,9 @@ public class HomeFragment extends Fragment {
     public String timeGetter() {
         Calendar cal = Calendar.getInstance();
         int hour = cal.get(Calendar.HOUR);
-        if(hour == 0){hour = 12;}
+        if (hour == 0) {
+            hour = 12;
+        }
         Format timeFormat = new DecimalFormat("00");
         int min = cal.get(Calendar.MINUTE);
         String minute = timeFormat.format(min);
@@ -170,27 +172,10 @@ public class HomeFragment extends Fragment {
         getActivity().setTitle(totalAmountStr);
     }
 
-    private void populateListViewFromDB(ListView myList) {
-            Cursor cursor = handler.getAllRows();
-            //gets data from db
-            String[] fromFieldNames = new String[]{
-                    DataHandler.KEY_AMOUNT_STR, DataHandler.KEY_DATE, DataHandler.KEY_TIME, DataHandler.KEY_RATING
-            };
-            //gets ids of textviews
-            int[] toViewIDs = new int[]{
-                    R.id.money, R.id.date, R.id.time, R.id.smiley
-            };
-            SimpleCursorAdapter myCursorAdapter =
-                    new SimpleCursorAdapter(
-                            getActivity(),        // Context
-                            R.layout.poopcard,    // Row layout template
-                            cursor,                    // cursor (set of DB records to map)
-                            fromFieldNames,            // DB Column names
-                            toViewIDs                // View IDs to put information in
-                    );
-
-        myList.setAdapter(myCursorAdapter);
-
+    private void populateListViewFromDB(RecyclerView myList) {
+        List<PoopCard> poopCardList = handler.getPoopCardInfo();
+        mAdapter = new PoopCardAdapter(poopCardList);
+        myList.setAdapter(mAdapter);
     }
 
 

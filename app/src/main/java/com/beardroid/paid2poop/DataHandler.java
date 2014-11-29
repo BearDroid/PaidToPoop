@@ -6,10 +6,13 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Created by Max on 11/13/2014.
  */
-public class DataHandler {
+public class DataHandler extends SQLiteOpenHelper {
     // DB Fields
     public static final String KEY_ROWID = "_id";
     public static final int COL_ROWID = 0;
@@ -37,28 +40,58 @@ public class DataHandler {
                     + KEY_RATING + " text not null,"
                     + KEY_AMOUNT_STR + " text not null);";
     public static final String DATABASE_NAME = "PoopDB";
-    public static final int DATABASE_VERSION = 16;
+    public static final int DATABASE_VERSION = 17;
     //order by:
     public static final String ORDER_BY = "_id DESC";
     // For logging:
     private static final String TAG = "DBAdapter";
-    private final Context context;
-    private DataBaseHelper myDBHelper;
     private SQLiteDatabase db;
 
     public DataHandler(Context context) {
-        this.context = context;
-        myDBHelper = new DataBaseHelper(context);
+        super(context, DATABASE_NAME, null, DATABASE_VERSION);
+    }
+
+
+    public List<PoopCard> getPoopCardInfo() {
+        List<PoopCard> poopCardList = new ArrayList<PoopCard>();
+
+        String selectQuery = "SELECT  * FROM " + TABLE_NAME;
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor cursor = db.rawQuery(selectQuery, null);
+        if (cursor.moveToFirst()) {
+            do {
+                PoopCard poopCard = new PoopCard();
+                poopCard.setId(cursor.getLong(0));
+                poopCard.setAmount(cursor.getString(1));
+                poopCard.setDate(cursor.getString(2));
+                poopCard.setTime(cursor.getString(3));
+                poopCard.setRating(cursor.getString(4));
+                poopCardList.add(poopCard);
+            } while (cursor.moveToNext());
+        }
+        return poopCardList;
+    }
+
+    @Override
+    public void onCreate(SQLiteDatabase db) {
+        db.execSQL(TABLE_CREATE);
 
     }
 
+    @Override
+    public void onUpgrade(SQLiteDatabase db, int i, int i2) {
+
+        db.execSQL("DROP TABLE IF EXISTS PoopTable ");
+        onCreate(db);
+    }
+
     public DataHandler open() {
-        db = myDBHelper.getWritableDatabase();
+        db = getWritableDatabase();
         return this;
     }
 
     public void close() {
-        myDBHelper.close();
+        close();
     }
 
     public long insertData(Double amount, String date, String time, String rating, String amountStr) {
@@ -115,23 +148,4 @@ public class DataHandler {
         return db.update(TABLE_NAME, content, where, null) != 0;
     }
 
-    private static class DataBaseHelper extends SQLiteOpenHelper {
-
-        public DataBaseHelper(Context context) {
-            super(context, DATABASE_NAME, null, DATABASE_VERSION);
-        }
-
-        @Override
-        public void onCreate(SQLiteDatabase db) {
-            db.execSQL(TABLE_CREATE);
-
-        }
-
-        @Override
-        public void onUpgrade(SQLiteDatabase db, int i, int i2) {
-
-            db.execSQL("DROP TABLE IF EXISTS PoopTable ");
-            onCreate(db);
-        }
-    }
 }
