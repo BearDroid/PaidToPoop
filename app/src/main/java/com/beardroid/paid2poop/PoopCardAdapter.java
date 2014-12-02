@@ -9,7 +9,6 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -39,7 +38,7 @@ public class PoopCardAdapter extends RecyclerView.Adapter<PoopCardAdapter.PoopCa
 
     @Override
     public void onBindViewHolder(final PoopCardHolder holder, int position) {
-        PoopCard pc = PoopCardList.get(position);
+        final PoopCard pc = PoopCardList.get(position);
         String amt = pc.getAmount();
         Double amtDbl = Double.parseDouble(amt);
         DecimalFormat moneyFormat = new DecimalFormat("0.00");
@@ -51,24 +50,25 @@ public class PoopCardAdapter extends RecyclerView.Adapter<PoopCardAdapter.PoopCa
         holder.mRating.setText(pc.getRating());
         String rating = pc.getRating();
         if(rating.equals("Good")){
-            holder.mRatingColor.setBackgroundColor(Color.parseColor("#2980b9"));
+            holder.mRatingColor.setBackgroundColor(Color.parseColor("#2196F3")); //2980b9
+            holder.mRating.setBackgroundColor(Color.parseColor("#1976D2"));
         } else if(rating.equals("Okay")){
-            holder.mRatingColor.setBackgroundColor(Color.parseColor("#8e44ad"));
+            holder.mRatingColor.setBackgroundColor(Color.parseColor("#9C27B0")); //8e44ad
+            holder.mRating.setBackgroundColor(Color.parseColor("#7B1FA2"));
         } else if(rating.equals("Bad")){
-            holder.mRatingColor.setBackgroundColor(Color.parseColor("#e74c3c"));
+            holder.mRatingColor.setBackgroundColor(Color.parseColor("#F44336")); //e74c3c
+            holder.mRating.setBackgroundColor(Color.parseColor("#D32F2F"));
         }
 
         holder.mLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent myIntent = new Intent(mContext, DetailActivity.class);
+                myIntent.putExtra("Amount",pc.getAmount());
+                myIntent.putExtra("Rating", pc.getRating());
+                myIntent.putExtra("Date", pc.getDate());
+                myIntent.putExtra("Time", pc.getTime());
                 startActivity((MainActivity) mContext, myIntent, Bundle.EMPTY);
-            }
-            public void onItemClick(AdapterView<?> parent, View v,
-                                    int position, long id) {
-                Intent myIntent = new Intent(mContext, DetailActivity.class);
-                startActivity((MainActivity) mContext, myIntent, Bundle.EMPTY);
-
             }
         });
     }
@@ -85,6 +85,7 @@ public class PoopCardAdapter extends RecyclerView.Adapter<PoopCardAdapter.PoopCa
         protected TextView mRating;
         protected CardView mLayout;
         protected RelativeLayout mRatingColor;
+        protected TextView mSmiley;
 
         public PoopCardHolder(View v) {
             super(v);

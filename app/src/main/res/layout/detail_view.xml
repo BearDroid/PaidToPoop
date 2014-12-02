@@ -3,10 +3,11 @@
     android:layout_width="match_parent" android:layout_height="match_parent">
     <include layout="@layout/detail_toolbar"
         android:id="@+id/detail_toolbar"
-        android:layout_height="224dp"
+        android:layout_height="280dp"
         android:layout_width="match_parent">
     </include>
     <TextView
+        android:id="@+id/amountDetail"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="$9.37"
@@ -14,7 +15,8 @@
         android:layout_alignBottom="@id/detail_toolbar"
         android:layout_marginLeft="72sp"
         android:layout_marginBottom="24dp"
-        android:textSize="42sp"/>
+        android:textSize="42sp"
+        android:elevation="16dp"/>
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
