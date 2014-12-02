@@ -8,6 +8,7 @@ import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import java.text.DecimalFormat;
@@ -17,42 +18,54 @@ import java.text.DecimalFormat;
  */
 public class DetailActivity extends ActionBarActivity {
     Toolbar mToolbar;
-
+    RelativeLayout topDetail;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.detail_view);
         mToolbar = (Toolbar) findViewById(R.id.detail_toolbar);
+        topDetail = (RelativeLayout) findViewById(R.id.topDetail);
         setSupportActionBar(mToolbar);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         mToolbar.setBackgroundColor(Color.DKGRAY);
         setBackgroundColor();
+        this.setTitle(null);
         populateData();
+
     }
     public void setBackgroundColor(){
         String rating = getIntent().getExtras().getString("Rating");
         if(rating.equals("Good")){
             mToolbar.setBackgroundColor(Color.parseColor("#2196F3"));
+            topDetail.setBackgroundColor(Color.parseColor("#2196F3"));
             setStatusGood();
         } else if(rating.equals("Okay")){
             mToolbar.setBackgroundColor(Color.parseColor("#9C27B0"));
+            topDetail.setBackgroundColor(Color.parseColor("#9C27B0"));
             setStatusOkay();
         } else if(rating.equals("Bad")){
             mToolbar.setBackgroundColor(Color.parseColor("#F44336"));
+            topDetail.setBackgroundColor(Color.parseColor("#F44336"));
             setStatusBad();
         }
     }
     public void populateData(){
         TextView amountView = (TextView) findViewById(R.id.amountDetail);
-        String amt =getIntent().getExtras().getString("Amount");
+        String amt = getIntent().getExtras().getString("Amount");
         Double amtDbl = Double.parseDouble(amt);
         DecimalFormat moneyFormat = new DecimalFormat("0.00");
         amt = moneyFormat.format(amtDbl);
         amt = "$" + amt;
         amountView.setText(amt);
-        this.setTitle(amt);
+
+        TextView dateView = (TextView) findViewById(R.id.dateText);
+        dateView.setText(getIntent().getExtras().getString("Date"));
+
+        TextView timeView = (TextView) findViewById(R.id.timeText);
+        timeView.setText(getIntent().getExtras().getString("Time"));
     }
+    //below sets statusbar if on Lollipop
     @TargetApi(Build.VERSION_CODES.LOLLIPOP)
     public void setStatusGood(){
         Window window = this.getWindow();

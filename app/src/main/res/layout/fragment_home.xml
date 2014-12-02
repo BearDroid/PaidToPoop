@@ -29,36 +29,36 @@
         </android.support.v7.widget.RecyclerView>
     </LinearLayout>
 
-<com.getbase.floatingactionbutton.FloatingActionsMenu
-    android:id="@+id/mainFab"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:layout_gravity="bottom|right"
-    fab:fab_addButtonColorNormal="@color/colorSecondary"
-    fab:fab_addButtonColorPressed="@color/colorSecondaryDark"
-    fab:fab_addButtonPlusIconColor="@color/white"
-    android:layout_marginBottom="16dp"
-    android:layout_marginRight="16dp"
-    android:layout_marginEnd="16dp"
-    fab:fab_type="normal">
-
-    <com.getbase.floatingactionbutton.FloatingActionButton
-        android:id="@+id/timerFab"
+    <com.getbase.floatingactionbutton.FloatingActionsMenu
+        android:id="@+id/mainFab"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        fab:fab_colorNormal="@color/colorSecondary"
-        fab:fab_colorPressed="@color/colorSecondaryDark"
-        fab:fab_type="mini"
-        fab:fab_icon="@drawable/ic_timer"/>
+        android:layout_gravity="bottom|right"
+        android:layout_marginBottom="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginRight="16dp"
+        fab:fab_addButtonColorNormal="@color/colorSecondary"
+        fab:fab_addButtonColorPressed="@color/colorSecondaryDark"
+        fab:fab_addButtonPlusIconColor="@color/white"
+        fab:fab_type="normal">
 
-    <com.getbase.floatingactionbutton.FloatingActionButton
-        android:id="@+id/editFab"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        fab:fab_colorNormal="@color/colorSecondary"
-        fab:fab_colorPressed="@color/colorSecondaryDark"
-        fab:fab_type="mini"
-        fab:fab_icon="@drawable/ic_edit"/>
+        <com.getbase.floatingactionbutton.FloatingActionButton
+            android:id="@+id/timerFab"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            fab:fab_colorNormal="@color/colorSecondary"
+            fab:fab_colorPressed="@color/colorSecondaryDark"
+            fab:fab_icon="@drawable/ic_timer"
+            fab:fab_type="mini" />
+
+        <com.getbase.floatingactionbutton.FloatingActionButton
+            android:id="@+id/editFab"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            fab:fab_colorNormal="@color/colorSecondary"
+            fab:fab_colorPressed="@color/colorSecondaryDark"
+            fab:fab_icon="@drawable/ic_edit"
+            fab:fab_type="mini" />
     </com.getbase.floatingactionbutton.FloatingActionsMenu>
 
 </FrameLayout>
