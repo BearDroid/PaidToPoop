@@ -131,7 +131,7 @@ public class MyPreferenceFragment extends PreferenceFragment {
                             public void onClick(DialogInterface dialog, int which) {
                                 // do nothing
                             }
-                        }).setIcon(R.drawable.ic_action_money).show();
+                        }).show();
                 return false;
             }
 
@@ -176,7 +176,7 @@ public class MyPreferenceFragment extends PreferenceFragment {
                             public void onClick(DialogInterface dialog, int which) {
                                 // do nothing
                             }
-                        }).setIcon(R.drawable.ic_action_money).show();
+                        }).show();
                 return false;
             }
         });
