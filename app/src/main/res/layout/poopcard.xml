@@ -10,7 +10,8 @@
     card_view:cardBackgroundColor="@color/white"
     card_view:cardCornerRadius="4dp"
     android:layout_marginBottom="8dp"
-    android:elevation="2dp">
+    android:elevation="2dp"
+    >
 
     <RelativeLayout
         android:id="@+id/card_rel"

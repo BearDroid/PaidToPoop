@@ -33,7 +33,7 @@ import java.util.Locale;
 /**
  * Created by Max on 11/13/2014.
  */
-public class HomeFragment extends Fragment {
+public class HomeFragment extends Fragment{
     public SharedPreferences mPrefs;
     public ArrayList<PoopCard> list = new ArrayList<PoopCard>();
     DataHandler handler;
@@ -41,6 +41,7 @@ public class HomeFragment extends Fragment {
     private RecyclerView.Adapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
     private Toolbar mToolbar;
+    public Context context = getActivity();
 
     @Override
     public View onCreateView(final LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -49,7 +50,6 @@ public class HomeFragment extends Fragment {
         openDB();
 
         final RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.pooplist);
-
         recyclerView.setHasFixedSize(true);
         LinearLayoutManager llm = new LinearLayoutManager(getActivity());
         llm.setOrientation(LinearLayoutManager.VERTICAL);
@@ -58,30 +58,10 @@ public class HomeFragment extends Fragment {
         populateListViewFromDB(recyclerView);
         makeHeaderNumber(view);
         mToolbar = (Toolbar) getActivity().findViewById(R.id.toolbar);
-        /**
-        final FloatingActionButton mainFab = (FloatingActionButton) view.findViewById(R.id.mainFab);
-        mainFab.attachToRecyclerView(myList);
-        mainFab.setColorNormal(getResources().getColor(R.color.colorSecondary));
-        mainFab.setColorPressed(getResources().getColor(R.color.colorSecondaryDark));
-        mainFab.setColorRipple(getResources().getColor(R.color.ripple_material_dark));
-        final FloatingActionButton timerFab = (FloatingActionButton) view.findViewById(R.id.timerFab);
-        timerFab.attachToRecyclerView(myList);
-        timerFab.setColorNormal(getResources().getColor(R.color.colorSecondary));
-        timerFab.setColorPressed(getResources().getColor(R.color.colorSecondaryDark));
-        timerFab.setColorRipple(getResources().getColor(R.color.ripple_material_dark));
-        timerFab.setType(0);
-        final FloatingActionButton editFab = (FloatingActionButton) view.findViewById(R.id.editFab);
-        editFab.attachToRecyclerView(myList);
-        editFab.setColorNormal(getResources().getColor(R.color.colorSecondary));
-        editFab.setColorPressed(getResources().getColor(R.color.colorSecondaryDark));
-        editFab.setColorRipple(getResources().getColor(R.color.ripple_material_dark));
-        editFab.setType(0);
-         **/
         final FloatingActionsMenu mainFab = (FloatingActionsMenu) view.findViewById(R.id.mainFab);
         FloatingActionButton editFab = (FloatingActionButton) view.findViewById(R.id.editFab);
 
         mPrefs = getActivity().getPreferences(Context.MODE_PRIVATE);
-        //FloatingActionButton fab = (FloatingActionButton) getActivity().findViewById(R.id.fab);
         editFab.setOnClickListener(new View.OnClickListener() {
             @SuppressLint("NewApi")
             @TargetApi(Build.VERSION_CODES.LOLLIPOP)
@@ -189,9 +169,7 @@ public class HomeFragment extends Fragment {
 
     private void populateListViewFromDB(RecyclerView myList) {
         List<PoopCard> poopCardList = handler.getPoopCardInfo();
-        mAdapter = new PoopCardAdapter(poopCardList);
+        mAdapter = new PoopCardAdapter(poopCardList, getActivity());
         myList.setAdapter(mAdapter);
     }
-
-
 }

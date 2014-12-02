@@ -10,6 +10,5 @@
         <item name="android:windowDrawsSystemBarBackgrounds">true</item>
         <item name="android:windowActionBarOverlay">true</item>
         <item name="android:windowActionBar">false</item>
-
     </style>
 </resources>
