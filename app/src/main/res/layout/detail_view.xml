@@ -63,12 +63,11 @@
                 android:layout_height="match_parent"
                 android:layout_centerVertical="true"
                 android:layout_marginLeft="72dp"
+                android:elegantTextHeight="true"
                 android:gravity="center_vertical"
                 android:text="Date"
                 android:textColor="@color/abc_primary_text_material_light"
-                android:textSize="24sp"
-                android:elegantTextHeight="true"
-                />
+                android:textSize="24sp" />
         </RelativeLayout>
 
         <RelativeLayout
@@ -111,7 +110,6 @@
         android:layout_alignParentRight="true"
         android:layout_marginBottom="-39dp"
         android:layout_marginRight="16dp"
-        android:background="@drawable/ripple_good"
         android:elevation="8dp"
         app:fab_icon="@drawable/ic_money" />
 </RelativeLayout>

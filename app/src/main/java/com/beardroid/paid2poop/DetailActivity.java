@@ -51,6 +51,7 @@ public class DetailActivity extends ActionBarActivity {
     }
     public void setColors(){
         String rating = getIntent().getExtras().getString("Rating");
+        String versionChecker = Build.VERSION.RELEASE;
         if(rating.equals("Good")){
             mToolbar.setBackgroundColor(Color.parseColor("#2196F3"));
             topDetail.setBackgroundColor(Color.parseColor("#2196F3"));
@@ -58,7 +59,9 @@ public class DetailActivity extends ActionBarActivity {
             fab.setColorPressed(Color.parseColor("#d5650c"));
             dateIcon.setColorFilter(Color.parseColor("#f37e21"));
             timeIcon.setColorFilter(Color.parseColor("#f37e21"));
-            setStatusGood();
+            if(versionChecker.equals("5.0")) {
+                setStatusGood();
+            }
         } else if(rating.equals("Okay")){
             mToolbar.setBackgroundColor(Color.parseColor("#9C27B0"));
             topDetail.setBackgroundColor(Color.parseColor("#9C27B0"));
@@ -66,7 +69,9 @@ public class DetailActivity extends ActionBarActivity {
             fab.setColorPressed(Color.parseColor("#2d861e"));
             dateIcon.setColorFilter(Color.parseColor("#3bb027"));
             timeIcon.setColorFilter(Color.parseColor("#3bb027"));
-            setStatusOkay();
+            if(versionChecker.equals("5.0")) {
+                setStatusOkay();
+            }
         } else if(rating.equals("Bad")){
             mToolbar.setBackgroundColor(Color.parseColor("#F44336"));
             topDetail.setBackgroundColor(Color.parseColor("#F44336"));
@@ -74,7 +79,9 @@ public class DetailActivity extends ActionBarActivity {
             fab.setColorPressed(Color.parseColor("#078089"));
             dateIcon.setColorFilter(Color.parseColor("#0bc4d2"));
             timeIcon.setColorFilter(Color.parseColor("#0bc4d2"));
-            setStatusBad();
+            if(versionChecker.equals("5.0")) {
+                setStatusBad();
+            }
         }
     }
     public void populateData(){

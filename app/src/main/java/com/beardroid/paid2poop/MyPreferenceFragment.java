@@ -57,7 +57,7 @@ public class MyPreferenceFragment extends PreferenceFragment {
                 new AlertDialog.Builder(getActivity())
                         .setTitle("Clear All")
                         .setMessage(
-                                "Are you sure you want to clear all of your poops??")
+                                "Are you sure you want to clear all of your poops?")
                         .setPositiveButton("Yes",
                                 new DialogInterface.OnClickListener() {
                                     public void onClick(DialogInterface dialog,
