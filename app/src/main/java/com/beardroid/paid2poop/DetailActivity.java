@@ -1,6 +1,8 @@
 package com.beardroid.paid2poop;
 
 import android.annotation.TargetApi;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Build;
@@ -121,7 +123,15 @@ public class DetailActivity extends ActionBarActivity {
     public boolean onOptionsItemSelected(MenuItem menuItem){
         switch(menuItem.getItemId()){
             case R.id.action_delete:
-                delete();
+                new AlertDialog.Builder(this).setTitle("Delete poop?")
+                        .setMessage("Are you sure you want to delete this log?")
+                        .setPositiveButton("Yes",new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                delete();
+                            }
+                        })
+                        .setNegativeButton("Cancel", null).show();
                 return true;
             case R.id.action_share:
                 share();
