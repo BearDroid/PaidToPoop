@@ -1,6 +1,7 @@
 package com.beardroid.paid2poop;
 
 import android.annotation.TargetApi;
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
@@ -141,6 +142,14 @@ public class DetailActivity extends ActionBarActivity {
         finish();
     }
     public void share(){
-
-    }
+        String madeStr = getIntent().getExtras().getString("Amount");
+            Intent i = new Intent(Intent.ACTION_SEND);
+            i.setType("text/plain");
+            i.putExtra(
+                    Intent.EXTRA_TEXT,
+                    "I made $"
+                            + madeStr
+                            + " today while on the can! #PaidToPoop");
+            startActivity(Intent.createChooser(i, "Brag via"));
+        }
 }
