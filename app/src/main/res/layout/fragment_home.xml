@@ -40,7 +40,7 @@
         fab:fab_addButtonColorNormal="@color/colorSecondary"
         fab:fab_addButtonColorPressed="@color/colorSecondaryDark"
         fab:fab_addButtonPlusIconColor="@color/white"
-        fab:fab_type="normal">
+        >
 
         <com.getbase.floatingactionbutton.FloatingActionButton
             android:id="@+id/timerFab"
@@ -49,7 +49,7 @@
             fab:fab_colorNormal="@color/colorSecondary"
             fab:fab_colorPressed="@color/colorSecondaryDark"
             fab:fab_icon="@drawable/ic_timer"
-            fab:fab_type="mini" />
+            />
 
         <com.getbase.floatingactionbutton.FloatingActionButton
             android:id="@+id/editFab"
@@ -58,7 +58,7 @@
             fab:fab_colorNormal="@color/colorSecondary"
             fab:fab_colorPressed="@color/colorSecondaryDark"
             fab:fab_icon="@drawable/ic_edit"
-            fab:fab_type="mini" />
+             />
     </com.getbase.floatingactionbutton.FloatingActionsMenu>
 
 </FrameLayout>

@@ -106,9 +106,8 @@ public class DataHandler extends SQLiteOpenHelper {
         return db.insert(TABLE_NAME, null, content);
     }
 
-    public boolean deleterRow(long rowId) {
-        String where = KEY_ROWID + "=" + rowId;
-        return db.delete(TABLE_NAME, where, null) != 0;
+    public boolean deleteRow(long rowId) {
+        return db.delete(TABLE_NAME, KEY_ROWID + "=" + rowId, null) > 0;
     }
 
     public void deleteAll() {
@@ -116,7 +115,7 @@ public class DataHandler extends SQLiteOpenHelper {
         long rowId = c.getColumnIndexOrThrow(KEY_ROWID);
         if (c.moveToFirst()) {
             do {
-                deleterRow(c.getLong((int) rowId));
+                deleteRow(c.getLong((int) rowId));
             } while (c.moveToNext());
         }
     }

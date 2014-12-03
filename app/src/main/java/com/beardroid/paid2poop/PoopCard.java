@@ -52,8 +52,9 @@ public class PoopCard {
         this.rating = rating;
     }
 
-    public long getId() {
-        return id;
+    public String getId() {
+        String idStr = "" + id;
+        return idStr;
     }
 
     public void setId(long id) {

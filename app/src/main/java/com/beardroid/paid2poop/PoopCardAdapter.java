@@ -68,6 +68,7 @@ public class PoopCardAdapter extends RecyclerView.Adapter<PoopCardAdapter.PoopCa
                 myIntent.putExtra("Rating", pc.getRating());
                 myIntent.putExtra("Date", pc.getDate());
                 myIntent.putExtra("Time", pc.getTime());
+                myIntent.putExtra("ID", pc.getId());
                 startActivity((MainActivity) mContext, myIntent, Bundle.EMPTY);
             }
         });

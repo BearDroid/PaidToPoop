@@ -57,20 +57,13 @@ public class MyPreferenceFragment extends PreferenceFragment {
                 new AlertDialog.Builder(getActivity())
                         .setTitle("Clear All")
                         .setMessage(
-                                "Are you sure you want to clear all saved data?")
+                                "Are you sure you want to clear all of your poops??")
                         .setPositiveButton("Yes",
                                 new DialogInterface.OnClickListener() {
                                     public void onClick(DialogInterface dialog,
                                                         int which) {
-                                        SharedPreferences.Editor editor = mPrefs.edit();
-                                        editor.putString("allTime", "0.00").commit();
-                                        editor.putString("hourlyWage", null).commit();
-                                        editor.putString("lastTime", "0.00").commit();
                                         openDB();
                                         handler.deleteAll();
-                                        //TextView totalNum = (TextView)getActivity(). findViewById(R.id.totalNum);
-                                        //totalNum.setText("0.00");
-
                                     }
                                 }
                         )
@@ -78,7 +71,7 @@ public class MyPreferenceFragment extends PreferenceFragment {
                             public void onClick(DialogInterface dialog, int which) {
                                 // do nothing
                             }
-                        }).setIcon(R.drawable.ic_action_discard).show();
+                        }).setIcon(R.drawable.ic_delete).show();
                 return true;
             }
         });

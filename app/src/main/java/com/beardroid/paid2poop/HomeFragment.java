@@ -46,7 +46,6 @@ public class HomeFragment extends Fragment{
     @Override
     public View onCreateView(final LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         final View view = inflater.inflate(R.layout.fragment_home, container, false);
-        final RecyclerView myList = (RecyclerView) view.findViewById(R.id.pooplist);
         openDB();
 
         final RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.pooplist);
@@ -60,7 +59,9 @@ public class HomeFragment extends Fragment{
         mToolbar = (Toolbar) getActivity().findViewById(R.id.toolbar);
         final FloatingActionsMenu mainFab = (FloatingActionsMenu) view.findViewById(R.id.mainFab);
         FloatingActionButton editFab = (FloatingActionButton) view.findViewById(R.id.editFab);
-
+        FloatingActionButton timerFab = (FloatingActionButton) view.findViewById(R.id.timerFab);
+        editFab.setSize(1);
+        timerFab.setSize(1);
         mPrefs = getActivity().getPreferences(Context.MODE_PRIVATE);
         editFab.setOnClickListener(new View.OnClickListener() {
             @SuppressLint("NewApi")
@@ -117,6 +118,20 @@ public class HomeFragment extends Fragment{
             }
         });
         return view;
+    }
+
+    @Override
+    public void onPause() {
+
+        super.onPause();
+    }
+
+    @Override
+    public void onResume() {
+        RecyclerView recyclerView = (RecyclerView) getView().findViewById(R.id.pooplist);
+        populateListViewFromDB(recyclerView);
+        makeHeaderNumber(getView());
+        super.onResume();
     }
 
     public String timeGetter() {

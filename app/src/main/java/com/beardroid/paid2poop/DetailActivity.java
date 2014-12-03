@@ -10,8 +10,11 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+
+import com.getbase.floatingactionbutton.FloatingActionButton;
 
 import java.text.DecimalFormat;
 
@@ -21,6 +24,10 @@ import java.text.DecimalFormat;
 public class DetailActivity extends ActionBarActivity {
     Toolbar mToolbar;
     RelativeLayout topDetail;
+    FloatingActionButton fab;
+    ImageView dateIcon;
+    ImageView timeIcon;
+    DataHandler handler;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,27 +35,42 @@ public class DetailActivity extends ActionBarActivity {
         setContentView(R.layout.detail_view);
         mToolbar = (Toolbar) findViewById(R.id.detail_toolbar);
         topDetail = (RelativeLayout) findViewById(R.id.topDetail);
+        dateIcon = (ImageView) findViewById(R.id.dateIcon);
+        timeIcon = (ImageView) findViewById(R.id.timeIcon);
+        fab = (FloatingActionButton) findViewById(R.id.fab);
         setSupportActionBar(mToolbar);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         mToolbar.setBackgroundColor(Color.DKGRAY);
-        setBackgroundColor();
+        setColors();
         this.setTitle(null);
         populateData();
 
     }
-    public void setBackgroundColor(){
+    public void setColors(){
         String rating = getIntent().getExtras().getString("Rating");
         if(rating.equals("Good")){
             mToolbar.setBackgroundColor(Color.parseColor("#2196F3"));
             topDetail.setBackgroundColor(Color.parseColor("#2196F3"));
+            fab.setColorNormal(Color.parseColor("#f37e21"));
+            fab.setColorPressed(Color.parseColor("#d5650c"));
+            dateIcon.setColorFilter(Color.parseColor("#f37e21"));
+            timeIcon.setColorFilter(Color.parseColor("#f37e21"));
             setStatusGood();
         } else if(rating.equals("Okay")){
             mToolbar.setBackgroundColor(Color.parseColor("#9C27B0"));
             topDetail.setBackgroundColor(Color.parseColor("#9C27B0"));
+            fab.setColorNormal(Color.parseColor("#3bb027"));
+            fab.setColorPressed(Color.parseColor("#2d861e"));
+            dateIcon.setColorFilter(Color.parseColor("#3bb027"));
+            timeIcon.setColorFilter(Color.parseColor("#3bb027"));
             setStatusOkay();
         } else if(rating.equals("Bad")){
             mToolbar.setBackgroundColor(Color.parseColor("#F44336"));
             topDetail.setBackgroundColor(Color.parseColor("#F44336"));
+            fab.setColorNormal(Color.parseColor("#0bc4d2"));
+            fab.setColorPressed(Color.parseColor("#078089"));
+            dateIcon.setColorFilter(Color.parseColor("#0bc4d2"));
+            timeIcon.setColorFilter(Color.parseColor("#0bc4d2"));
             setStatusBad();
         }
     }
@@ -107,8 +129,16 @@ public class DetailActivity extends ActionBarActivity {
                 return super.onOptionsItemSelected(menuItem);
         }
     }
+    private void openDB() {
+        handler = new DataHandler(this);
+        handler.open();
+    }
     public void delete(){
-
+        openDB();
+        String idStr = getIntent().getExtras().getString("ID");
+        long id = Long.parseLong(idStr);
+        handler.deleteRow(id);
+        finish();
     }
     public void share(){
 

@@ -23,7 +23,7 @@
             android:key="clearPref"
             android:title="Clear All"
             android:textColor="@color/black"
-            android:summary="Clear wage and saved poops." />
+            android:summary="Clear saved poops." />
     </PreferenceCategory>
 
 </PreferenceScreen>
