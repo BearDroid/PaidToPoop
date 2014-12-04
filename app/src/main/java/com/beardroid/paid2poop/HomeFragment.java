@@ -6,6 +6,7 @@ import android.app.AlertDialog;
 import android.app.Fragment;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.os.Build;
@@ -29,19 +30,23 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 import java.util.Locale;
+import java.util.Timer;
+import java.util.TimerTask;
 
 /**
  * Created by Max on 11/13/2014.
  */
-public class HomeFragment extends Fragment{
+public class HomeFragment extends Fragment {
     public SharedPreferences mPrefs;
     public ArrayList<PoopCard> list = new ArrayList<PoopCard>();
+    public Context context = getActivity();
     DataHandler handler;
+    Timer t;
+    TimerTask task;
     private RecyclerView mRecyclerView;
     private RecyclerView.Adapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
     private Toolbar mToolbar;
-    public Context context = getActivity();
 
     @Override
     public View onCreateView(final LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -63,6 +68,15 @@ public class HomeFragment extends Fragment{
         editFab.setSize(1);
         timerFab.setSize(1);
         mPrefs = getActivity().getPreferences(Context.MODE_PRIVATE);
+        timerFab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String wageStr = mPrefs.getString("hourlyWage", null);
+                Intent intent = new Intent(getActivity(), TimerActivity.class);
+                intent.putExtra("wage", wageStr);
+                startActivity(intent, Bundle.EMPTY);
+            }
+        });
         editFab.setOnClickListener(new View.OnClickListener() {
             @SuppressLint("NewApi")
             @TargetApi(Build.VERSION_CODES.LOLLIPOP)
@@ -93,8 +107,8 @@ public class HomeFragment extends Fragment{
                         //get sharedpref of hourly wage and do the magic math here
                         String wageStr = mPrefs.getString("hourlyWage", null); //get saved wage
                         Double wageDbl = Double.parseDouble(wageStr); //saved wage to double
-                        minDbl = minDbl / 60;
-                        double moneyMade = minDbl * wageDbl;
+                        double hrDbl = minDbl / 60;
+                        double moneyMade = hrDbl * wageDbl;
                         DecimalFormat moneyFormat = new DecimalFormat("0.00");
                         String madeStr = moneyFormat.format(moneyMade);
                         moneyMade = Double.parseDouble(madeStr);

@@ -43,16 +43,16 @@ public class DetailActivity extends ActionBarActivity {
         fab = (FloatingActionButton) findViewById(R.id.fab);
         setSupportActionBar(mToolbar);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
-        mToolbar.setBackgroundColor(Color.DKGRAY);
         setColors();
         this.setTitle(null);
         populateData();
 
     }
-    public void setColors(){
+
+    public void setColors() {
         String rating = getIntent().getExtras().getString("Rating");
         String versionChecker = Build.VERSION.RELEASE;
-        if(rating.equals("Good")){
+        if (rating.equals("Good")) {
 
             mToolbar.setBackgroundColor(Color.parseColor("#2196F3"));
             topDetail.setBackgroundColor(Color.parseColor("#2196F3"));
@@ -60,35 +60,36 @@ public class DetailActivity extends ActionBarActivity {
             fab.setColorPressed(Color.parseColor("#d5650c"));
             dateIcon.setColorFilter(Color.parseColor("#f37e21"));
             timeIcon.setColorFilter(Color.parseColor("#f37e21"));
-            if(versionChecker.equals("5.0")) {
+            if (versionChecker.equals("5.0")) {
                 setStatusGood();
                 setTheme(R.style.GoodTheme);
             }
-        } else if(rating.equals("Okay")){
+        } else if (rating.equals("Okay")) {
             mToolbar.setBackgroundColor(Color.parseColor("#9C27B0"));
             topDetail.setBackgroundColor(Color.parseColor("#9C27B0"));
             fab.setColorNormal(Color.parseColor("#3bb027"));
             fab.setColorPressed(Color.parseColor("#2d861e"));
             dateIcon.setColorFilter(Color.parseColor("#3bb027"));
             timeIcon.setColorFilter(Color.parseColor("#3bb027"));
-            if(versionChecker.equals("5.0")) {
+            if (versionChecker.equals("5.0")) {
                 setStatusOkay();
                 setTheme(R.style.OkayTheme);
             }
-        } else if(rating.equals("Bad")){
+        } else if (rating.equals("Bad")) {
             mToolbar.setBackgroundColor(Color.parseColor("#F44336"));
             topDetail.setBackgroundColor(Color.parseColor("#F44336"));
             fab.setColorNormal(Color.parseColor("#0bc4d2"));
             fab.setColorPressed(Color.parseColor("#078089"));
             dateIcon.setColorFilter(Color.parseColor("#0bc4d2"));
             timeIcon.setColorFilter(Color.parseColor("#0bc4d2"));
-            if(versionChecker.equals("5.0")) {
+            if (versionChecker.equals("5.0")) {
                 setStatusBad();
                 setTheme(R.style.BadTheme);
             }
         }
     }
-    public void populateData(){
+
+    public void populateData() {
         TextView amountView = (TextView) findViewById(R.id.amountDetail);
         String amt = getIntent().getExtras().getString("Amount");
         Double amtDbl = Double.parseDouble(amt);
@@ -103,40 +104,45 @@ public class DetailActivity extends ActionBarActivity {
         TextView timeView = (TextView) findViewById(R.id.timeText);
         timeView.setText(getIntent().getExtras().getString("Time"));
     }
+
     //below sets statusbar if on Lollipop
     @TargetApi(Build.VERSION_CODES.LOLLIPOP)
-    public void setStatusGood(){
+    public void setStatusGood() {
         Window window = this.getWindow();
         window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
         window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
         window.setStatusBarColor(Color.parseColor("#1976D2"));
     }
+
     @TargetApi(Build.VERSION_CODES.LOLLIPOP)
-    public void setStatusOkay(){
+    public void setStatusOkay() {
         Window window = this.getWindow();
         window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
         window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
         window.setStatusBarColor(Color.parseColor("#7B1FA2"));
     }
+
     @TargetApi(Build.VERSION_CODES.LOLLIPOP)
-    public void setStatusBad(){
+    public void setStatusBad() {
         Window window = this.getWindow();
         window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
         window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
         window.setStatusBarColor(Color.parseColor("#D32F2F"));
     }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.detailmenu, menu);
         return super.onCreateOptionsMenu(menu);
     }
+
     @Override
-    public boolean onOptionsItemSelected(MenuItem menuItem){
-        switch(menuItem.getItemId()){
+    public boolean onOptionsItemSelected(MenuItem menuItem) {
+        switch (menuItem.getItemId()) {
             case R.id.action_delete:
                 new AlertDialog.Builder(this).setTitle("Delete poop?")
                         .setMessage("Are you sure you want to delete this log?")
-                        .setPositiveButton("Yes",new DialogInterface.OnClickListener() {
+                        .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
                                 delete();
@@ -151,26 +157,30 @@ public class DetailActivity extends ActionBarActivity {
                 return super.onOptionsItemSelected(menuItem);
         }
     }
+
     private void openDB() {
         handler = new DataHandler(this);
         handler.open();
     }
-    public void delete(){
+
+    public void delete() {
         openDB();
         String idStr = getIntent().getExtras().getString("ID");
         long id = Long.parseLong(idStr);
         handler.deleteRow(id);
         finish();
     }
-    public void share(){
+
+    public void share() {
         String madeStr = getIntent().getExtras().getString("Amount");
-            Intent i = new Intent(Intent.ACTION_SEND);
-            i.setType("text/plain");
-            i.putExtra(
-                    Intent.EXTRA_TEXT,
-                    "I made $"
-                            + madeStr
-                            + " today while on the can! #PaidToPoop");
-            startActivity(Intent.createChooser(i, "Brag via"));
-        }
+        Intent i = new Intent(Intent.ACTION_SEND);
+        i.setType("text/plain");
+        i.putExtra(
+                Intent.EXTRA_TEXT,
+                "I made $"
+                        + madeStr
+                        + " today while on the can! #PaidToPoop");
+        startActivity(Intent.createChooser(i, "Brag via"));
+    }
+
 }

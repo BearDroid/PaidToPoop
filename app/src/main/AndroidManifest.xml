@@ -16,10 +16,11 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".DetailActivity"
-            android:label="@string/detail">
-
-            </activity>
+        <activity
+            android:name=".DetailActivity"
+            android:label="@string/detail"/>
+        <activity android:name=".TimerActivity"
+            android:label="@string/timer"/>
     </application>
 
 </manifest>

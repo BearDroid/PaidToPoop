@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/timeDialog"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:theme="@style/Base.Theme.AppCompat.Light.Dialog">
+
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorPrimary"
+        android:gravity="center"
+        android:padding="24dp"
+        android:text="New Poop"
+        android:textColor="@color/white"
+        android:textSize="34dp" />
+
+    <RelativeLayout
+        android:id="@+id/ratingLayout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/title">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="24dp"
+            android:text="@string/rating"
+            android:textColor="#000"
+            android:textSize="24sp" />
+
+        <RadioGroup
+            android:id="@+id/ratingGroup"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="24dp"
+            android:layout_marginTop="24dp"
+            android:orientation="vertical"
+            android:theme="@style/Base.Theme.AppCompat.Light.Dialog">
+
+            <RadioButton
+                android:id="@+id/goodbutton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/goodbutton"
+                android:textSize="20sp" />
+
+            <RadioButton
+                android:id="@+id/okaybutton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/okaybutton"
+                android:textSize="20sp" />
+
+            <RadioButton
+                android:id="@+id/badbutton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/badbutton"
+                android:textSize="20sp" />
+        </RadioGroup>
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/minutesText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/ratingLayout"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="16dp"
+        android:text="@string/minutesTitle"
+        android:textColor="#000"
+        android:textSize="24sp" />
+    <TextView
+        android:id="@+id/minutesNum"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/minutesText"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="16dp"
+        android:text="000"
+        android:textColor="#000"
+        android:textSize="24sp" />
+
+
+</RelativeLayout>
