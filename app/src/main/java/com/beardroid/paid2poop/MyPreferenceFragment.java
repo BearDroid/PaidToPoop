@@ -26,14 +26,16 @@ public class MyPreferenceFragment extends PreferenceFragment {
     static public EditText hrlyWage;
     public static double hoursYear;
     public static double hourlyWage;
-    public static SharedPreferences mPrefs;
     static String hourlyWageString;
     DataHandler handler;
+    public static final String MY_PREFS = "myPrefs";
+    public static SharedPreferences pref;
 
     @Override
     public void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         addPreferencesFromResource(R.xml.settings);
+        pref = getActivity().getSharedPreferences(MY_PREFS, Context.MODE_PRIVATE);
         getActivity().setTitle("Settings");
         final Preference wage = (Preference) findPreference("hourly");
         SwitchPreference salSwitch = (SwitchPreference) findPreference("salBox");
@@ -48,9 +50,6 @@ public class MyPreferenceFragment extends PreferenceFragment {
         });
 
         //clear
-        mPrefs = this.getActivity().getPreferences(Context.MODE_PRIVATE);
-        this.getActivity()
-                .getSharedPreferences("allTime", Context.MODE_PRIVATE);
         Preference myPref = (Preference) findPreference("clearPref");
         myPref.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
             public boolean onPreferenceClick(Preference preference) {
@@ -101,7 +100,7 @@ public class MyPreferenceFragment extends PreferenceFragment {
                                     DecimalFormat df = new DecimalFormat("0.00");
                                     hourlyWageString = "" + df.format(hourlyWage);
                                     getActivity().getSharedPreferences("hourlyWage", Context.MODE_PRIVATE);
-                                    SharedPreferences.Editor editor = mPrefs.edit();
+                                    SharedPreferences.Editor editor = pref.edit();
                                     editor.putString("hourlyWage", hourlyWageString).commit();
                                     Toast toast = Toast.makeText(getActivity(),
                                             hourlyWageString, Toast.LENGTH_LONG);
@@ -112,7 +111,7 @@ public class MyPreferenceFragment extends PreferenceFragment {
                                     toast.show();
                                 }
 
-                                SharedPreferences.Editor editor = mPrefs.edit();
+                                SharedPreferences.Editor editor = pref.edit();
                                 editor.putString("salary", "0.00").commit();
                                 //TextView totalNum = (TextView)getActivity(). findViewById(R.id.totalNum);
                                 //totalNum.setText("0.00");
@@ -150,7 +149,7 @@ public class MyPreferenceFragment extends PreferenceFragment {
                                     DecimalFormat df = new DecimalFormat("0.00");
                                     hourlyWageString = "" + df.format(wageDub);
                                     getActivity().getSharedPreferences("hourlyWage", Context.MODE_PRIVATE);
-                                    SharedPreferences.Editor editor = mPrefs.edit();
+                                    SharedPreferences.Editor editor = pref.edit();
                                     editor.putString("hourlyWage", hourlyWageString).commit();
                                     Toast toast = Toast.makeText(getActivity(),
                                             hourlyWageString, Toast.LENGTH_LONG);
@@ -160,7 +159,7 @@ public class MyPreferenceFragment extends PreferenceFragment {
                                             "Please enter a value!", Toast.LENGTH_LONG);
                                     toast.show();
                                 }
-                                SharedPreferences.Editor editor = mPrefs.edit();
+                                SharedPreferences.Editor editor = pref.edit();
                                 editor.putString("salary", "0.00").commit();
                             }
                         }

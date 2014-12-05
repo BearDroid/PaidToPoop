@@ -37,7 +37,6 @@ import java.util.TimerTask;
  * Created by Max on 11/13/2014.
  */
 public class HomeFragment extends Fragment {
-    public SharedPreferences mPrefs;
     public ArrayList<PoopCard> list = new ArrayList<PoopCard>();
     public Context context = getActivity();
     DataHandler handler;
@@ -47,10 +46,13 @@ public class HomeFragment extends Fragment {
     private RecyclerView.Adapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
     private Toolbar mToolbar;
+    public static final String MY_PREFS = "myPrefs";
+    public SharedPreferences pref;
 
     @Override
     public View onCreateView(final LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         final View view = inflater.inflate(R.layout.fragment_home, container, false);
+        pref = getActivity().getSharedPreferences(MY_PREFS, Context.MODE_PRIVATE);
         openDB();
 
         final RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.pooplist);
@@ -67,11 +69,10 @@ public class HomeFragment extends Fragment {
         FloatingActionButton timerFab = (FloatingActionButton) view.findViewById(R.id.timerFab);
         editFab.setSize(1);
         timerFab.setSize(1);
-        mPrefs = getActivity().getPreferences(Context.MODE_PRIVATE);
         timerFab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String wageStr = mPrefs.getString("hourlyWage", null);
+                String wageStr = pref.getString("hourlyWage", null);
                 Intent intent = new Intent(getActivity(), TimerActivity.class);
                 intent.putExtra("wage", wageStr);
                 startActivity(intent, Bundle.EMPTY);
@@ -105,7 +106,7 @@ public class HomeFragment extends Fragment {
                         Double minDbl = Double.parseDouble(num);
 
                         //get sharedpref of hourly wage and do the magic math here
-                        String wageStr = mPrefs.getString("hourlyWage", null); //get saved wage
+                        String wageStr = pref.getString("hourlyWage", null); //get saved wage
                         Double wageDbl = Double.parseDouble(wageStr); //saved wage to double
                         double hrDbl = minDbl / 60;
                         double moneyMade = hrDbl * wageDbl;

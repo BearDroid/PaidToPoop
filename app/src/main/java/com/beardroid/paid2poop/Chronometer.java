@@ -18,6 +18,7 @@ public class Chronometer extends TextView {
     @SuppressWarnings("unused")
     private static final String TAG = "Chronometer";
 
+    private boolean mIsRunning;
     public interface OnChronometerTickListener {
 
         void onChronometerTick(Chronometer chronometer);
@@ -28,6 +29,7 @@ public class Chronometer extends TextView {
     private boolean mStarted;
     private boolean mRunning;
     private OnChronometerTickListener mOnChronometerTickListener;
+    private boolean running;
 
     private static final int TICK_WHAT = 2;
 
@@ -74,11 +76,13 @@ public class Chronometer extends TextView {
     public void start() {
         mBase = SystemClock.elapsedRealtime();
         mStarted = true;
+        running = true;
         updateRunning();
     }
 
     public void stop() {
         mStarted = false;
+        running = false;
         updateRunning();
     }
 
@@ -146,6 +150,11 @@ public class Chronometer extends TextView {
         }
     }
 
+
+    public boolean isRunning(){
+        return running;
+    }
+
     private Handler mHandler = new Handler() {
         public void handleMessage(Message m) {
             if (mRunning) {
@@ -156,6 +165,7 @@ public class Chronometer extends TextView {
             }
         }
     };
+
 
     void dispatchChronometerTick() {
         if (mOnChronometerTickListener != null) {

@@ -19,6 +19,7 @@ import android.widget.ImageButton;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.text.DecimalFormat;
 import java.text.Format;
@@ -29,20 +30,29 @@ import java.util.Locale;
  * Created by Max on 12/3/2014.
  */
 public class TimerActivity extends ActionBarActivity {
+    private Chronometer mChonoView;
     public final String task_name = "Timing new poop";
     public final int task_id = 1; //no idea what this is for
-    public static SharedPreferences mPrefs;
+    public SharedPreferences mPrefs;
+
     public boolean isCounting;
     Toolbar mToolbar;
     ImageButton play;
     ImageButton pause;
     DataHandler handler;
+    public Chronometer chrono;
+    boolean running = false;
+    public static final String MY_PREFS = "myPrefs";
+    public SharedPreferences pref;
+    long startTime;
 
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.timer_view);
+        pref = getSharedPreferences(MY_PREFS, Context.MODE_PRIVATE);
+        chrono = (Chronometer) findViewById(R.id.chrono);
         //final String hrlyWage = getIntent().getExtras().getString("wage");
         mToolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(mToolbar);
@@ -55,39 +65,31 @@ public class TimerActivity extends ActionBarActivity {
         play.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startChronometer(v);
-                play.setVisibility(View.GONE);
-                pause.setVisibility(View.VISIBLE);
+                startChronometer();
+
             }
         });
         pause.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 stopChronometer(v);
-                pause.setVisibility(View.GONE);
-                play.setVisibility(View.VISIBLE);
             }
         });
 
     }
 
-    public void startChronometer(View view) {
+    public void startChronometer() {
+        play.setVisibility(View.GONE);
+        pause.setVisibility(View.VISIBLE);
         ((com.beardroid.paid2poop.Chronometer) findViewById(R.id.chrono)).start();
         isCounting = true;
-        /**
-        Intent intent = new Intent(this, ChronometerService.class);
-        intent.putExtra("task_name", task_name);
-        intent.putExtra("task_id", task_id);
-        intent.putExtra("ellapsedTime", ((com.beardroid.paid2poop.Chronometer) findViewById(R.id.chrono)).getBase());
-        Log.d("base", "" + ((com.beardroid.paid2poop.Chronometer) findViewById(R.id.chrono)).getBase());
-        startService(intent);
-         **/
     }
 
     public void stopChronometer(View view) {
+        pause.setVisibility(View.GONE);
+        play.setVisibility(View.VISIBLE);
         isCounting = false;
-        mPrefs = getPreferences(Context.MODE_PRIVATE);
-        final String wageStr = mPrefs.getString("hourlyWage", null);
+        String wageStr = pref.getString("wage", null);
         ((com.beardroid.paid2poop.Chronometer) findViewById(R.id.chrono)).stop();
         long elapsedMillis = SystemClock.elapsedRealtime() - ((com.beardroid.paid2poop.Chronometer) findViewById(R.id.chrono)).getBase();
         double seconds = elapsedMillis / 1000;
@@ -103,8 +105,8 @@ public class TimerActivity extends ActionBarActivity {
         builder.setPositiveButton("Add!", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                getSharedPreferences("hourlyWage", Context.MODE_PRIVATE);
-                final String wageStr = mPrefs.getString("hourlyWage", null);
+                pref = getSharedPreferences(MY_PREFS, Context.MODE_PRIVATE);
+                String wageStr = pref.getString("hourlyWage", null);
                 RadioGroup ratingGroup = (RadioGroup) alertView.findViewById(R.id.ratingGroup);
                 RadioButton ratingButton;
                 int selectedRating = ratingGroup.getCheckedRadioButtonId();
@@ -167,21 +169,45 @@ public class TimerActivity extends ActionBarActivity {
 
     @Override
     protected void onPause() {
-        long startTime = SystemClock.elapsedRealtime() - ((com.beardroid.paid2poop.Chronometer) findViewById(R.id.chrono)).getBase();
-        Intent intent = new Intent(this, TimerActivity.class);
-        PendingIntent contentintent = PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
-        NotificationCompat.Builder builder = new NotificationCompat.Builder(this);
-        builder.setContentTitle("Current poop:")
-                .setAutoCancel(true)
-                .setWhen(System.currentTimeMillis() - startTime)
-                .setUsesChronometer(true)
-                .setContentIntent(contentintent)
-                .setSmallIcon(R.drawable.ic_launcher);
 
-        NotificationManager mNotificationManager =
-                (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
-        mNotificationManager.notify(0, builder.build());
+        running = chrono.isRunning();
+        long startTime =
+                ((com.beardroid.paid2poop.Chronometer) findViewById(R.id.chrono)).getBase();
+        SharedPreferences.Editor editor = pref.edit();
+        editor.putLong("time", startTime);
+        editor.commit();
+        if(running) {
+            Intent intent = new Intent(this, TimerActivity.class);
+            PendingIntent contentIntent = PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+            NotificationCompat.Builder builder = new NotificationCompat.Builder(this);
+            builder.setContentTitle("Current poop:")
+                    .setAutoCancel(true)
+                    .setWhen(startTime)
+                    .setUsesChronometer(true)
+                    .setContentIntent(contentIntent)
+                    .setSmallIcon(R.drawable.ic_launcher);
+
+            NotificationManager mNotificationManager =
+                    (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+            mNotificationManager.notify(0, builder.build());
+        }
         super.onPause();
+    }
+
+    @Override
+    protected void onResume() {
+        startTime = pref.getLong("time", startTime);
+        String startTimeStr = String.valueOf(startTime);
+        Toast.makeText(this, startTimeStr, Toast.LENGTH_SHORT).show();
+        ((com.beardroid.paid2poop.Chronometer) findViewById(R.id.chrono)).setBase(startTime);
+
+        super.onResume();
+    }
+
+    @Override
+    protected void onDestroy() {
+        startTime =0;
+        super.onDestroy();
     }
 
     /**
