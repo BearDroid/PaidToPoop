@@ -4,12 +4,14 @@ package com.beardroid.paid2poop;
  * Created by Max on 12/3/2014.
  * Shoutout to antoniom for this class. https://github.com/antoniom/Millisecond-Chronometer
  */
+
 import android.content.Context;
 import android.os.Handler;
 import android.os.Message;
 import android.os.SystemClock;
 import android.util.AttributeSet;
 import android.widget.TextView;
+
 import java.text.DecimalFormat;
 
 public class Chronometer extends TextView {
@@ -164,5 +166,6 @@ public class Chronometer extends TextView {
     public long getTimeElapsed() {
         return timeElapsed;
     }
+
 
 }

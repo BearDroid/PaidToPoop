@@ -26,7 +26,7 @@ public class MyPreferenceFragment extends PreferenceFragment {
     static public EditText hrlyWage;
     public static double hoursYear;
     public static double hourlyWage;
-    static SharedPreferences mPrefs;
+    public static SharedPreferences mPrefs;
     static String hourlyWageString;
     DataHandler handler;
 
