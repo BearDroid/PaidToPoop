@@ -111,5 +111,5 @@
         android:layout_marginBottom="-39dp"
         android:layout_marginRight="16dp"
         android:elevation="8dp"
-        app:fab_icon="@drawable/ic_money" />
+        app:fab_icon="@drawable/ic_share" />
 </RelativeLayout>

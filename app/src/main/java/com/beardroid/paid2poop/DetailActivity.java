@@ -11,6 +11,7 @@ import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.ImageView;
@@ -46,6 +47,12 @@ public class DetailActivity extends ActionBarActivity {
         setColors();
         this.setTitle(null);
         populateData();
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                share();
+            }
+        });
 
     }
 
@@ -149,9 +156,6 @@ public class DetailActivity extends ActionBarActivity {
                             }
                         })
                         .setNegativeButton("Cancel", null).show();
-                return true;
-            case R.id.action_share:
-                share();
                 return true;
             default:
                 return super.onOptionsItemSelected(menuItem);

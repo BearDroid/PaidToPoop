@@ -14,9 +14,9 @@
         android:background="@color/colorPrimary"
         android:gravity="center"
         android:padding="24dp"
-        android:text="New Poop"
+        android:text="@string/dialogTitle"
         android:textColor="@color/white"
-        android:textSize="34dp" />
+        android:textSize="34sp" />
 
     <RelativeLayout
         android:id="@+id/ratingLayout"

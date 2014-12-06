@@ -27,7 +27,7 @@
             android:layout_alignParentRight="true"
             android:hint="E.g., 20000"
             android:inputType="number"
-            android:maxLength="7"
+            android:maxLength="8"
             android:paddingRight="16dp"
             android:textColorHighlight="#960e8f4f" />
 

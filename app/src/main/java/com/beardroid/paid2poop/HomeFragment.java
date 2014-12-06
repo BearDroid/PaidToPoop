@@ -54,7 +54,12 @@ public class HomeFragment extends Fragment {
         final View view = inflater.inflate(R.layout.fragment_home, container, false);
         pref = getActivity().getSharedPreferences(MY_PREFS, Context.MODE_PRIVATE);
         openDB();
-
+        /**
+         String checker = pref.getString("hourlyWage", null);
+         Double checkerDbl = Double.parseDouble(checker);
+         if(checker.isEmpty() || checkerDbl == 0.0){
+         introView();
+         }**/
         final RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.pooplist);
         recyclerView.setHasFixedSize(true);
         LinearLayoutManager llm = new LinearLayoutManager(getActivity());
@@ -145,6 +150,12 @@ public class HomeFragment extends Fragment {
 
     @Override
     public void onResume() {
+        boolean checker = false;
+        if (!checker) {
+            Intent intent = new Intent(getActivity(), IntroActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            startActivity(intent);
+        }
         RecyclerView recyclerView = (RecyclerView) getView().findViewById(R.id.pooplist);
         populateListViewFromDB(recyclerView);
         makeHeaderNumber(getView());
@@ -178,6 +189,10 @@ public class HomeFragment extends Fragment {
         int year = cal.get(Calendar.YEAR);
         String date = month + " " + day + ", " + year;
         return date;
+    }
+
+    public void introView() {
+
     }
 
     //here lie database stuff

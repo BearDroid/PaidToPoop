@@ -62,6 +62,11 @@
     <string name="action_share">Share</string>
     <string name="start">Start</string>
     <string name="timer">Timer</string>
+    <string name="currentTitle">Nothing set yet</string>
+    <string name="currentSum">Please choose wage or salary</string>
+    <string name="dialogTitle">New Poop</string>
+    <string name="welcome">Welcome!</string>
+    <string name="intro">Before we get started, please enter your salary or hourly wage.\nThis will help calculate how much you are Paid to Poop!</string>
     <!-- Nav Drawer Menu Items -->
     <string-array name="nav_drawer_items">
         <item>Home</item>

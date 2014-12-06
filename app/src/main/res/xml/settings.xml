@@ -4,6 +4,10 @@
     android:parentActivityName="HomeFragmentNew">
 
     <PreferenceCategory android:title="@string/prefGen">
+        <Preference
+            android:key="current"
+            android:title="@string/currentTitle"
+            android:summary="@string/currentSum"/>
         <SwitchPreference
             android:key="salBox"
             android:summary="Switch on if you want salary mode"

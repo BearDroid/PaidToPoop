@@ -22,6 +22,9 @@
         <activity android:name=".TimerActivity"
             android:label="@string/timer"
             android:launchMode="singleTask"/>
+        <activity android:name=".IntroActivity"
+            android:label="Intro"
+            />
     </application>
 
 </manifest>
