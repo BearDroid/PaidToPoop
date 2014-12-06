@@ -20,7 +20,8 @@
             android:name=".DetailActivity"
             android:label="@string/detail"/>
         <activity android:name=".TimerActivity"
-            android:label="@string/timer"/>
+            android:label="@string/timer"
+            android:launchMode="singleTask"/>
     </application>
 
 </manifest>

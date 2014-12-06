@@ -37,8 +37,10 @@ import java.util.TimerTask;
  * Created by Max on 11/13/2014.
  */
 public class HomeFragment extends Fragment {
+    public static final String MY_PREFS = "myPrefs";
     public ArrayList<PoopCard> list = new ArrayList<PoopCard>();
     public Context context = getActivity();
+    public SharedPreferences pref;
     DataHandler handler;
     Timer t;
     TimerTask task;
@@ -46,8 +48,6 @@ public class HomeFragment extends Fragment {
     private RecyclerView.Adapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
     private Toolbar mToolbar;
-    public static final String MY_PREFS = "myPrefs";
-    public SharedPreferences pref;
 
     @Override
     public View onCreateView(final LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -72,6 +72,7 @@ public class HomeFragment extends Fragment {
         timerFab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                mainFab.collapse();
                 String wageStr = pref.getString("hourlyWage", null);
                 Intent intent = new Intent(getActivity(), TimerActivity.class);
                 intent.putExtra("wage", wageStr);
@@ -82,6 +83,7 @@ public class HomeFragment extends Fragment {
             @SuppressLint("NewApi")
             @TargetApi(Build.VERSION_CODES.LOLLIPOP)
             public void onClick(final View view) {
+                mainFab.collapse();
                 AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
 
                 final View alertView = inflater.inflate(R.layout.poop_dialog, (ViewGroup) getActivity().findViewById(R.id.poopdialog));

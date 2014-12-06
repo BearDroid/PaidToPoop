@@ -17,34 +17,36 @@ import java.text.DecimalFormat;
 public class Chronometer extends TextView {
     @SuppressWarnings("unused")
     private static final String TAG = "Chronometer";
-
+    private static final int TICK_WHAT = 2;
     private boolean mIsRunning;
-    public interface OnChronometerTickListener {
-
-        void onChronometerTick(Chronometer chronometer);
-    }
-
     private long mBase;
     private boolean mVisible;
     private boolean mStarted;
     private boolean mRunning;
+    private Handler mHandler = new Handler() {
+        public void handleMessage(Message m) {
+            if (mRunning) {
+                updateText(SystemClock.elapsedRealtime());
+                dispatchChronometerTick();
+                sendMessageDelayed(Message.obtain(this, TICK_WHAT),
+                        100);
+            }
+        }
+    };
     private OnChronometerTickListener mOnChronometerTickListener;
     private boolean running;
-
-    private static final int TICK_WHAT = 2;
-
     private long timeElapsed;
 
     public Chronometer(Context context) {
-        this (context, null, 0);
+        this(context, null, 0);
     }
 
     public Chronometer(Context context, AttributeSet attrs) {
-        this (context, attrs, 0);
+        this(context, attrs, 0);
     }
 
     public Chronometer(Context context, AttributeSet attrs, int defStyle) {
-        super (context, attrs, defStyle);
+        super(context, attrs, defStyle);
 
         init();
     }
@@ -54,23 +56,23 @@ public class Chronometer extends TextView {
         updateText(mBase);
     }
 
+    public long getBase() {
+        return mBase;
+    }
+
     public void setBase(long base) {
         mBase = base;
         dispatchChronometerTick();
         updateText(SystemClock.elapsedRealtime());
     }
 
-    public long getBase() {
-        return mBase;
+    public OnChronometerTickListener getOnChronometerTickListener() {
+        return mOnChronometerTickListener;
     }
 
     public void setOnChronometerTickListener(
             OnChronometerTickListener listener) {
         mOnChronometerTickListener = listener;
-    }
-
-    public OnChronometerTickListener getOnChronometerTickListener() {
-        return mOnChronometerTickListener;
     }
 
     public void start() {
@@ -94,14 +96,14 @@ public class Chronometer extends TextView {
 
     @Override
     protected void onDetachedFromWindow() {
-        super .onDetachedFromWindow();
+        super.onDetachedFromWindow();
         mVisible = false;
         updateRunning();
     }
 
     @Override
     protected void onWindowVisibilityChanged(int visibility) {
-        super .onWindowVisibilityChanged(visibility);
+        super.onWindowVisibilityChanged(visibility);
         mVisible = visibility == VISIBLE;
         updateRunning();
     }
@@ -111,16 +113,16 @@ public class Chronometer extends TextView {
 
         DecimalFormat df = new DecimalFormat("00");
 
-        int hours = (int)(timeElapsed / (3600 * 1000));
-        int remaining = (int)(timeElapsed % (3600 * 1000));
+        int hours = (int) (timeElapsed / (3600 * 1000));
+        int remaining = (int) (timeElapsed % (3600 * 1000));
 
-        int minutes = (int)(remaining / (60 * 1000));
-        remaining = (int)(remaining % (60 * 1000));
+        int minutes = (int) (remaining / (60 * 1000));
+        remaining = (int) (remaining % (60 * 1000));
 
-        int seconds = (int)(remaining / 1000);
-        remaining = (int)(remaining % (1000));
+        int seconds = (int) (remaining / 1000);
+        remaining = (int) (remaining % (1000));
 
-        int milliseconds = (int)(((int)timeElapsed % 1000) / 100);
+        int milliseconds = (int) (((int) timeElapsed % 1000) / 100);
 
         String text = "";
 
@@ -151,21 +153,9 @@ public class Chronometer extends TextView {
     }
 
 
-    public boolean isRunning(){
+    public boolean isRunning() {
         return running;
     }
-
-    private Handler mHandler = new Handler() {
-        public void handleMessage(Message m) {
-            if (mRunning) {
-                updateText(SystemClock.elapsedRealtime());
-                dispatchChronometerTick();
-                sendMessageDelayed(Message.obtain(this , TICK_WHAT),
-                        100);
-            }
-        }
-    };
-
 
     void dispatchChronometerTick() {
         if (mOnChronometerTickListener != null) {
@@ -175,6 +165,11 @@ public class Chronometer extends TextView {
 
     public long getTimeElapsed() {
         return timeElapsed;
+    }
+
+    public interface OnChronometerTickListener {
+
+        void onChronometerTick(Chronometer chronometer);
     }
 
 

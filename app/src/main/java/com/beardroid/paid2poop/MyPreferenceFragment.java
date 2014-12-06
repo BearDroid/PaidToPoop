@@ -20,16 +20,16 @@ import java.text.DecimalFormat;
  * Created by Max on 11/14/2014.
  */
 public class MyPreferenceFragment extends PreferenceFragment {
+    public static final String MY_PREFS = "myPrefs";
     private static final boolean ALWAYS_SIMPLE_PREFS = false;
     static public EditText salYear;
     static public EditText salHour;
     static public EditText hrlyWage;
     public static double hoursYear;
     public static double hourlyWage;
+    public static SharedPreferences pref;
     static String hourlyWageString;
     DataHandler handler;
-    public static final String MY_PREFS = "myPrefs";
-    public static SharedPreferences pref;
 
     @Override
     public void onCreate(final Bundle savedInstanceState) {
@@ -101,7 +101,7 @@ public class MyPreferenceFragment extends PreferenceFragment {
                                     hourlyWageString = "" + df.format(hourlyWage);
                                     getActivity().getSharedPreferences("hourlyWage", Context.MODE_PRIVATE);
                                     SharedPreferences.Editor editor = pref.edit();
-                                    editor.putString("hourlyWage", hourlyWageString).commit();
+                                    editor.putString("hourlyWage", hourlyWageString).apply();
                                     Toast toast = Toast.makeText(getActivity(),
                                             hourlyWageString, Toast.LENGTH_LONG);
                                     //toast.show();
@@ -112,7 +112,7 @@ public class MyPreferenceFragment extends PreferenceFragment {
                                 }
 
                                 SharedPreferences.Editor editor = pref.edit();
-                                editor.putString("salary", "0.00").commit();
+                                editor.putString("salary", "0.00").apply();
                                 //TextView totalNum = (TextView)getActivity(). findViewById(R.id.totalNum);
                                 //totalNum.setText("0.00");
 
@@ -150,7 +150,7 @@ public class MyPreferenceFragment extends PreferenceFragment {
                                     hourlyWageString = "" + df.format(wageDub);
                                     getActivity().getSharedPreferences("hourlyWage", Context.MODE_PRIVATE);
                                     SharedPreferences.Editor editor = pref.edit();
-                                    editor.putString("hourlyWage", hourlyWageString).commit();
+                                    editor.putString("hourlyWage", hourlyWageString).apply();
                                     Toast toast = Toast.makeText(getActivity(),
                                             hourlyWageString, Toast.LENGTH_LONG);
                                     //toast.show();
@@ -160,7 +160,7 @@ public class MyPreferenceFragment extends PreferenceFragment {
                                     toast.show();
                                 }
                                 SharedPreferences.Editor editor = pref.edit();
-                                editor.putString("salary", "0.00").commit();
+                                editor.putString("salary", "0.00").apply();
                             }
                         }
                 )
