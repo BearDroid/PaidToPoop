@@ -11,7 +11,7 @@
         android:layout_height="wrap_content"
         android:background="@color/colorPrimary"
         android:gravity="center"
-        android:padding="24dp"
+        android:padding="16dp"
         android:text="@string/welcome"
         android:textColor="@color/white"
         android:textSize="34sp" />
@@ -26,7 +26,7 @@
         android:gravity="center"
         android:text="@string/intro"
         android:textColor="@color/black"
-        android:textSize="24sp" />
+        android:textSize="20sp" />
 
     <android.support.v7.widget.CardView
         android:layout_width="match_parent"
@@ -39,75 +39,113 @@
             android:id="@+id/card"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:layout_margin="0dp"
+            android:orientation="vertical"
+            android:padding="0dp">
 
             <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
                 android:id="@+id/hourlyLayout"
+                android:layout_width="match_parent"
+                android:layout_height="192dp"
+                android:paddingRight="16dp"
+                android:paddingLeft="16dp"
+                android:paddingTop="16dp"
                 android:paddingBottom="72dp"
-                android:visibility="gone">
+                android:visibility="visible"
+                android:background="#009688">
 
                 <EditText
                     android:id="@+id/hourlyEditText"
                     android:layout_width="match_parent"
                     android:layout_height="72dp"
                     android:hint="Hourly wage"
-                    android:textColor="@color/black"
-                    android:textSize="24sp"
-                    />
+                    android:inputType="numberDecimal"
+                    android:maxLength="5"
+                    android:textColorHint="@color/white"
+                    android:textSize="20sp"
+                    android:textColor="@color/white"/>
 
             </LinearLayout>
+
             <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
                 android:id="@+id/salary"
-                android:paddingBottom="0dp"
-                android:orientation="vertical">
+                android:layout_width="match_parent"
+                android:layout_height="192dp"
+                android:background="#673AB7"
+                android:orientation="vertical"
+                android:padding="16dp"
+                android:visibility="gone">
 
                 <EditText
                     android:id="@+id/salaryEditText"
                     android:layout_width="match_parent"
                     android:layout_height="72dp"
                     android:hint="Salary amount"
-                    android:textColor="@color/black"
-                    android:textSize="24sp"
                     android:inputType="number"
                     android:maxLength="9"
-                    />
+                    android:textColorHint="@color/white"
+                    android:textSize="20sp"
+                    android:textColor="@color/white"/>
+
                 <EditText
                     android:id="@+id/hoursEditText"
                     android:layout_width="match_parent"
                     android:layout_height="72dp"
                     android:hint="Hours per week"
-                    android:textColor="@color/black"
-                    android:textSize="24sp"
                     android:inputType="number"
-                    android:maxLength="3"/>
+                    android:maxLength="3"
+                    android:textColorHint="@color/white"
+                    android:textSize="20sp"
+                    android:textColor="@color/white"/>
             </LinearLayout>
 
             <LinearLayout
                 android:id="@+id/switchLayout"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="8dp"
+                android:layout_height="48dp"
+                android:layout_margin="0dp"
                 android:orientation="horizontal">
 
-                <TextView
-                    android:id="@+id/switchText"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                <Button
+                    android:id="@+id/hourlyBtn"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_margin="0dp"
                     android:layout_weight="1"
-                    android:text="Salary mode"
-                    android:textSize="24sp" />
+                    android:background="#009688"
+                    android:padding="0dp"
+                    android:text="Hourly"
+                    android:textColor="@color/white" />
 
-                <Switch
-                    android:id="@+id/salarySwitch"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
+                <Button
+                    android:id="@+id/salaryBtn"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_margin="0dp"
+                    android:layout_weight="1"
+                    android:background="#673AB7"
+                    android:padding="0dp"
+                    android:text="Salary"
+                    android:textColor="@color/white" />
             </LinearLayout>
         </LinearLayout>
 
     </android.support.v7.widget.CardView>
 
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:layout_alignParentBottom="true"
+        android:background="@color/selected_gray"
+        android:padding="16dp">
+
+        <Button
+            android:id="@+id/continueBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:background="@color/selected_gray"
+            android:text="Continue  >" />
+    </RelativeLayout>
 </RelativeLayout>

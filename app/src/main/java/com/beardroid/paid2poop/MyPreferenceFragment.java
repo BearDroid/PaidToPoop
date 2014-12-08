@@ -32,6 +32,7 @@ public class MyPreferenceFragment extends PreferenceFragment {
     DataHandler handler;
     boolean isEnabled;
     Preference current;
+    SwitchPreference salSwitch;
 
     @Override
     public void onCreate(final Bundle savedInstanceState) {
@@ -41,8 +42,11 @@ public class MyPreferenceFragment extends PreferenceFragment {
         getActivity().setTitle("Settings");
         final Preference wage = (Preference) findPreference("hourly");
         final Preference current = findPreference("current");
-        SwitchPreference salSwitch = (SwitchPreference) findPreference("salBox");
+        salSwitch = (SwitchPreference) findPreference("salBox");
         wage.setEnabled(!salSwitch.isChecked());
+        isSalary();
+        setCurrentHourly();
+        setCurrentSalary();
         salSwitch.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
             @Override
             public boolean onPreferenceChange(Preference preference, Object o) {
@@ -194,6 +198,23 @@ public class MyPreferenceFragment extends PreferenceFragment {
         handler.open();
     }
 
+    public void isSalary(){
+        String check = pref.getString("salary", "nada");
+        boolean checker = true;
+        if(check.equals("nada"))
+            checker = false;
+        salSwitch.setChecked(checker);
+    }
+    public void setUp(){
+        String wage = pref.getString("hourlyWage", "nada");
+        String salary = pref.getString("salary", "nada");
+        if (!wage.equals("nada") && salary.equals("nada")){
+            setCurrentHourly();
+        }
+        if (wage.equals("nada") && !salary.equals("nada")){
+            setCurrentSalary();
+        }
+    }
     public void setCurrentSalary() {
         String hrlyWage = pref.getString("hourlyWage", "error");
 

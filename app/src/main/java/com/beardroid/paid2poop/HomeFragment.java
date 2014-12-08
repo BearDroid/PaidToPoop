@@ -13,7 +13,6 @@ import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -30,8 +29,6 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 import java.util.Locale;
-import java.util.Timer;
-import java.util.TimerTask;
 
 /**
  * Created by Max on 11/13/2014.
@@ -42,38 +39,30 @@ public class HomeFragment extends Fragment {
     public Context context = getActivity();
     public SharedPreferences pref;
     DataHandler handler;
-    Timer t;
-    TimerTask task;
-    private RecyclerView mRecyclerView;
     private RecyclerView.Adapter mAdapter;
-    private RecyclerView.LayoutManager mLayoutManager;
-    private Toolbar mToolbar;
 
     @Override
     public View onCreateView(final LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         final View view = inflater.inflate(R.layout.fragment_home, container, false);
         pref = getActivity().getSharedPreferences(MY_PREFS, Context.MODE_PRIVATE);
         openDB();
-        /**
-         String checker = pref.getString("hourlyWage", null);
-         Double checkerDbl = Double.parseDouble(checker);
-         if(checker.isEmpty() || checkerDbl == 0.0){
-         introView();
-         }**/
+
         final RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.pooplist);
         recyclerView.setHasFixedSize(true);
         LinearLayoutManager llm = new LinearLayoutManager(getActivity());
         llm.setOrientation(LinearLayoutManager.VERTICAL);
         recyclerView.setLayoutManager(llm);
 
+        checker();
         populateListViewFromDB(recyclerView);
         makeHeaderNumber(view);
-        mToolbar = (Toolbar) getActivity().findViewById(R.id.toolbar);
+
+
         final FloatingActionsMenu mainFab = (FloatingActionsMenu) view.findViewById(R.id.mainFab);
         FloatingActionButton editFab = (FloatingActionButton) view.findViewById(R.id.editFab);
         FloatingActionButton timerFab = (FloatingActionButton) view.findViewById(R.id.timerFab);
-        editFab.setSize(1);
-        timerFab.setSize(1);
+        editFab.setSize(FloatingActionButton.SIZE_MINI);
+        timerFab.setSize(FloatingActionButton.SIZE_MINI);
         timerFab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -150,12 +139,7 @@ public class HomeFragment extends Fragment {
 
     @Override
     public void onResume() {
-        boolean checker = false;
-        if (!checker) {
-            Intent intent = new Intent(getActivity(), IntroActivity.class);
-            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-            startActivity(intent);
-        }
+        checker();
         RecyclerView recyclerView = (RecyclerView) getView().findViewById(R.id.pooplist);
         populateListViewFromDB(recyclerView);
         makeHeaderNumber(getView());
@@ -191,8 +175,13 @@ public class HomeFragment extends Fragment {
         return date;
     }
 
-    public void introView() {
-
+    public void checker() {
+        String check = pref.getString("hourlyWage", "nada");
+        if (check.equals("nada")) {
+            Intent intent = new Intent(getActivity(), IntroActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            startActivity(intent);
+        }
     }
 
     //here lie database stuff
