@@ -99,9 +99,11 @@ public class IntroActivity extends ActionBarActivity implements View.OnClickList
         if (!isHourly) {
             String salary = salaryEditText.getText().toString();
             String hours = hoursEditText.getText().toString();
-            int hourInt = Integer.parseInt(hours);
-            if(hourInt == 0){
-                Toast.makeText(this, "You work 0 hours per week? Must be nice.", Toast.LENGTH_SHORT).show();
+            if (hours.equals("0") || hours.equals("00") || hours.equals("000")) {
+                int hourInt = Integer.parseInt(hours);
+                if(hourInt == 0){
+                    Toast.makeText(this, "You work 0 hours per week? Must be nice.", Toast.LENGTH_SHORT).show();
+                }
             }
             else if(salary.length() > 0 && hours.length() > 0){
                 Double salaryDbl = Double.parseDouble(salary);
