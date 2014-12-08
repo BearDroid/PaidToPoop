@@ -102,6 +102,8 @@ public class TimerActivity extends ActionBarActivity {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         LayoutInflater inflater = this.getLayoutInflater();
         final View alertView = inflater.inflate(R.layout.time_dialog, (ViewGroup) this.findViewById(R.id.timeDialog));
+        RadioButton good = (RadioButton) alertView.findViewById(R.id.goodbutton);
+        good.setChecked(true);
         builder.setView(alertView);
         builder.setPositiveButton("Add!", new DialogInterface.OnClickListener() {
             @Override

@@ -99,7 +99,11 @@ public class IntroActivity extends ActionBarActivity implements View.OnClickList
         if (!isHourly) {
             String salary = salaryEditText.getText().toString();
             String hours = hoursEditText.getText().toString();
-            if(salary.length() > 0 && hours.length() > 0){
+            int hourInt = Integer.parseInt(hours);
+            if(hourInt == 0){
+                Toast.makeText(this, "You work 0 hours per week? Must be nice.", Toast.LENGTH_SHORT).show();
+            }
+            else if(salary.length() > 0 && hours.length() > 0){
                 Double salaryDbl = Double.parseDouble(salary);
                 Double hoursDbl = Double.parseDouble(hours);
                 Double hoursYearly = hoursDbl *52;

@@ -91,7 +91,7 @@ public class MyPreferenceFragment extends PreferenceFragment {
                             public void onClick(DialogInterface dialog, int which) {
                                 // do nothing
                             }
-                        }).setIcon(R.drawable.ic_delete).show();
+                        }).setIcon(R.drawable.ic_delete_grey).show();
                 return true;
             }
         });
@@ -111,15 +111,18 @@ public class MyPreferenceFragment extends PreferenceFragment {
                             public void onClick(DialogInterface dialog,
                                                 int which) {
 
-                                String yearly = salYear.getText().toString();
+                                String salary = salYear.getText().toString();
                                 String hours = salHour.getText().toString();
                                 SharedPreferences.Editor editor = pref.edit();
-                                editor.putString("salary", yearly);
+                                editor.putString("salary", salary);
                                 editor.putString("salHours", hours);
                                 editor.apply();
-                                try {
+                                int hourInt = Integer.parseInt(hours);
+                                if(hourInt == 0){
+                                    Toast.makeText(getActivity(), "You work 0 hours per week? Must be nice.", Toast.LENGTH_SHORT).show();
+                                } else if(salary.length() > 0 && hours.length() > 0) {
                                     double hoursDub = Double.parseDouble(hours);
-                                    double yearlyDub = Double.parseDouble(yearly);
+                                    double yearlyDub = Double.parseDouble(salary);
                                     hoursYear = hoursDub * 52;
                                     hourlyWage = yearlyDub / hoursYear;
                                     DecimalFormat df = new DecimalFormat("0.00");
@@ -127,7 +130,10 @@ public class MyPreferenceFragment extends PreferenceFragment {
                                     getActivity().getSharedPreferences("hourlyWage", Context.MODE_PRIVATE);
                                     editor.putString("hourlyWage", hourlyWageString).apply();
                                     setCurrentSalary();
-                                } catch (Exception e) {
+                                    editor.putString("salary", salary);
+                                    editor.putString("salHours", hours);
+                                    editor.apply();
+                                } else {
                                     Toast toast = Toast.makeText(getActivity(),
                                             "Please enter both values!", Toast.LENGTH_LONG);
                                     toast.show();

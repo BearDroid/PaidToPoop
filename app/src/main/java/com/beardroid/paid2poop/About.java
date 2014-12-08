@@ -60,7 +60,7 @@ public class About extends Fragment {
                 AlertDialog.Builder alert = new AlertDialog.Builder(getActivity());
                 View alertView = inflater.inflate(R.layout.whatsnew, (ViewGroup) getActivity().findViewById(R.id.newstuff));
                 alert.setView(alertView);
-                alert.setNeutralButton("Cool!", new DialogInterface.OnClickListener() {
+                alert.setPositiveButton("Cool!", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
                         // do nothing
                     }

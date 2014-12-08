@@ -6,11 +6,14 @@
 
     <TextView
         android:id="@+id/whatsnew"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
         android:layout_centerHorizontal="true"
-        android:text="What's new in V2.0"
-        android:textSize="24sp" />
+        android:gravity="center"
+        android:text="What's new in V3.0"
+        android:textSize="24sp"
+        android:textColor="@color/white"
+        android:background="@color/colorPrimary"/>
 
     <ScrollView
         android:layout_width="wrap_content"
@@ -26,7 +29,12 @@
             android:paddingLeft="16dp"
             android:paddingRight="16dp"
             android:paddingTop="8dp"
-            android:text="&#8226;Implemented Navigation Drawer\n\n&#8226;Added a settings menu\n\n&#8226;Ability to save wage or salary\n\n&#8226;Refreshed color theme\n\n&#8226;New icon (that doesn't suck)\n\n&#8226;Click icon in About for What's New\n\n&#8226;Got rid of transparent system bars (Sorry! They were causing problems and it doesn't fit Google's design! They'll be back in L.)\n\n&#8226;Bugfixes"
+            android:text="&#8226;New UI\nA brand new user interface that looks a helluva lot better and provides more information so you can get a better look at how much money you are making while slacking off.
+\n\n&#8226;More info!\nDates, times, and what? Ratings? Get a feel about how your trips to the loo are going with the new ratings feature.
+\n\n&#8226;Dat Material Design Though\nColors! Floating action buttons! CARDS! Matias Duarte himself uses this app just because of all of that material design.**\n\n
+&#8226;Built-in timer\nDon't feel like doing the math to figure out how many minutes you were on the can? I figured, you don't really look like the type. Well now PtP does it for you. Just tap on the timer button and go about your business. When you're done, click finish up in the notification bar and you're on your way to success.
+\n\n&#8226;Bugfixes\n\n\n **Not true. I have no idea what apps Mr. Duarte is using."
+            android:textColor="@color/black"
             android:textSize="20sp" />
     </ScrollView>
 

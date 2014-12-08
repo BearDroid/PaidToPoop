@@ -27,7 +27,7 @@
             android:key="clearPref"
             android:title="Clear All"
             android:textColor="@color/black"
-            android:summary="Clear saved poops." />
+            android:summary="Flush poops and money info." />
     </PreferenceCategory>
 
 </PreferenceScreen>

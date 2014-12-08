@@ -15,6 +15,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/toolbar"
         android:layout_centerHorizontal="true"
+        android:layout_margin="16dp"
         android:adjustViewBounds="true"
         android:contentDescription="@string/icon"
         android:maxHeight="150dp"
@@ -35,32 +36,33 @@
             android:text="@string/appName"
             android:textColor="#000"
             android:textSize="24sp" />
+
+        <TextView
+            android:id="@+id/created"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/name"
+            android:layout_centerHorizontal="true"
+            android:text="@string/created"
+            android:textColor="#000" />
+
+        <TextView
+            android:id="@+id/textView1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/created"
+            android:layout_centerHorizontal="true"
+            android:text="@string/bearDroid"
+            android:textColor="#000" />
     </RelativeLayout>
-
-    <TextView
-        android:id="@+id/created"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/relativeLayout1"
-        android:layout_centerHorizontal="true"
-        android:text="@string/created"
-        android:textColor="#000" />
-
-    <TextView
-        android:id="@+id/textView1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/created"
-        android:layout_centerHorizontal="true"
-        android:text="@string/bearDroid"
-        android:textColor="#000" />
 
     <TextView
         android:id="@+id/play"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_below="@+id/relativeLayout1"
         android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
+        android:layout_marginTop="32dp"
         android:linksClickable="true"
         android:text="@string/play"
         android:textColor="#000"

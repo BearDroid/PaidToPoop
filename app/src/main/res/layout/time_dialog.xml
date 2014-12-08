@@ -16,7 +16,7 @@
         android:padding="24dp"
         android:text="New Poop"
         android:textColor="@color/white"
-        android:textSize="34dp" />
+        android:textSize="34sp" />
 
     <RelativeLayout
         android:id="@+id/ratingLayout"
@@ -77,12 +77,14 @@
         android:text="@string/minutesTitle"
         android:textColor="#000"
         android:textSize="24sp" />
+
     <TextView
         android:id="@+id/minutesNum"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/minutesText"
         android:layout_centerHorizontal="true"
+        android:layout_marginBottom="16dp"
         android:layout_marginTop="16dp"
         android:text="000"
         android:textColor="#000"
