@@ -88,11 +88,11 @@ public class IntroActivity extends ActionBarActivity implements View.OnClickList
     public void clickContinue() {
         if (isHourly) {
             String hourlyWage = hourlyEditText.getText().toString();
-            if(hourlyWage.length()> 0) {
+            if (hourlyWage.length() > 0) {
                 editor.putString("hourlyWage", hourlyWage);
                 editor.apply();
                 finish();
-            } else{
+            } else {
                 Toast.makeText(this, "Please enter your information!", Toast.LENGTH_LONG).show();
             }
         }
@@ -101,15 +101,14 @@ public class IntroActivity extends ActionBarActivity implements View.OnClickList
             String hours = hoursEditText.getText().toString();
             if (hours.equals("0") || hours.equals("00") || hours.equals("000")) {
                 int hourInt = Integer.parseInt(hours);
-                if(hourInt == 0){
+                if (hourInt == 0) {
                     Toast.makeText(this, "You work 0 hours per week? Must be nice.", Toast.LENGTH_SHORT).show();
                 }
-            }
-            else if(salary.length() > 0 && hours.length() > 0){
+            } else if (salary.length() > 0 && hours.length() > 0) {
                 Double salaryDbl = Double.parseDouble(salary);
                 Double hoursDbl = Double.parseDouble(hours);
-                Double hoursYearly = hoursDbl *52;
-                Double hourlyWage = salaryDbl/hoursYearly;
+                Double hoursYearly = hoursDbl * 52;
+                Double hourlyWage = salaryDbl / hoursYearly;
                 DecimalFormat df = new DecimalFormat("0.00");
                 String hourlyWageStr = "" + df.format(hourlyWage);
                 editor.putString("hourlyWage", hourlyWageStr);

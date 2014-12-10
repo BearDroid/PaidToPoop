@@ -52,10 +52,10 @@ public class MyPreferenceFragment extends PreferenceFragment {
             public boolean onPreferenceChange(Preference preference, Object o) {
                 isEnabled = (Boolean) o; //true means salary mode is on
                 wage.setEnabled(!isEnabled); //if it's not true, then wage mode is on
-                if(isEnabled){
+                if (isEnabled) {
                     setCurrentSalary();
                 }
-                if(!isEnabled){
+                if (!isEnabled) {
                     setCurrentHourly();
                 }
                 return true;
@@ -118,9 +118,9 @@ public class MyPreferenceFragment extends PreferenceFragment {
                                 editor.putString("salHours", hours);
                                 editor.apply();
                                 int hourInt = Integer.parseInt(hours);
-                                if(hourInt == 0){
+                                if (hourInt == 0) {
                                     Toast.makeText(getActivity(), "You work 0 hours per week? Must be nice.", Toast.LENGTH_SHORT).show();
-                                } else if(salary.length() > 0 && hours.length() > 0) {
+                                } else if (salary.length() > 0 && hours.length() > 0) {
                                     double hoursDub = Double.parseDouble(hours);
                                     double yearlyDub = Double.parseDouble(salary);
                                     hoursYear = hoursDub * 52;
@@ -204,23 +204,25 @@ public class MyPreferenceFragment extends PreferenceFragment {
         handler.open();
     }
 
-    public void isSalary(){
+    public void isSalary() {
         String check = pref.getString("salary", "nada");
         boolean checker = true;
-        if(check.equals("nada"))
+        if (check.equals("nada"))
             checker = false;
         salSwitch.setChecked(checker);
     }
-    public void setUp(){
+
+    public void setUp() {
         String wage = pref.getString("hourlyWage", "nada");
         String salary = pref.getString("salary", "nada");
-        if (!wage.equals("nada") && salary.equals("nada")){
+        if (!wage.equals("nada") && salary.equals("nada")) {
             setCurrentHourly();
         }
-        if (wage.equals("nada") && !salary.equals("nada")){
+        if (wage.equals("nada") && !salary.equals("nada")) {
             setCurrentSalary();
         }
     }
+
     public void setCurrentSalary() {
         String hrlyWage = pref.getString("hourlyWage", "error");
 
@@ -242,7 +244,7 @@ public class MyPreferenceFragment extends PreferenceFragment {
         Double hrlyDbl = Double.parseDouble(hrlyWage);
         boolean hasWage = (hrlyWage != null);
         if (hasWage) {
-            if (hrlyDbl >0) {
+            if (hrlyDbl > 0) {
                 current.setTitle("Hourly Wage Mode");
                 current.setSummary("Your hourly wage is set at $" + hrlyWage + " per hour.");
             }
