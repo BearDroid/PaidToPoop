@@ -260,6 +260,7 @@ public class TimerActivity extends ActionBarActivity {
                 .setContentIntent(contentIntent)
                 .setSmallIcon(R.drawable.ic_launcher)
                 .setOngoing(!stopped)
+                .setSmallIcon(R.drawable.ic_notification_icon_small)
                 .setContent(notif);
         mNotificationManager.notify(0, builder.build());
     }
