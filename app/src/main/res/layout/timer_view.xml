@@ -6,10 +6,6 @@
     android:background="@color/colorPrimary"
     android:elevation="4dp">
 
-    <include
-        android:id="@+id/toolbar"
-        layout="@layout/toolbar" />
-
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -29,7 +25,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/timerms"
-            android:text="00"
+            android:text="0"
             android:textSize="34sp"
             android:textColor="@color/white"
             />

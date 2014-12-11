@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:internal="http://schemas.android.com/apk/prv/res/android"
+    android:id="@+id/swn_collapsed_hitspace"
+    android:layout_width="match_parent"
+    android:layout_height="64dp"
+    internal:layout_maxHeight="64dp"
+    internal:layout_minHeight="64dp"
+    android:background="?android:attr/selectableItemBackground" >
+    <include layout="@layout/stopwatch_notification_icon"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="fill_vertical"
+        android:layout_marginStart="@dimen/notification_icon_size"
+        android:layout_marginLeft="@dimen/notification_icon_size"
+        android:gravity="center"
+        android:minHeight="@dimen/notification_icon_size"
+        android:orientation="vertical"
+        android:paddingBottom="2dp"
+        android:paddingEnd="8dp"
+        android:paddingRight="8dp"
+        android:paddingTop="2dp" >
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Poop in progress!"
+            android:textColor="@color/black"
+            android:singleLine="true"
+            android:textSize="16sp"/>
+        <LinearLayout
+            android:id="@+id/line1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal" >
+            <Chronometer
+                android:id="@+id/chronometer"
+                android:layout_width="0dip"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:singleLine="true"
+                android:textColor="@color/abc_secondary_text_material_light"/>
+        </LinearLayout>
+    </LinearLayout>
+</FrameLayout>
