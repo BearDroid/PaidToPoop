@@ -3,15 +3,15 @@ package com.beardroid.paid2poop;
 import android.app.AlertDialog;
 import android.app.Fragment;
 import android.content.DialogInterface;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
-import android.text.Html;
-import android.text.method.LinkMovementMethod;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.TextView;
 
 /**
  * Created by Max on 11/13/2014.
@@ -33,24 +33,37 @@ public class About extends Fragment {
         mToolbar = (Toolbar) getActivity().findViewById(R.id.toolbar);
         getActivity().setTitle("About");
         View view = inflater.inflate(R.layout.fragment_about, container, false);
+        Button play = (Button) view.findViewById(R.id.play);
+        Button twitter = (Button) view.findViewById(R.id.twitter);
+        Button plus = (Button) view.findViewById(R.id.gplus);
 
-        TextView play = (TextView) view.findViewById(R.id.play);
-        play.setClickable(true);
-        play.setMovementMethod(LinkMovementMethod.getInstance());
-        String playtext = "<a href='https://play.google.com/store/apps/details?id=com.beardroid.paid2poop'>Play</a>";
-        play.setText(Html.fromHtml(playtext));
-        //link to twitter
-        TextView twitter = (TextView) view.findViewById(R.id.twitter);
-        twitter.setClickable(true);
-        twitter.setMovementMethod(LinkMovementMethod.getInstance());
-        String twittertext = "<a href='https://twitter.com/BearDroid77'>Twitter</a>";
-        twitter.setText(Html.fromHtml(twittertext));
-        //link to google+
-        TextView plus = (TextView) view.findViewById(R.id.gplus);
-        plus.setClickable(true);
-        plus.setMovementMethod(LinkMovementMethod.getInstance());
-        String plustext = "<a href='https://plus.google.com/+MaxMoss/posts'>Google+</a>";
-        plus.setText(Html.fromHtml(plustext));
+        play.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String url = "https://play.google.com/store/apps/details?id=com.beardroid.paid2poop";
+                Intent i = new Intent(Intent.ACTION_VIEW);
+                i.setData(Uri.parse(url));
+                startActivity(i);
+            }
+        });
+        twitter.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String url = "https://twitter.com/BearDroid77";
+                Intent i = new Intent(Intent.ACTION_VIEW);
+                i.setData(Uri.parse(url));
+                startActivity(i);
+            }
+        });
+        plus.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String url = "https://plus.google.com/+MaxMoss/posts";
+                Intent i = new Intent(Intent.ACTION_VIEW);
+                i.setData(Uri.parse(url));
+                startActivity(i);
+            }
+        });
 
         ImageView icon = (ImageView) view.findViewById(R.id.icon);
         icon.setOnClickListener(new View.OnClickListener() {

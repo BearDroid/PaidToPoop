@@ -34,7 +34,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/appName"
-            android:textColor="#000"
+            android:textColor="@color/abc_primary_text_material_light"
             android:textSize="24sp" />
 
         <TextView
@@ -44,7 +44,7 @@
             android:layout_below="@+id/name"
             android:layout_centerHorizontal="true"
             android:text="@string/created"
-            android:textColor="#000" />
+            android:textColor="@color/abc_secondary_text_material_light" />
 
         <TextView
             android:id="@+id/textView1"
@@ -53,44 +53,44 @@
             android:layout_below="@+id/created"
             android:layout_centerHorizontal="true"
             android:text="@string/bearDroid"
-            android:textColor="#000" />
+            android:textColor="@color/abc_secondary_text_material_light" />
     </RelativeLayout>
 
-    <TextView
+    <Button
         android:id="@+id/play"
-        android:layout_width="wrap_content"
+        android:layout_width="130dp"
         android:layout_height="wrap_content"
         android:layout_below="@+id/relativeLayout1"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="32dp"
-        android:linksClickable="true"
         android:text="@string/play"
-        android:textColor="#000"
-        android:textColorLink="@android:color/black"
-        android:textSize="20sp" />
+        android:textColor="@color/white"
+        android:background="@color/background_material_dark"
+        android:textSize="20sp"
+        android:layout_marginBottom="8dp"/>
 
-    <TextView
+    <Button
         android:id="@+id/twitter"
-        android:layout_width="wrap_content"
+        android:layout_width="130dp"
         android:layout_height="wrap_content"
         android:layout_below="@+id/play"
         android:layout_centerHorizontal="true"
-        android:linksClickable="true"
         android:text="@string/twitter"
-        android:textColor="#000"
-        android:textColorLink="@android:color/black"
-        android:textSize="20sp" />
+        android:textColor="@color/white"
+        android:textSize="20sp"
+        android:background="#4099FF"
+        android:layout_margin="8dp"/>
 
-    <TextView
+    <Button
         android:id="@+id/gplus"
-        android:layout_width="wrap_content"
+        android:layout_width="130dp"
         android:layout_height="wrap_content"
         android:layout_below="@+id/twitter"
         android:layout_centerHorizontal="true"
-        android:linksClickable="true"
         android:text="@string/gplus"
-        android:textColor="#000"
-        android:textColorLink="@android:color/black"
-        android:textSize="20sp" />
+        android:textColor="@color/white"
+        android:textSize="20sp"
+        android:background="#D34836"
+        android:layout_margin="8dp"/>
 
 </RelativeLayout>

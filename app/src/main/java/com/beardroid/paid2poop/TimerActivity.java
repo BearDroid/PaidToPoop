@@ -20,7 +20,6 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.RemoteViews;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.text.DecimalFormat;
 import java.text.Format;
@@ -39,12 +38,10 @@ public class TimerActivity extends ActionBarActivity {
     SharedPreferences.Editor editor;
     ImageButton play;
     ImageButton pause;
+    ImageButton restart;
     DataHandler handler;
     boolean running = false;
-    long currentTime;
-    long masterBaseTime;
     NotificationManager mNotificationManager;
-    private TextView tempTextView;
     private Handler mHandler = new Handler();
     private long elapsedTime;
     private Runnable startTimer = new Runnable() {
@@ -70,6 +67,7 @@ public class TimerActivity extends ActionBarActivity {
 
         play = (ImageButton) findViewById(R.id.playBtn);
         pause = (ImageButton) findViewById(R.id.pauseBtn);
+        restart = (ImageButton) findViewById(R.id.restartBtn);
 
         play.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -81,6 +79,12 @@ public class TimerActivity extends ActionBarActivity {
             @Override
             public void onClick(View v) {
                 stopClick(v);
+            }
+        });
+        restart.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                restartClick(v);
             }
         });
         startTime = pref.getLong(TIME_START, 0);
@@ -113,20 +117,32 @@ public class TimerActivity extends ActionBarActivity {
         mHandler.removeCallbacks(startTimer);
         stopped = true;
         long elapsed = System.currentTimeMillis() - startTime;
-        Toast.makeText(this, "" + elapsed, Toast.LENGTH_SHORT).show();
         complete(view, elapsed);
         running = false;
+    }
+    public void restartClick(View view){
+        hideStopButton();
+        long startTime = 0;
+        stopped = false;
+        running = false;
+        ((TextView)findViewById(R.id.timer)).setText("0 00 00");
+        ((TextView)findViewById(R.id.timerms)).setText(" 0");
+        mHandler.removeCallbacks(startTimer);
+        editor.remove(TIME_START).apply();
     }
 
     public void showStopButton() {
         pause.setVisibility(View.VISIBLE);
         play.setVisibility(View.GONE);
+        restart.setVisibility(View.VISIBLE);
+
     }
 
     public void hideStopButton() {
         pause.setVisibility(View.GONE);
         play.setVisibility(View.VISIBLE);
     }
+
 
     public void updateTimer(float time) {
         secs = (long) (time / 1000);
@@ -252,7 +268,6 @@ public class TimerActivity extends ActionBarActivity {
         RemoteViews notif = new RemoteViews(getPackageName(),
                 R.layout.timer_notif);
         long notificationTime = SystemClock.elapsedRealtime() - elapsed;
-        editor.putLong("savedTime", notificationTime);
         notif.setChronometer(R.id.chronometer, notificationTime, null, !stopped);
         NotificationCompat.Builder builder = new NotificationCompat.Builder(this);
         builder.setContentTitle("Poop in progress!")
