@@ -9,33 +9,87 @@
         android:layout_width="match_parent"
         android:layout_height="56dp"
         android:layout_centerHorizontal="true"
+        android:background="@color/colorPrimary"
         android:gravity="center"
         android:text="What's new in V3.0"
-        android:textSize="24sp"
         android:textColor="@color/white"
-        android:background="@color/colorPrimary"/>
+        android:textSize="24sp" />
 
     <ScrollView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/whatsnew">
 
-        <TextView
-            android:id="@+id/features"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:paddingBottom="8dp"
-            android:paddingLeft="16dp"
-            android:paddingRight="16dp"
-            android:paddingTop="8dp"
-            android:text="&#8226;New UI\nA brand new user interface that looks a helluva lot better and provides more information so you can get a better look at how much money you are making while slacking off.
-\n\n&#8226;More info!\nDates, times, and what? Ratings? Get a feel about how your trips to the loo are going with the new ratings feature.
-\n\n&#8226;Dat Material Design Though\nColors! Floating action buttons! CARDS! Matias Duarte himself uses this app just because of all of that material design.**\n\n
-&#8226;Built-in timer\nDon't feel like doing the math to figure out how many minutes you were on the can? I figured, you don't really look like the type. Well now PtP does it for you. Just tap on the timer button and go about your business. When you're done, click finish up in the notification bar and you're on your way to success.
-\n\n&#8226;Bugfixes\n\n\n **Not true. I have no idea what apps Mr. Duarte is using."
-            android:textColor="@color/black"
-            android:textSize="20sp" />
+            android:orientation="vertical"
+            android:padding="16dp">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="New UI!"
+                android:textStyle="bold"
+                android:textSize="20sp"
+                android:textColor="@color/abc_primary_text_material_light"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="20sp"
+                android:paddingBottom="16dp"
+                android:textColor="@color/abc_secondary_text_material_light"
+                android:text="A brand new user interface that looks a helluva lot better and provides more information so you can get a better look at how much money you are making while slacking off."/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="More info!"
+                android:textStyle="bold"
+                android:textSize="20sp"
+                android:textColor="@color/abc_primary_text_material_light"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="20sp"
+                android:paddingBottom="16dp"
+                android:textColor="@color/abc_secondary_text_material_light"
+                android:text="Dates, times, and what? Ratings? Get a feel about how your trips to the loo are going with the new ratings feature."/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Built-in timer!"
+                android:textStyle="bold"
+                android:textSize="20sp"
+                android:textColor="@color/abc_primary_text_material_light"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="20sp"
+                android:paddingBottom="16dp"
+                android:textColor="@color/abc_secondary_text_material_light"
+                android:text="Don't feel like doing the math to figure out how many minutes you were on the can? I figured, you don't really look like the type. Well now PtP does it for you. Just tap on the timer button and go about your business. When you're done, click finish up in the notification bar and you're on your way to success."/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Dat Material Design Though!"
+                android:textStyle="bold"
+                android:textSize="20sp"
+                android:textColor="@color/abc_primary_text_material_light"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="20sp"
+                android:paddingBottom="16dp"
+                android:textColor="@color/abc_secondary_text_material_light"
+                android:text="Colors! Floating action buttons! CARDS! Matias Duarte himself uses this app just because of all of that material design.**"/>
+            <TextView
+                android:paddingTop="16dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="14sp"
+                android:textColor="@color/abc_secondary_text_material_light"
+                android:text="**Not true. I have no idea what apps Mr. Duarte is using."/>
+        </LinearLayout>
     </ScrollView>
 
 </RelativeLayout>
