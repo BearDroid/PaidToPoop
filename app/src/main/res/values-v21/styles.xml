@@ -10,15 +10,17 @@
         <item name="android:windowDrawsSystemBarBackgrounds">true</item>
         <item name="android:windowActionBarOverlay">true</item>
         <item name="android:windowActionBar">false</item>
-
     </style>
     <style name="GoodTheme" parent="AppTheme.Base">
         <item name="android:colorPrimary">@color/goodRating</item>
+        <item name="android:colorPrimaryDark">@color/goodRatingDark</item>
     </style>
     <style name="OkayTheme" parent="AppTheme.Base">
         <item name="android:colorPrimary">@color/okayRating</item>
+        <item name="android:colorPrimaryDark">@color/okayRatingDark</item>
     </style>
     <style name="BadTheme" parent="AppTheme.Base">
         <item name="android:colorPrimary">@color/badRating</item>
+        <item name="android:colorPrimaryDark">@color/badRatingDark</item>
     </style>
 </resources>

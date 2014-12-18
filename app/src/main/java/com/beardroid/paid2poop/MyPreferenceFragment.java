@@ -78,10 +78,11 @@ public class MyPreferenceFragment extends PreferenceFragment {
                                         openDB();
                                         handler.deleteAll();
                                         SharedPreferences.Editor editor = pref.edit();
-                                        editor.putString("allTime", "0.00").apply();
-                                        editor.putString("hourlyWage", null).apply();
-                                        editor.putString("salHours", null).apply();
-                                        editor.putString("salary", null).apply();
+                                        editor.remove("allTime");
+                                        editor.remove("hourlyWage");
+                                        editor.remove("salhours");
+                                        editor.remove("salary");
+                                        editor.apply();
                                         current.setTitle(R.string.currentTitle);
                                         current.setSummary(R.string.currentSum);
                                     }

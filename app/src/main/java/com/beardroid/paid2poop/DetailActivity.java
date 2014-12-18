@@ -59,6 +59,7 @@ public class DetailActivity extends ActionBarActivity {
     public void setColors() {
         String rating = getIntent().getExtras().getString("Rating");
         String versionChecker = Build.VERSION.RELEASE;
+        versionChecker = versionChecker.substring(0,1);
         if (rating.equals("Good")) {
 
             mToolbar.setBackgroundColor(Color.parseColor("#2196F3"));
@@ -67,7 +68,7 @@ public class DetailActivity extends ActionBarActivity {
             fab.setColorPressed(Color.parseColor("#d5650c"));
             dateIcon.setColorFilter(Color.parseColor("#f37e21"));
             timeIcon.setColorFilter(Color.parseColor("#f37e21"));
-            if (versionChecker.equals("5.0")) {
+            if (versionChecker.equals("5")) {
                 setStatusGood();
                 setTheme(R.style.GoodTheme);
             }
@@ -78,7 +79,7 @@ public class DetailActivity extends ActionBarActivity {
             fab.setColorPressed(Color.parseColor("#2d861e"));
             dateIcon.setColorFilter(Color.parseColor("#3bb027"));
             timeIcon.setColorFilter(Color.parseColor("#3bb027"));
-            if (versionChecker.equals("5.0")) {
+            if (versionChecker.equals("5")) {
                 setStatusOkay();
                 setTheme(R.style.OkayTheme);
             }
@@ -89,7 +90,7 @@ public class DetailActivity extends ActionBarActivity {
             fab.setColorPressed(Color.parseColor("#078089"));
             dateIcon.setColorFilter(Color.parseColor("#0bc4d2"));
             timeIcon.setColorFilter(Color.parseColor("#0bc4d2"));
-            if (versionChecker.equals("5.0")) {
+            if (versionChecker.equals("5")) {
                 setStatusBad();
                 setTheme(R.style.BadTheme);
             }

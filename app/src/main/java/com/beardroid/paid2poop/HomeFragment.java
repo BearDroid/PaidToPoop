@@ -55,8 +55,6 @@ public class HomeFragment extends Fragment {
 
         checker();
         populateListViewFromDB(recyclerView);
-        makeHeaderNumber(view);
-
 
         final FloatingActionsMenu mainFab = (FloatingActionsMenu) view.findViewById(R.id.mainFab);
         FloatingActionButton editFab = (FloatingActionButton) view.findViewById(R.id.editFab);
@@ -197,8 +195,13 @@ public class HomeFragment extends Fragment {
     }
 
     private void makeHeaderNumber(View view) {
+        String oldTotal = pref.getString("allTime", "0");
+        Double oldTotalDbl = Double.parseDouble(oldTotal);
         Cursor c = handler.totalAmount();
         Double totalAmount = c.getDouble(c.getColumnIndex("myTotal"));
+        if(oldTotalDbl > 0){
+            totalAmount = totalAmount + oldTotalDbl;
+        }
         DecimalFormat moneyFormat = new DecimalFormat("0.00");
         String totalAmountStr = moneyFormat.format(totalAmount);
         totalAmountStr = "Total: $" + totalAmountStr;
