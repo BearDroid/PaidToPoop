@@ -102,8 +102,7 @@ public class DetailActivity extends ActionBarActivity {
         String amt = getIntent().getExtras().getString("Amount");
         Double amtDbl = Double.parseDouble(amt);
         DecimalFormat moneyFormat = new DecimalFormat("0.00");
-        amt = moneyFormat.format(amtDbl);
-        amt = "$" + amt;
+        amt = "$" + moneyFormat.format(amtDbl);
         amountView.setText(amt);
 
         TextView dateView = (TextView) findViewById(R.id.dateText);
@@ -178,11 +177,14 @@ public class DetailActivity extends ActionBarActivity {
 
     public void share() {
         String madeStr = getIntent().getExtras().getString("Amount");
+        Double madeDbl = Double.parseDouble(madeStr);
+        DecimalFormat moneyFormat = new DecimalFormat("0.00");
+        madeStr = "$" + moneyFormat.format(madeDbl);
         Intent i = new Intent(Intent.ACTION_SEND);
         i.setType("text/plain");
         i.putExtra(
                 Intent.EXTRA_TEXT,
-                "I made $"
+                "I made "
                         + madeStr
                         + " today while on the can! #PaidToPoop");
         startActivity(Intent.createChooser(i, "Brag via"));
