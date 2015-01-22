@@ -25,70 +25,78 @@
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:padding="16dp">
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="New UI!"
-                android:textStyle="bold"
+                android:textColor="@color/abc_primary_text_material_light"
                 android:textSize="20sp"
-                android:textColor="@color/abc_primary_text_material_light"/>
+                android:textStyle="bold" />
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="20sp"
                 android:paddingBottom="16dp"
+                android:text="A brand new user interface that looks a helluva lot better and provides more information so you can get a better look at how much money you are making while slacking off."
                 android:textColor="@color/abc_secondary_text_material_light"
-                android:text="A brand new user interface that looks a helluva lot better and provides more information so you can get a better look at how much money you are making while slacking off."/>
+                android:textSize="20sp" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="More info!"
-                android:textStyle="bold"
+                android:textColor="@color/abc_primary_text_material_light"
                 android:textSize="20sp"
-                android:textColor="@color/abc_primary_text_material_light"/>
+                android:textStyle="bold" />
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="20sp"
                 android:paddingBottom="16dp"
+                android:text="Dates, times, and what? Ratings? Get a feel about how your trips to the loo are going with the new ratings feature."
                 android:textColor="@color/abc_secondary_text_material_light"
-                android:text="Dates, times, and what? Ratings? Get a feel about how your trips to the loo are going with the new ratings feature."/>
+                android:textSize="20sp" />
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Built-in timer!"
-                android:textStyle="bold"
+                android:textColor="@color/abc_primary_text_material_light"
                 android:textSize="20sp"
-                android:textColor="@color/abc_primary_text_material_light"/>
+                android:textStyle="bold" />
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="20sp"
                 android:paddingBottom="16dp"
+                android:text="Don't feel like doing the math to figure out how many minutes you were on the can? I figured, you don't really look like the type. Well now PtP does it for you. Just tap on the timer button and go about your business. When you're done, click finish up in the notification bar and you're on your way to success."
                 android:textColor="@color/abc_secondary_text_material_light"
-                android:text="Don't feel like doing the math to figure out how many minutes you were on the can? I figured, you don't really look like the type. Well now PtP does it for you. Just tap on the timer button and go about your business. When you're done, click finish up in the notification bar and you're on your way to success."/>
+                android:textSize="20sp" />
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Dat Material Design Though!"
-                android:textStyle="bold"
+                android:textColor="@color/abc_primary_text_material_light"
                 android:textSize="20sp"
-                android:textColor="@color/abc_primary_text_material_light"/>
+                android:textStyle="bold" />
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="20sp"
                 android:paddingBottom="16dp"
+                android:text="Colors! Floating action buttons! CARDS! Matias Duarte himself uses this app just because of all of that material design.**"
                 android:textColor="@color/abc_secondary_text_material_light"
-                android:text="Colors! Floating action buttons! CARDS! Matias Duarte himself uses this app just because of all of that material design.**"/>
+                android:textSize="20sp" />
+
             <TextView
-                android:paddingTop="16dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="14sp"
+                android:paddingTop="16dp"
+                android:text="**Not true. I have no idea what apps Mr. Duarte is using."
                 android:textColor="@color/abc_secondary_text_material_light"
-                android:text="**Not true. I have no idea what apps Mr. Duarte is using."/>
+                android:textSize="14sp" />
         </LinearLayout>
     </ScrollView>
 

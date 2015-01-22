@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.CheckBoxPreference;
 import android.preference.Preference;
 import android.preference.PreferenceFragment;
 import android.preference.SwitchPreference;
@@ -33,6 +34,7 @@ public class MyPreferenceFragment extends PreferenceFragment {
     boolean isEnabled;
     Preference current;
     SwitchPreference salSwitch;
+    CheckBoxPreference overtime;
 
     @Override
     public void onCreate(final Bundle savedInstanceState) {
@@ -43,6 +45,7 @@ public class MyPreferenceFragment extends PreferenceFragment {
         final Preference wage = (Preference) findPreference("hourly");
         final Preference current = findPreference("current");
         salSwitch = (SwitchPreference) findPreference("salBox");
+        overtime = (CheckBoxPreference) findPreference("overtime");
         wage.setEnabled(!salSwitch.isChecked());
         isSalary();
         setCurrentHourly();

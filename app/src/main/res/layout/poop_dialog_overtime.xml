@@ -10,21 +10,24 @@
     <TextView
         android:id="@+id/title"
         android:layout_width="match_parent"
-        android:layout_height="104dp"
+        android:layout_height="56dp"
         android:background="@color/colorPrimary"
         android:gravity="center"
+        android:padding="12dp"
         android:text="@string/dialogTitle"
         android:textColor="@color/white"
-        android:textSize="34sp" />
+        android:textSize="28sp" />
 
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@id/title">
+        android:layout_below="@+id/title"
+        android:scrollbarStyle="insideOverlay">
 
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
+
 
             <RelativeLayout
                 android:id="@+id/ratingLayout"
@@ -47,7 +50,7 @@
                     android:layout_alignParentRight="true"
                     android:layout_centerVertical="true"
                     android:layout_marginRight="24dp"
-                    android:layout_marginTop="24dp"
+                    android:layout_marginTop="8dp"
                     android:orientation="vertical"
                     android:theme="@style/Base.Theme.AppCompat.Light.Dialog">
 
@@ -81,7 +84,7 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@id/ratingLayout"
                 android:layout_centerHorizontal="true"
-                android:layout_marginTop="16dp"
+                android:layout_marginTop="4dp"
                 android:text="@string/minutesTitle"
                 android:textColor="#000"
                 android:textSize="24sp" />
@@ -92,8 +95,59 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@id/minutesText"
                 android:layout_centerHorizontal="true"
-                android:layout_marginBottom="16dp"
+                android:layout_marginBottom="4dp"
                 android:theme="@style/ThemeOverlay.AppCompat.Light" />
+
+            <TextView
+                android:id="@+id/overtimeTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/numberpicker"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="0dp"
+                android:paddingTop="0dp"
+                android:text="@string/overtime"
+                android:textColor="#000"
+                android:textSize="24sp" />
+
+            <RadioGroup
+                android:id="@+id/overtime"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/overtimeTitle"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="0dp"
+                android:gravity="center"
+                android:orientation="horizontal"
+                android:paddingBottom="8dp"
+                android:paddingLeft="24dp"
+                android:paddingRight="24dp"
+                android:paddingTop="0dp">
+
+                <RadioButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="x1"
+                    android:textColor="@color/black" />
+
+                <RadioButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="x1.5"
+                    android:textColor="@color/black" />
+
+                <RadioButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="x2"
+                    android:textColor="@color/black" />
+            </RadioGroup>
         </RelativeLayout>
     </ScrollView>
 </RelativeLayout>

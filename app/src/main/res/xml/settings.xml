@@ -28,6 +28,11 @@
             android:title="Clear All"
             android:textColor="@color/black"
             android:summary="Flush poops and money info." />
+        <CheckBoxPreference
+            android:key="overtime"
+            android:title="Overtime Mode"
+            android:summary="Check to be able to choose time and a half or double time when entering a log."
+            />
     </PreferenceCategory>
 
 </PreferenceScreen>

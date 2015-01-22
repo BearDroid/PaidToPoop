@@ -80,8 +80,7 @@ public class HomeFragment extends Fragment {
 
                 final View alertView = inflater.inflate(R.layout.poop_dialog, (ViewGroup) getActivity().findViewById(R.id.poopdialog));
                 builder.setView(alertView);
-                RadioButton good = (RadioButton) alertView.findViewById(R.id.goodbutton);
-                good.setChecked(true);
+
                 NumberPicker np = (NumberPicker) alertView.findViewById(R.id.numberpicker);
                 np.setMaxValue(120);
                 np.setMinValue(1);

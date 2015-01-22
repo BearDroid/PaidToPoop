@@ -62,12 +62,12 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/relativeLayout1"
         android:layout_centerHorizontal="true"
+        android:layout_marginBottom="8dp"
         android:layout_marginTop="32dp"
+        android:background="@color/background_material_dark"
         android:text="@string/play"
         android:textColor="@color/white"
-        android:background="@color/background_material_dark"
-        android:textSize="20sp"
-        android:layout_marginBottom="8dp"/>
+        android:textSize="20sp" />
 
     <Button
         android:id="@+id/twitter"
@@ -75,11 +75,11 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/play"
         android:layout_centerHorizontal="true"
+        android:layout_margin="8dp"
+        android:background="#4099FF"
         android:text="@string/twitter"
         android:textColor="@color/white"
-        android:textSize="20sp"
-        android:background="#4099FF"
-        android:layout_margin="8dp"/>
+        android:textSize="20sp" />
 
     <Button
         android:id="@+id/gplus"
@@ -87,10 +87,10 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/twitter"
         android:layout_centerHorizontal="true"
+        android:layout_margin="8dp"
+        android:background="#D34836"
         android:text="@string/gplus"
         android:textColor="@color/white"
-        android:textSize="20sp"
-        android:background="#D34836"
-        android:layout_margin="8dp"/>
+        android:textSize="20sp" />
 
 </RelativeLayout>
