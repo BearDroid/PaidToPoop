@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/poopdialog"
+    android:id="@+id/poopdialogovertime"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
@@ -125,28 +125,34 @@
                 android:paddingTop="0dp">
 
                 <RadioButton
+                    android:id="@+id/time"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:gravity="center"
                     android:text="x1"
-                    android:textColor="@color/black" />
+                    android:textColor="@color/black"
+                    />
 
                 <RadioButton
+                    android:id="@+id/timeandahalf"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:gravity="center"
                     android:text="x1.5"
-                    android:textColor="@color/black" />
+                    android:textColor="@color/black"
+                    />
 
                 <RadioButton
+                    android:id="@+id/doubletime"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:gravity="center"
                     android:text="x2"
-                    android:textColor="@color/black" />
+                    android:textColor="@color/black"
+                    />
             </RadioGroup>
         </RelativeLayout>
     </ScrollView>

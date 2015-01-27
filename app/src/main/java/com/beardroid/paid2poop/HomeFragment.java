@@ -39,7 +39,9 @@ public class HomeFragment extends Fragment {
     public Context context = getActivity();
     public SharedPreferences pref;
     DataHandler handler;
+    boolean overtime;
     private RecyclerView.Adapter mAdapter;
+    View alertView;
 
     @Override
     public View onCreateView(final LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -77,9 +79,18 @@ public class HomeFragment extends Fragment {
             public void onClick(final View view) {
                 mainFab.collapse();
                 AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+                overtime = pref.getBoolean("overtime", false);
 
-                final View alertView = inflater.inflate(R.layout.poop_dialog, (ViewGroup) getActivity().findViewById(R.id.poopdialog));
-                builder.setView(alertView);
+                if(!overtime) {
+                    alertView = inflater.inflate(R.layout.poop_dialog, (ViewGroup) getActivity().findViewById(R.id.poopdialog));
+                    builder.setView(alertView);
+                }
+                if(overtime){
+                    alertView = inflater.inflate(R.layout.poop_dialog_overtime, (ViewGroup) getActivity().findViewById(R.id.poopdialogovertime));
+                    builder.setView(alertView);
+                    RadioButton onex = (RadioButton) alertView.findViewById(R.id.time);
+                    onex.setChecked(true);
+                }
 
                 NumberPicker np = (NumberPicker) alertView.findViewById(R.id.numberpicker);
                 np.setMaxValue(120);
@@ -88,12 +99,27 @@ public class HomeFragment extends Fragment {
                 builder.setPositiveButton("Add!", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
+                        double otMultiplyer = 1;
                         //rating button
                         RadioGroup ratingGroup = (RadioGroup) alertView.findViewById(R.id.ratingGroup);
                         RadioButton ratingButton;
                         int selectedRating = ratingGroup.getCheckedRadioButtonId();
                         ratingButton = (RadioButton) alertView.findViewById(selectedRating);
                         String ratingString = (String) ratingButton.getText();
+                        if(overtime){
+                            RadioGroup overtimeGroup = (RadioGroup) alertView.findViewById(R.id.overtime);
+                            RadioButton overtimeButton;
+                            int selectedOvertime = overtimeGroup.getCheckedRadioButtonId();
+                            overtimeButton = (RadioButton) alertView.findViewById(selectedOvertime);
+                            String overtimeCheck = (String) overtimeButton.getText();
+                            if(overtimeCheck.equals("x1")){
+                                otMultiplyer = 1;
+                            } else if(overtimeCheck.equals("x1.5")){
+                                otMultiplyer = 1.5;
+                            } else if(overtimeCheck.equals("x2")){
+                                otMultiplyer = 2;
+                            }
+                        }
 
                         //number spinner
                         NumberPicker np = (NumberPicker) alertView.findViewById(R.id.numberpicker);
@@ -104,7 +130,7 @@ public class HomeFragment extends Fragment {
                         String wageStr = pref.getString("hourlyWage", null); //get saved wage
                         Double wageDbl = Double.parseDouble(wageStr); //saved wage to double
                         double hrDbl = minDbl / 60;
-                        double moneyMade = hrDbl * wageDbl;
+                        double moneyMade = hrDbl * wageDbl * otMultiplyer;
                         DecimalFormat moneyFormat = new DecimalFormat("0.00");
                         String madeStr = moneyFormat.format(moneyMade);
                         moneyMade = Double.parseDouble(madeStr);

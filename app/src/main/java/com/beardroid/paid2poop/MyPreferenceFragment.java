@@ -32,9 +32,10 @@ public class MyPreferenceFragment extends PreferenceFragment {
     static String hourlyWageString;
     DataHandler handler;
     boolean isEnabled;
+    boolean isOvertime;
     Preference current;
     SwitchPreference salSwitch;
-    CheckBoxPreference overtime;
+    SwitchPreference overtime;
 
     @Override
     public void onCreate(final Bundle savedInstanceState) {
@@ -42,14 +43,19 @@ public class MyPreferenceFragment extends PreferenceFragment {
         addPreferencesFromResource(R.xml.settings);
         pref = getActivity().getSharedPreferences(MY_PREFS, Context.MODE_PRIVATE);
         getActivity().setTitle("Settings");
+
+        final SharedPreferences.Editor edit = pref.edit();
+
         final Preference wage = (Preference) findPreference("hourly");
         final Preference current = findPreference("current");
         salSwitch = (SwitchPreference) findPreference("salBox");
-        overtime = (CheckBoxPreference) findPreference("overtime");
+        overtime = (SwitchPreference) findPreference("overtime");
+
         wage.setEnabled(!salSwitch.isChecked());
         isSalary();
         setCurrentHourly();
         setCurrentSalary();
+
         salSwitch.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
             @Override
             public boolean onPreferenceChange(Preference preference, Object o) {
@@ -57,6 +63,7 @@ public class MyPreferenceFragment extends PreferenceFragment {
                 wage.setEnabled(!isEnabled); //if it's not true, then wage mode is on
                 if (isEnabled) {
                     setCurrentSalary();
+
                 }
                 if (!isEnabled) {
                     setCurrentHourly();
@@ -64,7 +71,23 @@ public class MyPreferenceFragment extends PreferenceFragment {
                 return true;
             }
         });
+        overtime.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
+            @Override
+            public boolean onPreferenceChange(Preference preference, Object o) {
+                isOvertime = (Boolean) o; //true means overtime mode is on
+                if(isOvertime){
+                    Toast.makeText(getActivity(), "Enabled", Toast.LENGTH_SHORT).show();
+                    edit.putBoolean("overtime", true);
 
+                }
+                if(!isOvertime){
+                    Toast.makeText(getActivity(), "Disabled", Toast.LENGTH_SHORT).show();
+                    edit.putBoolean("overtime", false);
+                }
+                edit.apply();
+                return true;
+            }
+        });
 
         //clear
         Preference myPref = (Preference) findPreference("clearPref");
