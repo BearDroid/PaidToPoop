@@ -54,6 +54,8 @@ public class TimerActivity extends ActionBarActivity {
     private String hours, minutes, seconds, milleseconds;
     private long secs, mins, hrs, msecs;
     private boolean stopped = false;
+    boolean overtime;
+    View alertView;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -282,6 +284,7 @@ public class TimerActivity extends ActionBarActivity {
 
     public void complete(View view, long elapsed) {
         running = false;
+
         String timeView = timeParse(elapsed);
         double seconds = elapsed / 1000;
         double minutes = seconds / 60;
@@ -291,13 +294,25 @@ public class TimerActivity extends ActionBarActivity {
         final double hrDbl = minDbl / 60;
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         LayoutInflater inflater = this.getLayoutInflater();
-        final View alertView = inflater.inflate(R.layout.time_dialog, (ViewGroup) this.findViewById(R.id.timeDialog));
+        overtime = pref.getBoolean("overtime", false);
+
+        if(!overtime) {
+            alertView = inflater.inflate(R.layout.time_dialog, (ViewGroup) this.findViewById(R.id.timeDialog));
+            builder.setView(alertView);
+        }
+        if(overtime){
+            alertView = inflater.inflate(R.layout.time_dialog_overtime, (ViewGroup) this.findViewById(R.id.timeDialogOvertime));
+            builder.setView(alertView);
+            RadioButton onex = (RadioButton) alertView.findViewById(R.id.time);
+            onex.setChecked(true);
+        }
         RadioButton good = (RadioButton) alertView.findViewById(R.id.goodbutton);
         good.setChecked(true);
         builder.setView(alertView);
         builder.setPositiveButton("Add!", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
+                double otMultiplyer = 1;
                 pref = getSharedPreferences(MY_PREFS, Context.MODE_PRIVATE);
                 String wageStr = pref.getString("hourlyWage", null);
                 RadioGroup ratingGroup = (RadioGroup) alertView.findViewById(R.id.ratingGroup);
@@ -305,6 +320,21 @@ public class TimerActivity extends ActionBarActivity {
                 int selectedRating = ratingGroup.getCheckedRadioButtonId();
                 ratingButton = (RadioButton) alertView.findViewById(selectedRating);
                 String ratingString = (String) ratingButton.getText();
+
+                if(overtime){
+                    RadioGroup overtimeGroup = (RadioGroup) alertView.findViewById(R.id.overtime);
+                    RadioButton overtimeButton;
+                    int selectedOvertime = overtimeGroup.getCheckedRadioButtonId();
+                    overtimeButton = (RadioButton) alertView.findViewById(selectedOvertime);
+                    String overtimeCheck = (String) overtimeButton.getText();
+                    if(overtimeCheck.equals("x1")){
+                        otMultiplyer = 1;
+                    } else if(overtimeCheck.equals("x1.5")){
+                        otMultiplyer = 1.5;
+                    } else if(overtimeCheck.equals("x2")){
+                        otMultiplyer = 2;
+                    }
+                }
 
                 Double wageDbl = Double.parseDouble(wageStr); //saved wage to double
                 double moneyMade = hrDbl * wageDbl;
