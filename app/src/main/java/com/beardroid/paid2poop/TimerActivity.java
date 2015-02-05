@@ -122,13 +122,14 @@ public class TimerActivity extends ActionBarActivity {
         complete(view, elapsed);
         running = false;
     }
-    public void restartClick(View view){
+
+    public void restartClick(View view) {
         hideStopButton();
         long startTime = 0;
         stopped = false;
         running = false;
-        ((TextView)findViewById(R.id.timer)).setText("0 00 00");
-        ((TextView)findViewById(R.id.timerms)).setText(" 0");
+        ((TextView) findViewById(R.id.timer)).setText("0 00 00");
+        ((TextView) findViewById(R.id.timerms)).setText(" 0");
         mHandler.removeCallbacks(startTimer);
         editor.remove(TIME_START).apply();
     }
@@ -296,12 +297,12 @@ public class TimerActivity extends ActionBarActivity {
         LayoutInflater inflater = this.getLayoutInflater();
         overtime = pref.getBoolean("overtime", false);
 
-        if(!overtime) {
-            alertView = inflater.inflate(R.layout.time_dialog, (ViewGroup) this.findViewById(R.id.timeDialog));
+        if (!overtime) {
+            alertView = inflater.inflate(R.layout.time_dialog_overtime, (ViewGroup) this.findViewById(R.id.timeDialog));
             builder.setView(alertView);
         }
-        if(overtime){
-            alertView = inflater.inflate(R.layout.time_dialog_overtime, (ViewGroup) this.findViewById(R.id.timeDialogOvertime));
+        if (overtime) {
+            alertView = inflater.inflate(R.layout.time_dialog, (ViewGroup) this.findViewById(R.id.timeDialogOvertime));
             builder.setView(alertView);
             RadioButton onex = (RadioButton) alertView.findViewById(R.id.time);
             onex.setChecked(true);
@@ -321,23 +322,23 @@ public class TimerActivity extends ActionBarActivity {
                 ratingButton = (RadioButton) alertView.findViewById(selectedRating);
                 String ratingString = (String) ratingButton.getText();
 
-                if(overtime){
+                if (overtime) {
                     RadioGroup overtimeGroup = (RadioGroup) alertView.findViewById(R.id.overtime);
                     RadioButton overtimeButton;
                     int selectedOvertime = overtimeGroup.getCheckedRadioButtonId();
                     overtimeButton = (RadioButton) alertView.findViewById(selectedOvertime);
                     String overtimeCheck = (String) overtimeButton.getText();
-                    if(overtimeCheck.equals("x1")){
+                    if (overtimeCheck.equals("x1")) {
                         otMultiplyer = 1;
-                    } else if(overtimeCheck.equals("x1.5")){
+                    } else if (overtimeCheck.equals("x1.5")) {
                         otMultiplyer = 1.5;
-                    } else if(overtimeCheck.equals("x2")){
+                    } else if (overtimeCheck.equals("x2")) {
                         otMultiplyer = 2;
                     }
                 }
 
                 Double wageDbl = Double.parseDouble(wageStr); //saved wage to double
-                double moneyMade = hrDbl * wageDbl;
+                double moneyMade = hrDbl * wageDbl * otMultiplyer;
                 DecimalFormat moneyFormat = new DecimalFormat("0.00");
                 String madeStr = moneyFormat.format(moneyMade);
                 moneyMade = Double.parseDouble(madeStr);

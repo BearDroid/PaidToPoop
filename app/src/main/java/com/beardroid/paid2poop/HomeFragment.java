@@ -55,7 +55,7 @@ public class HomeFragment extends Fragment {
         llm.setOrientation(LinearLayoutManager.VERTICAL);
         recyclerView.setLayoutManager(llm);
 
-        checker();
+        checker(); //checks to see if there is wage/salary info, if not brings up the intro screen
         populateListViewFromDB(recyclerView);
 
         final FloatingActionsMenu mainFab = (FloatingActionsMenu) view.findViewById(R.id.mainFab);
@@ -81,11 +81,11 @@ public class HomeFragment extends Fragment {
                 AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
                 overtime = pref.getBoolean("overtime", false);
 
-                if(!overtime) {
+                if (!overtime) {
                     alertView = inflater.inflate(R.layout.poop_dialog, (ViewGroup) getActivity().findViewById(R.id.poopdialog));
                     builder.setView(alertView);
                 }
-                if(overtime){
+                if (overtime) {
                     alertView = inflater.inflate(R.layout.poop_dialog_overtime, (ViewGroup) getActivity().findViewById(R.id.poopdialogovertime));
                     builder.setView(alertView);
                     RadioButton onex = (RadioButton) alertView.findViewById(R.id.time);
@@ -106,17 +106,17 @@ public class HomeFragment extends Fragment {
                         int selectedRating = ratingGroup.getCheckedRadioButtonId();
                         ratingButton = (RadioButton) alertView.findViewById(selectedRating);
                         String ratingString = (String) ratingButton.getText();
-                        if(overtime){
+                        if (overtime) {
                             RadioGroup overtimeGroup = (RadioGroup) alertView.findViewById(R.id.overtime);
                             RadioButton overtimeButton;
                             int selectedOvertime = overtimeGroup.getCheckedRadioButtonId();
                             overtimeButton = (RadioButton) alertView.findViewById(selectedOvertime);
                             String overtimeCheck = (String) overtimeButton.getText();
-                            if(overtimeCheck.equals("x1")){
+                            if (overtimeCheck.equals("x1")) {
                                 otMultiplyer = 1;
-                            } else if(overtimeCheck.equals("x1.5")){
+                            } else if (overtimeCheck.equals("x1.5")) {
                                 otMultiplyer = 1.5;
-                            } else if(overtimeCheck.equals("x2")){
+                            } else if (overtimeCheck.equals("x2")) {
                                 otMultiplyer = 2;
                             }
                         }
@@ -224,7 +224,7 @@ public class HomeFragment extends Fragment {
         Double oldTotalDbl = Double.parseDouble(oldTotal);
         Cursor c = handler.totalAmount();
         Double totalAmount = c.getDouble(c.getColumnIndex("myTotal"));
-        if(oldTotalDbl > 0){
+        if (oldTotalDbl > 0) {
             totalAmount = totalAmount + oldTotalDbl;
         }
         DecimalFormat moneyFormat = new DecimalFormat("0.00");

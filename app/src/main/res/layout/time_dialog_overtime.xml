@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/timeDialogOvertime"
+    android:id="@+id/timeDialog"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
@@ -89,5 +89,63 @@
         android:text="0:00:00"
         android:textColor="#000"
         android:textSize="24sp" />
+
+    <TextView
+        android:id="@+id/overtimeTitleTimer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/minutesNum"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="0dp"
+        android:paddingTop="0dp"
+        android:text="@string/overtime"
+        android:textColor="#000"
+        android:textSize="24sp" />
+
+    <RadioGroup
+        android:id="@+id/overtimeTimer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/overtimeTitleTimer"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="0dp"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:paddingBottom="8dp"
+        android:paddingLeft="24dp"
+        android:paddingRight="24dp"
+        android:paddingTop="8dp">
+
+        <RadioButton
+            android:id="@+id/timeTimer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="x1"
+            android:textColor="@color/black"
+            />
+
+        <RadioButton
+            android:id="@+id/timeandahalfTimer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="x1.5"
+            android:textColor="@color/black"
+            />
+
+        <RadioButton
+            android:id="@+id/doubletimeTimer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="x2"
+            android:textColor="@color/black"
+            />
+    </RadioGroup>
+
 
 </RelativeLayout>

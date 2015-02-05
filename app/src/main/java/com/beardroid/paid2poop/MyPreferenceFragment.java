@@ -5,7 +5,6 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.preference.CheckBoxPreference;
 import android.preference.Preference;
 import android.preference.PreferenceFragment;
 import android.preference.SwitchPreference;
@@ -22,7 +21,15 @@ import java.text.DecimalFormat;
  */
 public class MyPreferenceFragment extends PreferenceFragment {
     public static final String MY_PREFS = "myPrefs";
-    private static final boolean ALWAYS_SIMPLE_PREFS = false;
+    public static final String OVERTIME_PREF = "overtime";
+    public static final String ARE_YOU_SURE = "Are you sure you want to flush all of your poops and wage info?";
+    public static final String ALL_TIME_PREF = "allTime";
+    public static final String HOURLY_WAGE_PREF = "hourlyWage";
+    public static final String SALARY_HOURS_PREF = "salhours";
+    public static final String SALARY_PREF = "salary";
+    public static final String SETTINGS_TITLE = "Settings";
+    public static final String HOURLY = "hourly";
+
     static public EditText salYear;
     static public EditText salHour;
     static public EditText hrlyWage;
@@ -42,11 +49,11 @@ public class MyPreferenceFragment extends PreferenceFragment {
         super.onCreate(savedInstanceState);
         addPreferencesFromResource(R.xml.settings);
         pref = getActivity().getSharedPreferences(MY_PREFS, Context.MODE_PRIVATE);
-        getActivity().setTitle("Settings");
+        getActivity().setTitle(SETTINGS_TITLE);
 
         final SharedPreferences.Editor edit = pref.edit();
 
-        final Preference wage = (Preference) findPreference("hourly");
+        final Preference wage = (Preference) findPreference(HOURLY);
         final Preference current = findPreference("current");
         salSwitch = (SwitchPreference) findPreference("salBox");
         overtime = (SwitchPreference) findPreference("overtime");
@@ -75,14 +82,12 @@ public class MyPreferenceFragment extends PreferenceFragment {
             @Override
             public boolean onPreferenceChange(Preference preference, Object o) {
                 isOvertime = (Boolean) o; //true means overtime mode is on
-                if(isOvertime){
-                    Toast.makeText(getActivity(), "Enabled", Toast.LENGTH_SHORT).show();
-                    edit.putBoolean("overtime", true);
+                if (isOvertime) {
+                    edit.putBoolean(OVERTIME_PREF, true);
 
                 }
-                if(!isOvertime){
-                    Toast.makeText(getActivity(), "Disabled", Toast.LENGTH_SHORT).show();
-                    edit.putBoolean("overtime", false);
+                if (!isOvertime) {
+                    edit.putBoolean(OVERTIME_PREF, false);
                 }
                 edit.apply();
                 return true;
@@ -96,7 +101,7 @@ public class MyPreferenceFragment extends PreferenceFragment {
                 new AlertDialog.Builder(getActivity())
                         .setTitle("Clear All")
                         .setMessage(
-                                "Are you sure you want to flush all of your poops and wage info?")
+                                ARE_YOU_SURE)
                         .setPositiveButton("Yes",
                                 new DialogInterface.OnClickListener() {
                                     public void onClick(DialogInterface dialog,
@@ -104,10 +109,10 @@ public class MyPreferenceFragment extends PreferenceFragment {
                                         openDB();
                                         handler.deleteAll();
                                         SharedPreferences.Editor editor = pref.edit();
-                                        editor.remove("allTime");
-                                        editor.remove("hourlyWage");
-                                        editor.remove("salhours");
-                                        editor.remove("salary");
+                                        editor.remove(ALL_TIME_PREF);
+                                        editor.remove(HOURLY_WAGE_PREF);
+                                        editor.remove(SALARY_HOURS_PREF);
+                                        editor.remove(SALARY_PREF);
                                         editor.apply();
                                         current.setTitle(R.string.currentTitle);
                                         current.setSummary(R.string.currentSum);
@@ -141,8 +146,8 @@ public class MyPreferenceFragment extends PreferenceFragment {
                                 String salary = salYear.getText().toString();
                                 String hours = salHour.getText().toString();
                                 SharedPreferences.Editor editor = pref.edit();
-                                editor.putString("salary", salary);
-                                editor.putString("salHours", hours);
+                                editor.putString(SALARY_PREF, salary);
+                                editor.putString(SALARY_HOURS_PREF, hours);
                                 editor.apply();
                                 int hourInt = Integer.parseInt(hours);
                                 if (hourInt == 0) {
@@ -154,11 +159,11 @@ public class MyPreferenceFragment extends PreferenceFragment {
                                     hourlyWage = yearlyDub / hoursYear;
                                     DecimalFormat df = new DecimalFormat("0.00");
                                     hourlyWageString = "" + df.format(hourlyWage);
-                                    getActivity().getSharedPreferences("hourlyWage", Context.MODE_PRIVATE);
-                                    editor.putString("hourlyWage", hourlyWageString).apply();
+                                    getActivity().getSharedPreferences(HOURLY_WAGE_PREF, Context.MODE_PRIVATE);
+                                    editor.putString(HOURLY_WAGE_PREF, hourlyWageString).apply();
                                     setCurrentSalary();
-                                    editor.putString("salary", salary);
-                                    editor.putString("salHours", hours);
+                                    editor.putString(SALARY_PREF, salary);
+                                    editor.putString(SALARY_HOURS_PREF, hours);
                                     editor.apply();
                                 } else {
                                     Toast toast = Toast.makeText(getActivity(),
@@ -181,7 +186,7 @@ public class MyPreferenceFragment extends PreferenceFragment {
 
         });
         //hourly wage settings
-        Preference hrly = (Preference) findPreference("hourly");
+        Preference hrly = (Preference) findPreference(HOURLY);
         hrly.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
             @Override
             public boolean onPreferenceClick(Preference preference) {
@@ -200,9 +205,9 @@ public class MyPreferenceFragment extends PreferenceFragment {
                                     double wageDub = Double.parseDouble(wage);
                                     DecimalFormat df = new DecimalFormat("0.00");
                                     hourlyWageString = "" + df.format(wageDub);
-                                    getActivity().getSharedPreferences("hourlyWage", Context.MODE_PRIVATE);
+                                    getActivity().getSharedPreferences(HOURLY_WAGE_PREF, Context.MODE_PRIVATE);
                                     SharedPreferences.Editor editor = pref.edit();
-                                    editor.putString("hourlyWage", hourlyWageString).apply();
+                                    editor.putString(HOURLY_WAGE_PREF, hourlyWageString).apply();
 
                                 } catch (Exception e) {
                                     Toast toast = Toast.makeText(getActivity(),
@@ -210,8 +215,8 @@ public class MyPreferenceFragment extends PreferenceFragment {
                                     toast.show();
                                 }
                                 SharedPreferences.Editor editor = pref.edit();
-                                editor.putString("salHours", null).apply();
-                                editor.putString("salary", null).apply();
+                                editor.putString(SALARY_HOURS_PREF, null).apply();
+                                editor.putString(SALARY_PREF, null).apply();
                                 setCurrentHourly();
                             }
                         }
@@ -232,7 +237,7 @@ public class MyPreferenceFragment extends PreferenceFragment {
     }
 
     public void isSalary() {
-        String check = pref.getString("salary", "nada");
+        String check = pref.getString(SALARY_PREF, "nada");
         boolean checker = true;
         if (check.equals("nada"))
             checker = false;
@@ -240,8 +245,8 @@ public class MyPreferenceFragment extends PreferenceFragment {
     }
 
     public void setUp() {
-        String wage = pref.getString("hourlyWage", "nada");
-        String salary = pref.getString("salary", "nada");
+        String wage = pref.getString(HOURLY_WAGE_PREF, "nada");
+        String salary = pref.getString(SALARY_PREF, "nada");
         if (!wage.equals("nada") && salary.equals("nada")) {
             setCurrentHourly();
         }
@@ -251,13 +256,13 @@ public class MyPreferenceFragment extends PreferenceFragment {
     }
 
     public void setCurrentSalary() {
-        String hrlyWage = pref.getString("hourlyWage", "error");
+        String hrlyWage = pref.getString(HOURLY_WAGE_PREF, "error");
 
         boolean hasWage = (hrlyWage != null);
         if (hasWage) {
             current = findPreference("current");
-            String salary = pref.getString("salary", "error");
-            String hours = pref.getString("salHours", "error");
+            String salary = pref.getString(SALARY_PREF, "error");
+            String hours = pref.getString(SALARY_HOURS_PREF, "error");
             if (!salary.equals("0.00") && !hours.equals("error")) {
                 current.setTitle("Salary Mode");
                 current.setSummary("Your salary is set at $" + salary + " per year at " + hours + " hours per week.");
@@ -267,7 +272,7 @@ public class MyPreferenceFragment extends PreferenceFragment {
 
     public void setCurrentHourly() {
         current = findPreference("current");
-        String hrlyWage = pref.getString("hourlyWage", "0.00");
+        String hrlyWage = pref.getString(HOURLY_WAGE_PREF, "0.00");
         Double hrlyDbl = Double.parseDouble(hrlyWage);
         boolean hasWage = (hrlyWage != null);
         if (hasWage) {

@@ -27,6 +27,10 @@ public class NavigationDrawerFragment extends Fragment implements NavigationDraw
     private static final String PREF_USER_LEARNED_DRAWER = "navigation_drawer_learned";
     private static final String STATE_SELECTED_POSITION = "selected_navigation_drawer_position";
     private static final String PREFERENCES_FILE = "my_app_settings"; //TODO: change this to your file
+    public static final String HOME_DRAWER = "Home";
+    public static final String SETTINGS_DRAWER = "Settings";
+    public static final String ABOUT_DRAWER = "About";
+    public static final String BACKSTACK = "back";
     private NavigationDrawerCallbacks mCallbacks;
     private RecyclerView mDrawerList;
     private View mFragmentContainerView;
@@ -147,9 +151,9 @@ public class NavigationDrawerFragment extends Fragment implements NavigationDraw
 
     public List<NavigationItem> getMenu() {
         List<NavigationItem> items = new ArrayList<NavigationItem>();
-        items.add(new NavigationItem("Home", getResources().getDrawable(R.drawable.ic_home)));
-        items.add(new NavigationItem("Settings", getResources().getDrawable(R.drawable.ic_settings)));
-        items.add(new NavigationItem("About", getResources().getDrawable(R.drawable.ic_info)));
+        items.add(new NavigationItem(HOME_DRAWER, getResources().getDrawable(R.drawable.ic_home)));
+        items.add(new NavigationItem(SETTINGS_DRAWER, getResources().getDrawable(R.drawable.ic_settings)));
+        items.add(new NavigationItem(ABOUT_DRAWER, getResources().getDrawable(R.drawable.ic_info)));
         return items;
     }
 
@@ -166,14 +170,15 @@ public class NavigationDrawerFragment extends Fragment implements NavigationDraw
         switch (position) {
             case 0:
                 frag = new HomeFragment();
+                trans.addToBackStack(BACKSTACK).commit();
                 break;
             case 1:
                 frag = new MyPreferenceFragment();
-                trans.addToBackStack("back");
+                trans.addToBackStack(BACKSTACK).commit();
                 break;
             case 2:
                 frag = new About();
-                trans.addToBackStack("back");
+                trans.addToBackStack(BACKSTACK).commit();
                 break;
             default:
                 break;

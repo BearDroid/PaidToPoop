@@ -59,7 +59,7 @@ public class DetailActivity extends ActionBarActivity {
     public void setColors() {
         String rating = getIntent().getExtras().getString("Rating");
         String versionChecker = Build.VERSION.RELEASE;
-        versionChecker = versionChecker.substring(0,1);
+        versionChecker = versionChecker.substring(0, 1);
         if (rating.equals("Good")) {
 
             mToolbar.setBackgroundColor(Color.parseColor("#2196F3"));
