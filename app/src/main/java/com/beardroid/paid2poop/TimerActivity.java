@@ -298,13 +298,13 @@ public class TimerActivity extends ActionBarActivity {
         overtime = pref.getBoolean("overtime", false);
 
         if (!overtime) {
-            alertView = inflater.inflate(R.layout.time_dialog_overtime, (ViewGroup) this.findViewById(R.id.timeDialog));
+            alertView = inflater.inflate(R.layout.time_dialog, (ViewGroup) this.findViewById(R.id.timeDialog));
             builder.setView(alertView);
         }
         if (overtime) {
-            alertView = inflater.inflate(R.layout.time_dialog, (ViewGroup) this.findViewById(R.id.timeDialogOvertime));
+            alertView = inflater.inflate(R.layout.time_dialog_overtime, (ViewGroup) this.findViewById(R.id.timeDialogOvertime));
             builder.setView(alertView);
-            RadioButton onex = (RadioButton) alertView.findViewById(R.id.time);
+            RadioButton onex = (RadioButton) alertView.findViewById(R.id.timeTimer);
             onex.setChecked(true);
         }
         RadioButton good = (RadioButton) alertView.findViewById(R.id.goodbutton);
@@ -323,7 +323,7 @@ public class TimerActivity extends ActionBarActivity {
                 String ratingString = (String) ratingButton.getText();
 
                 if (overtime) {
-                    RadioGroup overtimeGroup = (RadioGroup) alertView.findViewById(R.id.overtime);
+                    RadioGroup overtimeGroup = (RadioGroup) alertView.findViewById(R.id.overtimeTimer);
                     RadioButton overtimeButton;
                     int selectedOvertime = overtimeGroup.getCheckedRadioButtonId();
                     overtimeButton = (RadioButton) alertView.findViewById(selectedOvertime);
