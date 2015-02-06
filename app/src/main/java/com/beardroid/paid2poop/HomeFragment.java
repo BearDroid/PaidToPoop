@@ -35,6 +35,7 @@ import java.util.Locale;
  */
 public class HomeFragment extends Fragment {
     public static final String MY_PREFS = "myPrefs";
+    public static final String HOURLY_WAGE = "hourlyWage";
     public ArrayList<PoopCard> list = new ArrayList<PoopCard>();
     public Context context = getActivity();
     public SharedPreferences pref;
@@ -67,7 +68,7 @@ public class HomeFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 mainFab.collapse();
-                String wageStr = pref.getString("hourlyWage", null);
+                String wageStr = pref.getString(HOURLY_WAGE, null);
                 Intent intent = new Intent(getActivity(), TimerActivity.class);
                 intent.putExtra("wage", wageStr);
                 startActivity(intent, Bundle.EMPTY);
@@ -106,7 +107,8 @@ public class HomeFragment extends Fragment {
                         int selectedRating = ratingGroup.getCheckedRadioButtonId();
                         ratingButton = (RadioButton) alertView.findViewById(selectedRating);
                         String ratingString = (String) ratingButton.getText();
-                        if (overtime) {
+
+                        if (overtime) { //checks if overtime mode is on, changes otMultiplyer
                             RadioGroup overtimeGroup = (RadioGroup) alertView.findViewById(R.id.overtime);
                             RadioButton overtimeButton;
                             int selectedOvertime = overtimeGroup.getCheckedRadioButtonId();
@@ -127,7 +129,7 @@ public class HomeFragment extends Fragment {
                         Double minDbl = Double.parseDouble(num);
 
                         //get sharedpref of hourly wage and do the magic math here
-                        String wageStr = pref.getString("hourlyWage", null); //get saved wage
+                        String wageStr = pref.getString(HOURLY_WAGE, null); //get saved wage
                         Double wageDbl = Double.parseDouble(wageStr); //saved wage to double
                         double hrDbl = minDbl / 60;
                         double moneyMade = hrDbl * wageDbl * otMultiplyer;
@@ -201,7 +203,7 @@ public class HomeFragment extends Fragment {
     }
 
     public void checker() {
-        String check = pref.getString("hourlyWage", "nada");
+        String check = pref.getString(HOURLY_WAGE, "nada");
         if (check.equals("nada")) {
             Intent intent = new Intent(getActivity(), IntroActivity.class);
             intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);

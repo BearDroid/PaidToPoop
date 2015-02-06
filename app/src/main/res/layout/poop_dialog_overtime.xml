@@ -58,9 +58,9 @@
                         android:id="@+id/goodbutton"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:checked="true"
                         android:text="@string/goodbutton"
-                        android:textSize="20sp"
-                        android:checked="true"/>
+                        android:textSize="20sp" />
 
                     <RadioButton
                         android:id="@+id/okaybutton"
@@ -131,8 +131,7 @@
                     android:layout_weight="1"
                     android:gravity="center"
                     android:text="x1"
-                    android:textColor="@color/black"
-                    />
+                    android:textColor="@color/black" />
 
                 <RadioButton
                     android:id="@+id/timeandahalf"
@@ -141,8 +140,7 @@
                     android:layout_weight="1"
                     android:gravity="center"
                     android:text="x1.5"
-                    android:textColor="@color/black"
-                    />
+                    android:textColor="@color/black" />
 
                 <RadioButton
                     android:id="@+id/doubletime"
@@ -151,8 +149,7 @@
                     android:layout_weight="1"
                     android:gravity="center"
                     android:text="x2"
-                    android:textColor="@color/black"
-                    />
+                    android:textColor="@color/black" />
             </RadioGroup>
         </RelativeLayout>
     </ScrollView>

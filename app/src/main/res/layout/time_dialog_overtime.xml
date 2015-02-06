@@ -123,8 +123,7 @@
             android:layout_weight="1"
             android:gravity="center"
             android:text="x1"
-            android:textColor="@color/black"
-            />
+            android:textColor="@color/black" />
 
         <RadioButton
             android:id="@+id/timeandahalfTimer"
@@ -133,8 +132,7 @@
             android:layout_weight="1"
             android:gravity="center"
             android:text="x1.5"
-            android:textColor="@color/black"
-            />
+            android:textColor="@color/black" />
 
         <RadioButton
             android:id="@+id/doubletimeTimer"
@@ -143,8 +141,7 @@
             android:layout_weight="1"
             android:gravity="center"
             android:text="x2"
-            android:textColor="@color/black"
-            />
+            android:textColor="@color/black" />
     </RadioGroup>
 
 
